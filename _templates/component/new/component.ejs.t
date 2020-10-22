@@ -8,11 +8,10 @@ to: src/components/<%= h.changeCase.pascal(name) %>.vue
 <script lang="ts">
 import { ref, reactive, defineComponent } from 'vue'
 
-
 export default defineComponent ({
   // props: {},
   setup() {
     return {}
-  }
+  },
 })
 </script>
