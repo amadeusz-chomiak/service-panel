@@ -1,4 +1,5 @@
 module.exports = {
+  // todo change main path
   preset: "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
   transform: {
     "^.+\\.ts$": "ts-jest",
@@ -6,4 +7,5 @@ module.exports = {
     ".*\\.(vue)$": "vue-jest",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  testMatch: ["**/components/?(*.)+(spec).ts", "**/composable/?(*.)+(spec).ts"],
 }

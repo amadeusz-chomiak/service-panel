@@ -1,5 +1,7 @@
 <template>
-  <div><slot /></div>
+  <div class="p-4 md:p-8 rounded-3xl shadow-2xl bg-gray-200 dark:bg-gray-700">
+    <slot />
+  </div>
 </template>
 
 <script lang="ts">
