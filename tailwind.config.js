@@ -5,6 +5,9 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
+  experimental: {
+    additionalBreakpoint: true,
+  },
   purge: [],
   theme: {
     colors: {
