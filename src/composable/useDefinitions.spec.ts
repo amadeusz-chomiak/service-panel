@@ -15,14 +15,14 @@ describe("composable/useDefinitions.ts", () => {
       service = new Service({
         brand: {
           color: "#fff",
-          onColor: "#000",
+          onColor: "black",
           name: "service",
           description: "description"
         }
       })
-    })
+    }) 
     it("renderer returns category with service brand", async () => {
-      renderer.category(category.service(service))
+      renderer.add(category.add(service))
   
       expect(renderer.export()).toStrictEqual([{
         name: "category",
@@ -31,7 +31,7 @@ describe("composable/useDefinitions.ts", () => {
           { 
             brand: {
               color: "#fff",
-              onColor: "#000",
+              onColor: "black",
               name: "service",
               description: "description"
             }
@@ -42,9 +42,9 @@ describe("composable/useDefinitions.ts", () => {
   
     it("renderer remove duplicates from categories and services", async () => {
       renderer
-        .category(category.service(service).service(service))
-        .category(category)
-        .category(category.service(service))
+        .add(category.add(service).add(service))
+        .add(category)
+        .add(category.add(service))
   
       expect(renderer.export()).toStrictEqual([{
         name: "category",
@@ -53,7 +53,7 @@ describe("composable/useDefinitions.ts", () => {
           { 
             brand: {
               color: "#fff",
-              onColor: "#000",
+              onColor: "black",
               name: "service",
               description: "description"
             }

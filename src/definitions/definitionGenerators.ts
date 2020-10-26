@@ -2,7 +2,7 @@
 interface ServiceOptions {
   brand: {
     color: string,
-    onColor: string,
+    onColor: 'black' | 'white',
     name: string,
     description: string
   }
@@ -26,7 +26,7 @@ export class Category {
   public readonly id = Symbol()
   constructor(private readonly options: CategoryOptions){}
   
-  service(instance: Service) {
+  add(instance: Service) {
     this.services.add(instance.export())
     return this
   }
@@ -36,13 +36,13 @@ export class Category {
       ...this.options,
       services: Array.from(this.services)
     }
-  }
+  } 
 }
 
 export class Renderer {
   private readonly categories= new Map<Symbol, ReturnType<Category["export"]>>()
 
-  category(instance: Category) {
+  add(instance: Category) {
     this.categories.set(instance.id, instance.export())
     return this
   }
