@@ -1,13 +1,24 @@
 <template>
-  <div></div>
+  <div class="max-w-4xl">
+    <CategoryContainer :render="render" />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
-//import HelloWorld from "@/components/HelloWorld.vue" // @ is an alias to /src
+import CategoryContainer from "@/components/CategoryContainer.vue" // @ is an alias to /src
+import { useDefinitions } from "@/composable/useDefinitions"
 
 export default defineComponent({
   name: "Main",
-  components: {},
+  components: {
+    CategoryContainer,
+  },
+  setup() {
+    const { render } = useDefinitions()
+    return {
+      render,
+    }
+  },
 })
 </script>
