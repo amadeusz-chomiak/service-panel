@@ -13,19 +13,22 @@ interface ServiceOptions<Links extends string> {
   links: Map<LiteralUnion<Links>, ServiceOptionLink>
 }
 
+//todo add way to edit options from code
 export class Service<Links extends string = string> {
   constructor(private readonly options: ServiceOptions<Links>) {}
   public readonly id = Symbol()
 
+  /*
+   * @description Add new or change link, that will be rendered in service the card
+   */
   link(name: Links, options: Partial<ServiceOptionLink>): this
   link(name: string, options: ServiceOptionLink): this
   link(name: LiteralUnion<Links>, options: Partial<ServiceOptionLink>) {
     const links = this.options.links
 
     const oldLink = links.get(name)
-    if (oldLink)
-      links.set(name, { ...oldLink, ...options })
-      
+    if (oldLink) links.set(name, { ...oldLink, ...options })
+
     if (options.description && options.href)
       links.set(name, options as ServiceOptionLink)
 
