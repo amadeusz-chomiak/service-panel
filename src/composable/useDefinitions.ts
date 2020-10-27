@@ -14,3 +14,5 @@ export const useDefinitions = () => {
     render: computed(() => renderer.export()),
   }
 }
+
+export type Render = ReturnType<typeof useDefinitions>['render']['value']
