@@ -6,6 +6,10 @@ import * as service from "@/definitions/en/serviceDefinitions"
 export const useDefinitions = () => {
   const renderer = new Renderer()
 
+  renderer.add(category.contentEditor.add(service.sanity))
+  renderer.add(category.analytic.add(service.plausible).add(service.firebase))
+  renderer.add(category.server.add(service.firebase))
+
   return {
     render: computed(() => renderer.export()),
   }
