@@ -5,7 +5,7 @@ export const firebase = new Service({
     name: "firebase",
     description: "Server provider that combines site hosting, database, authentication, analytics and more",
     color: "#FFA000",
-    onColor: "white",
+    onColor: "black",
   },
   links: new Map([
     [
