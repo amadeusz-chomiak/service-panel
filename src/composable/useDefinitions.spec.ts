@@ -1,11 +1,20 @@
 import { Renderer, Category, Service } from "@/definitions/definitionGenerators"
-
+import { useDefinitions } from "./useDefinitions"
+import {isReactive} from "vue"
 let renderer: Renderer
 let category: Category
 let service: Service
 
 describe("composable/useDefinitions.ts", () => {
-  describe("basic", () => {
+  describe("composable", () => {
+    it("return render as a computed with array as a value", () => {
+      const { render } = useDefinitions()
+      const value = render.value
+      expect(Array.isArray(value)).toBe(true)
+    })
+  })
+ 
+  describe("definition generation basic", () => {
     const expectedResult = [
       {
         name: "category",
@@ -69,7 +78,7 @@ describe("composable/useDefinitions.ts", () => {
       expect(renderer.export()).toStrictEqual(expectedResult)
     })
   })
-  describe("service links", () => {
+  describe("definition generation service links", () => {
     beforeEach(() => {
       renderer = new Renderer()
       category = new Category({
