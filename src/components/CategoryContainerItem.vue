@@ -1,10 +1,10 @@
 <template>
   <div>
-    <base-text tag="h2" size="2xl">
+    <base-text tag="h2" size="3xl" class="mb-4">
       <span>{{ category.name }}&nbsp;</span>
-      <span class="text-xl">{{ category.description }}</span>
+      <span class="text-2xl">{{ category.description }}</span>
     </base-text>
-    <div>
+    <div class="flex flex-col space-y-8">
       <service-card
         v-for="(service, index) in category.services"
         :key="index"

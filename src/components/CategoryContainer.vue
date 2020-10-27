@@ -3,6 +3,7 @@
     v-for="(category, index) in render"
     :key="index"
     :category="category"
+    class="my-32"
   />
 </template>
 
