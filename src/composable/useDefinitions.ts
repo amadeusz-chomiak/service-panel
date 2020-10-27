@@ -16,3 +16,5 @@ export const useDefinitions = () => {
 }
 
 export type Render = ReturnType<typeof useDefinitions>['render']['value']
+export type Category = Render[number]
+export type Service = Category['services'][number]
