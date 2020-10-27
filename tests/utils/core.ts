@@ -35,6 +35,13 @@ export class Base {
     return wrapper
   }
 
+  /**
+   * Will always throw rendered HTML
+   * @param additionalOptions 
+   */
+  debug(additionalOptions: MountingOptions = {}) {
+    expect(this.render(additionalOptions).html()).toBe(undefined)
+  }
   // ? tests
   /**
    * Test if slot exists and is visible
