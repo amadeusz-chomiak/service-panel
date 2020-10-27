@@ -21,7 +21,7 @@ const app = createApp(App)
 app.use(store)
 app.use(router)
 
-app.component('BaseCard', BaseCard)
-app.component('BaseText', BaseText)
+app.component('base-card', BaseCard)
+app.component('base-text', BaseText)
 
 app.mount("#app")

@@ -4,6 +4,8 @@ module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
+    defaultLineHeights: true,
+    standardFontWeights: true,
   },
   experimental: {
     additionalBreakpoint: true,
@@ -36,6 +38,9 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    scale: ({ after }) => after(["active"]),
+    boxShadow: ({ after }) => after(["active"]),
+  },
   plugins: [],
 }
