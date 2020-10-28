@@ -48,8 +48,4 @@ describe("components/ServiceCard.vue", () => {
     //? search for two opening tags for category-container-item component
     expect(wrapper.findAll("service-card-link-stub")?.length).toBe(2)
   })
-  it("pass 'link' prop to ServiceCardLink component", async () => {
-    const wrapper = base.render()
-    expect(wrapper.findAll('service-card-link-stub')[0].attributes().link).toBeTruthy()
-  })
 })

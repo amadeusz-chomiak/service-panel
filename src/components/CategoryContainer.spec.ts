@@ -25,9 +25,4 @@ describe("components/CategoryContainer.vue", () => {
     //? search for two opening tags for category-container-item component
     expect(wrapper.findAll('category-container-item-stub')?.length).toBe(2)
   })
-
-  it("pass 'category' prop to CategoryContainerItem component", async () => {
-    const wrapper = base.render()
-    expect(wrapper.findAll('category-container-item-stub')[0].attributes()["category"]).toBeTruthy()
-  })
 })

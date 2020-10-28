@@ -27,9 +27,4 @@ describe("components/CategoryContainerItem.vue", () => {
     //? search for two opening tags for category-container-item component
     expect(wrapper.findAll("service-card-stub")?.length).toBe(2)
   })
-
-  it("pass 'service' prop to service-card component", async () => {
-    const wrapper = base.render()
-    expect(wrapper.findAll('service-card-stub')[0].attributes().service).toBeTruthy()
-  })
 })
