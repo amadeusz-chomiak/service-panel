@@ -8,7 +8,7 @@
       <base-text tag="h3" size="2xl" data-testid="title">{{
         service.brand.name
       }}</base-text>
-      <base-text data-testid="description">{{
+      <base-text class="mb-4" data-testid="description">{{
         service.brand.description
       }}</base-text>
       <div class="flex flex-col space-y-2">

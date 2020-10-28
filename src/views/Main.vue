@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-4xl">
+  <div class="max-w-3xl">
     <CategoryContainer :render="render" />
   </div>
 </template>

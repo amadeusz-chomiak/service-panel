@@ -11,14 +11,11 @@
         background: brandColor,
         color: brandOnColor,
       }"
-      class="rounded-full w-40 flex-shrink-0 px-4 py-2 flex items-baseline shadow transform duration-75 ease-in hover:scale-105 hover:shadow-md active:scale-95 active:shadow-xs"
+      class="rounded-full w-40 flex-shrink-0 px-4 py-2 flex items-baseline justify-between shadow transform duration-75 ease-in hover:scale-105 hover:shadow-md active:scale-95 active:shadow-xs"
       target="_blank"
       rel="noreferrer"
       ><span class="first-letter:uppercase">{{ link.name }}</span
-      ><base-icon
-        icon="link"
-        class="inline ml-2 h-3"
-        :style="{ color: brandOnColor }"
+      ><base-icon icon="link" class="ml-2 h-3" :style="{ color: brandOnColor }"
     /></base-text>
     <base-text class="m-4 sm:m-2" data-testid="description">{{
       link.description
