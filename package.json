@@ -47,6 +47,7 @@
     "ts-node": "^8.10.2",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0",
+    "vue-svg-inline-loader": "^1.5.1",
     "wdio-chromedriver-service": "^6.0.3",
     "wdio-geckodriver-service": "^1.1.0"
   }

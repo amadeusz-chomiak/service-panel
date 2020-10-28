@@ -14,6 +14,7 @@ import store from "./store"
 import App from "./App.vue"
 import BaseCard from "@/components/BaseCard.vue"
 import BaseText from "@/components/BaseText.vue"
+import BaseIcon from "@/components/BaseIcon.vue"
 
 //* create app
 const app = createApp(App)
@@ -23,5 +24,6 @@ app.use(router)
 
 app.component('base-card', BaseCard)
 app.component('base-text', BaseText)
+app.component('base-icon', BaseIcon)
 
 app.mount("#app")
