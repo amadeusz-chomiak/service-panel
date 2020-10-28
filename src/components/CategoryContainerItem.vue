@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-text tag="h2" size="3xl" class="mb-4">
+    <base-text tag="h2" size="3xl" class="mb-4 first-letter:uppercase">
       <span>{{ category.name }}&nbsp;</span>
       <span class="text-2xl">{{ category.description }}</span>
     </base-text>

@@ -4,7 +4,7 @@
       class="w-10 h-10 mr-4 rounded-full flex-shrink-0"
       :style="{ background: service.brand.color }"
     ></div>
-    <div class="flex-1">
+    <div class="flex-1 first-letter:uppercase">
       <base-text tag="h3" size="2xl" data-testid="title">{{
         service.brand.name
       }}</base-text>
