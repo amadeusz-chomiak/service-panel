@@ -35,4 +35,10 @@ describe("components/ServiceCardLink.vue", () => {
     expect(baseIcon.attributes().icon).toBe('link')
     expect((baseIcon.element as HTMLElement).style.color).toBe('rgb(255, 255, 255)')
   })
+
+  it('render link description', () => {
+    const wrapper = base.render()
+    const description = wrapper.get('[data-testid="description"]')
+    expect(description.text()).toBe('description')
+  })
 })

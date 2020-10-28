@@ -1,22 +1,28 @@
 <template>
-  <div>
+  <div
+    class="flex flex-col sm:flex-row flex-wrap sm:items-center bg-opacity-25 rounded-3xl"
+    :style="brandBackgroundStyle"
+  >
     <base-text
       tag="a"
       size="lg"
       :href="link.href"
       :style="{
-        background: styleBrandColor,
-        color: styleBrandOnColor,
+        background: brandColor,
+        color: brandOnColor,
       }"
-      class="rounded-full px-4 py-2 flex items-baseline shadow transform duration-75 ease-in hover:scale-105 hover:shadow-md active:scale-95 active:shadow-xs"
+      class="rounded-full w-40 flex-shrink-0 px-4 py-2 flex items-baseline shadow transform duration-75 ease-in hover:scale-105 hover:shadow-md active:scale-95 active:shadow-xs"
       target="_blank"
       rel="noreferrer"
       ><span class="first-letter:uppercase">{{ link.name }}</span
       ><base-icon
         icon="link"
         class="inline ml-2 h-3"
-        :style="{ color: styleBrandOnColor }"
+        :style="{ color: brandOnColor }"
     /></base-text>
+    <base-text class="m-4 sm:m-2" data-testid="description">{{
+      link.description
+    }}</base-text>
   </div>
 </template>
 
@@ -37,12 +43,16 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { color: styleBrandOnColor } = useColor(props.brand.onColor)
-    const { color: styleBrandColor } = useColor(props.brand.color)
+    const { color: brandOnColor } = useColor(props.brand.onColor)
+    const {
+      color: brandColor,
+      backgroundStyle: brandBackgroundStyle,
+    } = useColor(props.brand.color)
 
     return {
-      styleBrandOnColor,
-      styleBrandColor,
+      brandOnColor,
+      brandColor,
+      brandBackgroundStyle,
     }
   },
 })
