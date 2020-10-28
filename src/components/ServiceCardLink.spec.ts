@@ -15,17 +15,24 @@ const base = new Base(Component, {
 })
 
 describe("components/ServiceCardLink.vue", () => {
-  it("render a tag with name and href", async () => {
+  it("render 'a' tag with name and href", async () => {
     const wrapper = base.render()
     const link = wrapper.get('[target="_blank"]')
     expect(link.text()).toContain('name')
     expect(link.attributes().href).toBe('href')
   })
 
-  it('render a tag with brand colors', () => {
+  it('render "a" tag with brand colors', () => {
     const wrapper = base.render()
     const element = wrapper.get('[target="_blank"]').element as HTMLLinkElement
     expect(element.style.color).toBe('rgb(255, 255, 255)')
     expect(element.style.background).toBe('rgb(255, 255, 255)')
+  })
+
+  it('render link icon', () => {
+    const wrapper = base.render()
+    const baseIcon = wrapper.get('base-icon')
+    expect(baseIcon.attributes().icon).toBe('link')
+    expect((baseIcon.element as HTMLElement).style.color).toBe('rgb(255, 255, 255)')
   })
 })
