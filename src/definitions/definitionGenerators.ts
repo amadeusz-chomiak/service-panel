@@ -1,3 +1,5 @@
+import { cloneDeep } from "lodash"
+
 interface ServiceOptionLink {
   description: string
   href: string
@@ -18,7 +20,7 @@ export class Service<Links extends string = string> {
   constructor(private readonly options: ServiceOptions<Links>) {}
   public readonly id = Symbol()
 
-  /*
+  /**
    * @description Add new or change link, that will be rendered in service the card
    */
   link(name: Links, options: Partial<ServiceOptionLink>): this
@@ -33,6 +35,13 @@ export class Service<Links extends string = string> {
       links.set(name, options as ServiceOptionLink)
 
     return this
+  }
+  /**
+   * @description Detach from default instance. Let You define independent version of a service
+   * @example service.detach().link('unique', {href: 'YOUR_HREF', description: 'YOUR_DESCRIPTION'})
+   */
+  detach() {
+    return new Service(cloneDeep(this.options))
   }
 
   export() {

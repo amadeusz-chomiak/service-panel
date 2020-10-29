@@ -7,7 +7,15 @@ export const useDefinitions = () => {
   const renderer = new Renderer()
 
   renderer.add(category.contentEditor.add(service.sanity))
-  renderer.add(category.analytic.add(service.plausible).add(service.firebase))
+  renderer.add(
+    category.analytic
+      .add(service.plausible)
+      .add(
+        service.firebase
+          .detach()
+          .link("analytics", { description: "analytics", href: "test" })
+      )
+  )
   renderer.add(category.server.add(service.firebase))
 
   return {
@@ -15,6 +23,6 @@ export const useDefinitions = () => {
   }
 }
 
-export type Render = ReturnType<typeof useDefinitions>['render']['value']
+export type Render = ReturnType<typeof useDefinitions>["render"]["value"]
 export type Category = Render[number]
-export type Service = Category['services'][number]
+export type Service = Category["services"][number]
