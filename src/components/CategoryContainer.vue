@@ -1,10 +1,12 @@
 <template>
-  <CategoryContainerItem
-    v-for="(category, index) in render"
-    :key="index"
-    :category="category"
-    class="my-32"
-  />
+  <div>
+    <CategoryContainerItem
+      v-for="(category, index) in render"
+      :key="index"
+      :category="category"
+      class="my-32"
+    />
+  </div>
 </template>
 
 <script lang="ts">

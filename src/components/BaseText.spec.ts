@@ -20,6 +20,14 @@ describe("components/BaseText.vue", () => {
 
     expect(wrapper.element.classList).toContain('text-xl')
   })
+ 
+  it("root has uppercase class based on 'capitalize' prop", async () => {
+    const wrapper = base.render({
+      props: { capitalize: true }
+    })
+
+    expect(wrapper.element.classList).toContain('first-letter:uppercase')
+  })
 
   it("render default slot", () => base.testHasSlot())
 })

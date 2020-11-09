@@ -17,6 +17,11 @@ describe("components/CategoryContainerItem.vue", () => {
     const header = wrapper.get("base-text")
     expect(header.text()).toContain("name")
   })
+  it("render title with category name as an id", () => {
+    const wrapper = base.render()
+    const header = wrapper.get("#name")
+    expect(header.isVisible()).toBe(true)
+  })
   it("render category description", () => {
     const wrapper = base.render()
     const header = wrapper.get("base-text")

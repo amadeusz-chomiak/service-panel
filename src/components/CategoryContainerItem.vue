@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-text tag="h2" size="3xl" class="mb-4 first-letter:uppercase">
+    <base-text :id="category.name" tag="h2" size="3xl" capitalize class="mb-4">
       <span>{{ category.name }}&nbsp;</span>
       <span class="text-2xl">{{ category.description }}</span>
     </base-text>
