@@ -7,9 +7,5 @@ module.exports = {
     ".*\\.(vue)$": "vue-jest",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-  testMatch: [
-    "**/components/?(*.)+(spec).ts",
-    "**/composable/?(*.)+(spec).ts",
-    "**/definitions/?(*.)+(spec).ts",
-  ],
+  testMatch: ["**/src/**/?(*.)+(spec).ts"],
 }

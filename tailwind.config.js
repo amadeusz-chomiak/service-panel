@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -8,8 +9,16 @@ module.exports = {
   experimental: {
     additionalBreakpoint: true,
   },
-  purge: [],
+  purge: {
+    // content: ['./src/**/*.html'],
+
+    // These options are passed through directly to PurgeCSS
+    options: {
+      whitelist: ["dark"],
+    },
+  },
   theme: {
+    darkSelector: ".dark",
     colors: {
       primary: {
         600: "#3e61a5", //45%
@@ -30,15 +39,12 @@ module.exports = {
       black: "#080808",
       white: "#f7f7f7",
     },
-    extend: {
-      screens: {
-        dark: { raw: "(prefers-color-scheme: dark)" },
-      },
-    },
   },
   variants: {
     scale: ({ after }) => after(["active"]),
     boxShadow: ({ after }) => after(["active"]),
+    backgroundColor: ({ before }) => before(["dark"]),
+    textColor: ({ before }) => before(["dark"]),
   },
-  plugins: [],
+  plugins: [require("tailwindcss-dark-mode")()],
 }
