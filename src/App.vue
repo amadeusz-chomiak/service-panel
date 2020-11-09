@@ -6,6 +6,7 @@
 import { defineComponent, onBeforeMount } from "vue"
 export default defineComponent({
   setup() {
+    // TODO add e2e test for prefersColorScheme
     onBeforeMount(() => {
       let prefersColorScheme: "light" | "dark" = "light"
       if ("matchMedia" in window)
