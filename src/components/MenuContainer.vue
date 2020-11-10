@@ -1,9 +1,18 @@
 <template>
   <div>
     <div>
-      <base-text tag="h1" size="3xl">Services</base-text>
+      <h1
+        class="font-semibold text-5xl text-black dark:text-white first-letter:uppercase"
+      >
+        services
+      </h1>
+      <a
+        class="text-2xl text-primary-700 dark:text-primary-600"
+        href="https://amadeo.dev"
+        >amadeo.dev</a
+      >
     </div>
-    <div class="space-y-4">
+    <div class="space-y-6">
       <MenuContainerContent :render="render" />
     </div>
   </div>

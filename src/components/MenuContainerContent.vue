@@ -1,12 +1,9 @@
 <template>
   <div v-for="(category, index) in render" :key="index">
-    <base-text
-      tag="a"
-      size="3xl"
-      class="text-primary-700"
-      capitalize
+    <a
+      class="text-4xl text-primary-700 dark:text-primary-600 font-semibold"
       :href="`#${category.name}`"
-      >{{ category.name }}</base-text
+      ><p class="first-letter:uppercase">{{ category.name }}</p></a
     >
   </div>
 </template>

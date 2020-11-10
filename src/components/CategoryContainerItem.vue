@@ -1,9 +1,12 @@
 <template>
   <div>
-    <base-text :id="category.name" tag="h2" size="3xl" capitalize class="mb-4">
+    <h2
+      :id="category.name"
+      class="text-3xl text-black dark:text-white mb-4 first-letter:uppercase"
+    >
       <span>{{ category.name }}&nbsp;</span>
       <span class="text-2xl">{{ category.description }}</span>
-    </base-text>
+    </h2>
     <div class="flex flex-col space-y-8">
       <service-card
         v-for="(service, index) in category.services"

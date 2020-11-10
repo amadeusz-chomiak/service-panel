@@ -14,7 +14,7 @@ const base = new Base(Component, {
 describe("components/CategoryContainerItem.vue", () => {
   it("render category title", () => {
     const wrapper = base.render()
-    const header = wrapper.get("base-text")
+    const header = wrapper.get("h2")
     expect(header.text()).toContain("name")
   })
   it("render title with category name as an id", () => {
@@ -24,7 +24,7 @@ describe("components/CategoryContainerItem.vue", () => {
   })
   it("render category description", () => {
     const wrapper = base.render()
-    const header = wrapper.get("base-text")
+    const header = wrapper.get("h2")
     expect(header.text()).toContain("description")
   })
   it("render service cards", () => {

@@ -5,12 +5,12 @@
       :style="{ background: service.brand.color }"
     ></div>
     <div class="flex-1 first-letter:uppercase">
-      <base-text tag="h3" size="2xl" data-testid="title">{{
-        service.brand.name
-      }}</base-text>
-      <base-text class="mb-4" data-testid="description">{{
-        service.brand.description
-      }}</base-text>
+      <h3 class="text-2xl text-black dark:text-white" data-testid="title">
+        {{ service.brand.name }}
+      </h3>
+      <p class="mb-4 text-black dark:text-white" data-testid="description">
+        {{ service.brand.description }}
+      </p>
       <div class="flex flex-col space-y-2">
         <ServiceCardLink
           v-for="(link, index) in service.links"
