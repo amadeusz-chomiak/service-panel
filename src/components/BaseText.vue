@@ -14,7 +14,16 @@ export default defineComponent({
       default: "p",
     },
     size: {
-      type: String as () => "sm" | "base" | "lg" | "xl" | "2xl" | "3xl",
+      type: String as () =>
+        | "sm"
+        | "base"
+        | "lg"
+        | "xl"
+        | "2xl"
+        | "3xl"
+        | "4xl"
+        | "5xl"
+        | "6xl",
       default: "base",
     },
     capitalize: {
@@ -37,6 +46,12 @@ export default defineComponent({
           return ["text-2xl"]
         case "3xl":
           return ["text-3xl"]
+        case "4xl":
+          return ["text-4xl"]
+        case "5xl":
+          return ["text-5xl"]
+        case "6xl":
+          return ["text-6xl"]
       }
     })
     const uppercaseClasses = computed(() => {
