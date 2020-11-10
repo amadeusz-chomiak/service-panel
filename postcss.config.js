@@ -4,6 +4,8 @@ module.exports = {
   plugins: [
     require("tailwindcss"),
     require("autoprefixer"),
-    postcssPresetEnv(),
+    postcssPresetEnv({
+      stage: 1,
+    }),
   ],
 }

@@ -3,5 +3,6 @@
 
 @import './fonts.css';
 @import './svg.css';
+@import './scroll.css';
 
 @tailwind utilities;

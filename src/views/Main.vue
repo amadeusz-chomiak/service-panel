@@ -4,11 +4,9 @@
       class="flex-shrink-0 w-1/3 p-2 md:p-4 lg:p-8 xl:p-10 2xl:p-12"
       :render="render"
     />
-
-    <CategoryContainer
-      class="max-w-3xl max-h-screen flex-1 flex flex-col overflow-auto p-2 md:p-4 lg:p-8 xl:p-10 2xl:p-12"
-      :render="render"
-    />
+    <div class="max-h-screen pr-2">
+      <CategoryContainer :render="render" />
+    </div>
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="mb-32">
     <h2
       :id="category.name"
-      class="text-3xl text-black dark:text-white mb-4 first-letter:uppercase"
+      class="text-3xl text-black dark:text-white pt-16 md:pt-32 lg:pt-36 xl:pt-38 2xl:pt-40 mb-4 first-letter:uppercase"
     >
       <span>{{ category.name }}&nbsp;</span>
       <span class="text-2xl">{{ category.description }}</span>

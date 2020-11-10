@@ -1,0 +1,101 @@
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+.scroll-page-padding {
+  &::after,
+  &::before {
+    content: "";
+    @apply bg-gray-200 fixed right-0 w-5 h-4 md:h-6 lg:h-10 xl:h-12 2xl:h-14 z-10;
+  }
+  &::after {
+    @apply top-0;
+  }
+  &::before {
+    @apply bottom-0;
+  }
+}
+
+/* purgecss start ignore */
+.dark .scroll-page-padding {
+    &::after,
+    &::before {
+      @apply bg-gray-800;
+    }
+  }
+
+/* purgecss end ignore */
+
+@variants dark {
+  .scroll-white {
+    scrollbar-color: theme("colors.gray.100") theme("colors.transparent");
+
+    &::-webkit-scrollbar-track {
+      @apply bg-transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-gray-100 shadow-xs;
+    }
+  }
+}
+
+@variants dark {
+  .scroll-black {
+    scrollbar-color: theme("colors.gray.900") theme("colors.transparent");
+
+    &::-webkit-scrollbar-track {
+      @apply bg-transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-gray-900 shadow-xs;
+    }
+  }
+}
+
+@variants hover {
+  .scroll-wide {
+    scrollbar-width: auto;
+
+    &::-webkit-scrollbar {
+      @apply w-2;
+    }
+  }
+}
+
+@variants hover {
+  .scroll-rounded-full {
+    &::-webkit-scrollbar-track {
+      @apply rounded-full;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply rounded-full;
+    }
+  }
+}
+
+@variants hover {
+  .scroll-thin {
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+      @apply w-1;
+    }
+  }
+}
+
+@variants hover {
+  .scroll-hide {
+    scrollbar-color: transparent transparent;
+
+    &::-webkit-scrollbar-track {
+      @apply bg-transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-transparent;
+    }
+  }
+}

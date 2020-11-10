@@ -8,6 +8,7 @@ module.exports = {
   },
   experimental: {
     additionalBreakpoint: true,
+    applyComplexClasses: true,
   },
   purge: {
     // content: ['./src/**/*.html'],
@@ -21,6 +22,8 @@ module.exports = {
     darkSelector: ".dark",
     colors: {
       primary: {
+        200: "#b8cdea", //18%
+        500: "#3666b2", //55%
         600: "#3e61a5", //45%
         700: "#0c43a5", //35%
         900: "#011332", //96%
@@ -38,6 +41,16 @@ module.exports = {
       },
       black: "#080808",
       white: "#f7f7f7",
+      transparent: "transparent",
+    },
+    extend: {
+      spacing: {
+        7: "1.75rem",
+        14: "3.5rem",
+        34: "8.5rem",
+        36: "9rem",
+        38: "9.5rem",
+      },
     },
   },
   variants: {

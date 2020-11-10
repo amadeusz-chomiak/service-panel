@@ -1,18 +1,18 @@
 <template>
   <div>
-    <div>
+    <div class="mb-8">
       <h1
         class="font-semibold text-5xl text-black dark:text-white first-letter:uppercase"
       >
         services
       </h1>
       <a
-        class="text-2xl text-primary-700 dark:text-primary-600"
+        class="text-2xl text-primary-700 dark:text-primary-200 underline"
         href="https://amadeo.dev"
         >amadeo.dev</a
       >
     </div>
-    <div class="space-y-6">
+    <div class="space-y-5">
       <MenuContainerContent :render="render" />
     </div>
   </div>

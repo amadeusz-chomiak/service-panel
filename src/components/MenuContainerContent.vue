@@ -1,7 +1,7 @@
 <template>
   <div v-for="(category, index) in render" :key="index">
     <a
-      class="text-4xl text-primary-700 dark:text-primary-600 font-semibold"
+      class="text-4xl block text-primary-700 dark:text-primary-200 font-semibold transform transition-transform duration-75 ease-in hover:translate-x-1"
       :href="`#${category.name}`"
       ><p class="first-letter:uppercase">{{ category.name }}</p></a
     >
