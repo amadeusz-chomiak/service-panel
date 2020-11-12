@@ -1,10 +1,8 @@
 module.exports = {
-  plugins: ["wdio"],
-  extends: "plugin:wdio/recommended",
+  plugins: ["jest"],
+  extends: ["plugin:jest/recommended"],
   env: {
-    mocha: true,
-  },
-  rules: {
-    strict: "off",
-  },
+    "jest/globals": true,
+    jest: true
+  }
 }

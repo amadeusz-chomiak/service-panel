@@ -11,7 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "@wdio/mocha-framework", "@wdio/sync", "jest"],
+    "types": ["webpack-env", "@types/jest-environment-puppeteer", "jest"],
     "paths": {
       "@/*": ["src/*"]
     },
