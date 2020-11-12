@@ -51,6 +51,13 @@ module.exports = {
         36: "9rem",
         38: "9.5rem",
       },
+      inset: {
+        full: "100%",
+      },
+      boxShadow: {
+        "center-lg":
+          "0 0 17px -3px rgba(0, 0, 0, 0.1), 0 0 8px -2px rgba(0, 0, 0, 0.05)",
+      },
     },
   },
   variants: {
