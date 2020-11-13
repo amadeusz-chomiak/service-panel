@@ -6,6 +6,10 @@ body {
   @apply uppercase
 } 
 
+.font-small-caps {
+  font-variant: small-caps;
+}
+
 /* source-sans-pro-regular - latin-ext_latin */
 @font-face {
   font-family: 'Source Sans Pro';

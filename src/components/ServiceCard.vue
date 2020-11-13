@@ -1,14 +1,17 @@
 <template>
-  <base-card class="flex">
+  <base-card class="flex max-w-3xl">
     <div
-      class="w-10 h-10 mr-4 rounded-full flex-shrink-0"
-      :style="{ background: service.brand.color }"
+      class="w-10 h-10 mr-4 rounded-full flex-shrink-0 dark:bg-opacity-75"
+      :style="brandBackgroundStyle"
     ></div>
     <div class="flex-1 first-letter:uppercase">
-      <h3 class="text-2xl text-black dark:text-white" data-testid="title">
+      <h3 class="text-3xl text-black dark:text-gray-200" data-testid="title">
         {{ service.brand.name }}
       </h3>
-      <p class="mb-4 text-black dark:text-white" data-testid="description">
+      <p
+        class="mb-4 text-black dark:text-gray-200 max-w-md"
+        data-testid="description"
+      >
         {{ service.brand.description }}
       </p>
       <div class="flex flex-col space-y-2">
@@ -27,6 +30,7 @@
 import { ref, reactive, defineComponent } from "vue"
 import { Service } from "@/composable/useDefinitions"
 import ServiceCardLink from "./ServiceCardLink.vue"
+import { useColor } from "@/composable/useColor"
 
 export default defineComponent({
   components: {
@@ -38,8 +42,11 @@ export default defineComponent({
       type: Object as () => Service,
     },
   },
-  setup() {
-    return {}
+  setup(props) {
+    const { backgroundStyle: brandBackgroundStyle } = useColor(
+      props.service.brand.color
+    )
+    return { brandBackgroundStyle }
   },
 })
 </script>

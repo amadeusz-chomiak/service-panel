@@ -2,12 +2,12 @@
   <div>
     <div class="mb-8">
       <h1
-        class="font-semibold text-5xl text-black dark:text-white first-letter:uppercase"
+        class="font-semibold text-5xl text-black dark:text-gray-200 first-letter:uppercase"
       >
         services
       </h1>
       <a
-        class="text-2xl text-primary-700 dark:text-primary-200 underline"
+        class="text-2xl text-primary-700 dark:text-primary-200 underline font-small-caps"
         href="https://amadeo.dev"
         >amadeo.dev</a
       >

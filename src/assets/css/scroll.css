@@ -20,7 +20,7 @@
 .dark .scroll-page-padding {
     &::after,
     &::before {
-      @apply bg-gray-800;
+      @apply bg-gray-900;
     }
   }
 
@@ -28,14 +28,14 @@
 
 @variants dark {
   .scroll-white {
-    scrollbar-color: theme("colors.gray.100") theme("colors.transparent");
+    scrollbar-color: theme("colors.gray.300") theme("colors.transparent");
 
     &::-webkit-scrollbar-track {
       @apply bg-transparent;
     }
 
     &::-webkit-scrollbar-thumb {
-      @apply bg-gray-100 shadow-xs;
+      @apply bg-gray-300 shadow-xs;
     }
   }
 }

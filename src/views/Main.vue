@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between">
     <MenuContainer :render="render" />
-    <main class="max-h-screen pr-2">
+    <main class="max-h-screen flex-1 pr-2">
       <CategoryContainer :render="render" />
     </main>
   </div>

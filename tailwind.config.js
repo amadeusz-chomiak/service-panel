@@ -58,12 +58,16 @@ module.exports = {
         "center-lg":
           "0 0 17px -3px rgba(0, 0, 0, 0.1), 0 0 8px -2px rgba(0, 0, 0, 0.05)",
       },
+      opacity: {
+        60: "0.6",
+      },
     },
   },
   variants: {
     scale: ({ after }) => after(["active"]),
     boxShadow: ({ after }) => after(["active"]),
     backgroundColor: ({ before }) => before(["dark"]),
+    backgroundOpacity: ({ before }) => before(["dark"]),
     textColor: ({ before }) => before(["dark"]),
   },
   plugins: [require("tailwindcss-dark-mode")()],

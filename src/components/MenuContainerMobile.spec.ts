@@ -1,6 +1,7 @@
 import { Base } from "../../tests/utils/core"
 import Component from "./MenuContainerMobile.vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
+import waitFor from "wait-for-expect"
 
 const base = new Base(Component, {
   // props: {},
@@ -9,7 +10,7 @@ const base = new Base(Component, {
 describe("components/MenuContainerMobile.vue", () => {
   it("render one MenuContainerContent node", async () => {
     const wrapper = base.render()
-    expect(wrapper.findAllComponents(MenuContainerContent)).toHaveLength(1)
+    expect(wrapper.html()).toContain("<menu-container-content")
   })
 
   it("render one site link node", async () => {
@@ -20,6 +21,8 @@ describe("components/MenuContainerMobile.vue", () => {
   it("hide MenuContainerContent after toggle button click", async () => {
     const wrapper = base.render()
     await wrapper.find("[data-testid='toggle']").trigger("click")
-    expect(wrapper.findAllComponents(MenuContainerContent)).toHaveLength(0)
+    await waitFor(() =>
+      expect(wrapper.find("menu-container-content-stub").element).not.toBeVisible()
+    )
   })
 })

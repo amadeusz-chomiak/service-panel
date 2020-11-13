@@ -1,13 +1,13 @@
 <template>
   <div
     v-if="mobileMode"
-    class="flex flex-col p-2 sm:p-4 fixed z-30 inset-x-0 bottom-0 shadow-center-lg bg-gray-200 dark:bg-gray-700 rounded-t-xl"
+    class="flex flex-col p-2 sm:p-4 fixed z-30 inset-x-0 bottom-0 shadow-center-lg bg-gray-200 dark:bg-gray-800 rounded-t-xl"
   >
     <menu-container-mobile :render="render" />
   </div>
   <div
     v-else
-    class="flex-shrink-0 flex flex-col h-screen justify-between w-1/3 md:p-4 lg:p-8 xl:p-10 2xl:p-12"
+    class="flex-shrink-0 flex flex-col h-screen justify-between md:p-4 lg:p-8 xl:p-10 2xl:p-12"
   >
     <menu-container-desktop :render="render" />
   </div>
@@ -24,10 +24,10 @@ import {
 } from "vue"
 import { Render } from "@/composable/useDefinitions"
 const MenuContainerMobile = defineAsyncComponent(() =>
-  import("./MenuContainerMobile.vue"),
+  import("./MenuContainerMobile.vue")
 )
 const MenuContainerDesktop = defineAsyncComponent(() =>
-  import("./MenuContainerDesktop.vue"),
+  import("./MenuContainerDesktop.vue")
 )
 //TODO maybe add global page loader based on state of this async component
 

@@ -13,9 +13,9 @@
   >
     <div
       v-show="mobileShowContent"
-      class="transform transition-all duration-200 ease-in flex flex-col p-2 sm:p-4 fixed inset-x-0 bottom-0 shadow-center-lg bg-gray-200 dark:bg-gray-700 rounded-t-xl"
+      class="transform transition-all duration-200 ease-in flex flex-col p-2 sm:p-4 fixed inset-x-0 bottom-0 shadow-center-lg bg-gray-200 dark:bg-gray-800 rounded-t-xl"
     >
-      <MenuContainerContent class="mb-10" :render="render" />
+      <MenuContainerContent class="mb-14 mt-4 ml-4" :render="render" />
     </div>
   </transition>
   <div class="flex-1 flex justify-between z-10">
@@ -24,10 +24,13 @@
       data-testid="toggle"
       @click="mobileShowContent = !mobileShowContent"
     >
-      <base-icon class="h-5 text-white" icon="close" />
+      <base-icon
+        class="h-5 w-5 text-white"
+        :icon="mobileShowContent ? 'close' : 'menu'"
+      />
     </button>
     <a
-      class="text-2xl text-primary-700 dark:text-primary-200 underline"
+      class="text-2xl text-primary-700 dark:text-primary-200 underline font-small-caps"
       href="https://amadeo.dev"
       >amadeo.dev</a
     >
@@ -46,6 +49,7 @@ import { ref, defineComponent } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import { Render } from "@/composable/useDefinitions"
 import { usePrefersColorScheme } from "@/composable/usePrefersColorScheme"
+import { onBeforeRouteUpdate } from "vue-router"
 
 export default defineComponent({
   components: {
@@ -59,6 +63,10 @@ export default defineComponent({
   },
   setup() {
     const mobileShowContent = ref(true)
+    onBeforeRouteUpdate(() => {
+      mobileShowContent.value = false
+    })
+
     const { isLight, setColorScheme } = usePrefersColorScheme()
 
     return { mobileShowContent, isLight, setColorScheme }

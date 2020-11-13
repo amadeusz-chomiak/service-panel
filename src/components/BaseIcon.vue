@@ -27,6 +27,13 @@
     class="fill-current fill-inherit"
     alt="sun icon"
   />
+  <img
+    v-else-if="icon === 'menu'"
+    svg-inline
+    src="@/assets/icons/menu.svg"
+    class="fill-current fill-inherit"
+    alt="open menu icon"
+  />
 </template>
 
 <script lang="ts">
@@ -35,7 +42,7 @@ import { ref, reactive, defineComponent } from "vue"
 export default defineComponent({
   props: {
     icon: {
-      type: String as () => "link" | "close" | "moon" | "sun",
+      type: String as () => "link" | "close" | "moon" | "sun" | "menu",
       required: true,
     },
   },
