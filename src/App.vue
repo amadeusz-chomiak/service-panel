@@ -4,21 +4,12 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount } from "vue"
+import { usePrefersColorScheme } from "@/composable/usePrefersColorScheme"
 export default defineComponent({
   setup() {
-    // TODO add e2e test for prefersColorScheme
+    const { initializeFromPrefersColorScheme } = usePrefersColorScheme()
     onBeforeMount(() => {
-      let prefersColorScheme: "light" | "dark" = "light"
-      if ("matchMedia" in window)
-        prefersColorScheme = window.matchMedia("(prefers-color-scheme: dark)")
-          .matches
-          ? "dark"
-          : "light"
-
-      const root = document.documentElement
-      if (prefersColorScheme === "dark") {
-        root.classList.add("dark")
-      }
+      initializeFromPrefersColorScheme()
     })
   },
 })

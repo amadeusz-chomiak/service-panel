@@ -8,8 +8,30 @@ describe("dark mode", () => {
     await page.goto("http://localhost:8080/")
   })
 
-  test("set dark mode by default if prefers-color-scheme is set to dark", async () => {
-    await page.waitForSelector('main')
-    await page.evaluate(()=> expect(document.documentElement).toHaveClass('dark'))
+  it("set dark mode by default if prefers-color-scheme is set to dark", async () => {
+    await page.waitForSelector(".dark")
+    const classes = await page.evaluate(() =>
+      Array.from(document.documentElement.classList.values())
+    )
+    expect(classes).toContain("dark")
+  })
+
+  it("press setColorScheme toggle button", async () => {
+    await page.click('[data-testid="toggle-color-scheme"]')
+
+    const classes = await page.evaluate(() =>
+      Array.from(document.documentElement.classList.values())
+    )
+    expect(classes).not.toContain("dark")
+  })
+
+  it("keeps light mode preference, after reload", async () => {
+    await page.reload()
+    await page.waitForSelector("main")
+
+    const classes = await page.evaluate(() =>
+      Array.from(document.documentElement.classList.values())
+    )
+    expect(classes).not.toContain("dark")
   })
 })

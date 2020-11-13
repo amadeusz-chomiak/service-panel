@@ -20,26 +20,32 @@
   </transition>
   <div class="flex-1 flex justify-between z-10">
     <button
+      class="button button-primary p-2"
       data-testid="toggle"
       @click="mobileShowContent = !mobileShowContent"
     >
-      <base-icon class="h-6 text-black dark:text-white" icon="close" />
+      <base-icon class="h-5 text-white" icon="close" />
     </button>
     <a
       class="text-2xl text-primary-700 dark:text-primary-200 underline"
       href="https://amadeo.dev"
       >amadeo.dev</a
     >
-    <button>
-      <base-icon class="h-6 text-black dark:text-white" icon="sun" />
+    <button
+      class="button button-primary p-2"
+      data-testid="toggle-color-scheme"
+      @click="setColorScheme(!isLight)"
+    >
+      <base-icon class="h-5 text-white" :icon="isLight ? 'sun' : 'moon'" />
     </button>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, reactive, defineComponent } from "vue"
+import { ref, defineComponent } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import { Render } from "@/composable/useDefinitions"
+import { usePrefersColorScheme } from "@/composable/usePrefersColorScheme"
 
 export default defineComponent({
   components: {
@@ -53,8 +59,9 @@ export default defineComponent({
   },
   setup() {
     const mobileShowContent = ref(true)
+    const { isLight, setColorScheme } = usePrefersColorScheme()
 
-    return { mobileShowContent }
+    return { mobileShowContent, isLight, setColorScheme }
   },
 })
 </script>

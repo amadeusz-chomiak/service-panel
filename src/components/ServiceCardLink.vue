@@ -9,7 +9,7 @@
         background: brandColor,
         color: brandOnColor,
       }"
-      class="rounded-full text-lg w-40 flex-shrink-0 px-5 py-2 flex items-baseline justify-between shadow transform duration-75 ease-in hover:scale-105 hover:shadow-md active:scale-95 active:shadow-xs"
+      class="button text-lg w-40 flex-shrink-0 px-5 py-2 flex items-baseline justify-between"
       target="_blank"
       rel="noreferrer"
       ><span class="first-letter:uppercase">{{ link.name }}</span

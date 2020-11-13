@@ -5,7 +5,10 @@
   >
     <menu-container-mobile :render="render" />
   </div>
-  <div v-else class="flex-shrink-0 w-1/3 md:p-4 lg:p-8 xl:p-10 2xl:p-12">
+  <div
+    v-else
+    class="flex-shrink-0 flex flex-col h-screen justify-between w-1/3 md:p-4 lg:p-8 xl:p-10 2xl:p-12"
+  >
     <menu-container-desktop :render="render" />
   </div>
 </template>
@@ -21,10 +24,10 @@ import {
 } from "vue"
 import { Render } from "@/composable/useDefinitions"
 const MenuContainerMobile = defineAsyncComponent(() =>
-  import("./MenuContainerMobile.vue")
+  import("./MenuContainerMobile.vue"),
 )
 const MenuContainerDesktop = defineAsyncComponent(() =>
-  import("./MenuContainerDesktop.vue")
+  import("./MenuContainerDesktop.vue"),
 )
 //TODO maybe add global page loader based on state of this async component
 

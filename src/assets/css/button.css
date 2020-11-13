@@ -1,0 +1,7 @@
+.button {
+  @apply rounded-full transform transition-transform duration-75 ease-in hover:scale-105 active:scale-95 shadow-sm active:shadow-none
+}
+
+.button-primary {
+  @apply bg-primary-700 dark:bg-primary-600
+}
