@@ -1,9 +1,39 @@
-import { Renderer, Category, Service } from "./definitionGenerators"
+import {
+  Renderer,
+  Category,
+  Service,
+  createService,
+} from "./definitionGenerators"
 let renderer: Renderer
 let category: Category
-let service: Service
+let service: Service<{}>
 
 describe("definitions/definitionGenerators.ts", () => {
+  beforeEach(() => {
+    renderer = new Renderer()
+    category = new Category({
+      name: "category",
+      description: "description",
+    })
+    service = createService({
+      brand: {
+        color: "#fff",
+        onColor: "black",
+        name: "service",
+      },
+      links: {
+        link: "href",
+      },
+    })({
+      brand: {
+        description: "description",
+      },
+    }).link("initialize", "link", {
+      title: "link",
+      description: "description",
+    })
+  })
+
   describe("basic", () => {
     const expectedResult = [
       {
@@ -19,7 +49,7 @@ describe("definitions/definitionGenerators.ts", () => {
             },
             links: [
               {
-                name: "link",
+                title: "link",
                 description: "description",
                 href: "href",
               },
@@ -29,30 +59,6 @@ describe("definitions/definitionGenerators.ts", () => {
       },
     ]
 
-    beforeEach(() => {
-      renderer = new Renderer()
-      category = new Category({
-        name: "category",
-        description: "description",
-      })
-      service = new Service({
-        brand: {
-          color: "#fff",
-          onColor: "black",
-          name: "service",
-          description: "description",
-        },
-        links: new Map([
-          [
-            "link",
-            {
-              description: "description",
-              href: "href",
-            },
-          ],
-        ]),
-      })
-    })
     it("renderer returns category with service", async () => {
       renderer.add(category.add(service))
 
@@ -69,34 +75,11 @@ describe("definitions/definitionGenerators.ts", () => {
     })
   })
   describe("service links", () => {
-    beforeEach(() => {
-      renderer = new Renderer()
-      category = new Category({
-        name: "category",
-        description: "description",
-      })
-      service = new Service({
-        brand: {
-          color: "#fff",
-          onColor: "black",
-          name: "service",
-          description: "description",
-        },
-        links: new Map([
-          [
-            "link",
-            {
-              description: "description",
-              href: "href",
-            },
-          ],
-        ]),
-      })
-    })
     it("service allow links extension", async () => {
       renderer.add(
         category.add(
-          service.link("added", {
+          service.link("add", "added", {
+            title: "added",
             description: "description",
             href: "href",
           })
@@ -116,12 +99,12 @@ describe("definitions/definitionGenerators.ts", () => {
               },
               links: [
                 {
-                  name: "link",
+                  title: "link",
                   description: "description",
                   href: "href",
                 },
                 {
-                  name: "added",
+                  title: "added",
                   description: "description",
                   href: "href",
                 },
@@ -136,7 +119,7 @@ describe("definitions/definitionGenerators.ts", () => {
     it("service allow existing links change", async () => {
       renderer.add(
         category.add(
-          service.link("link", {
+          service.link("change", "link", {
             description: "change",
             href: "change",
           })
@@ -156,7 +139,7 @@ describe("definitions/definitionGenerators.ts", () => {
               },
               links: [
                 {
-                  name: "link",
+                  title: "link",
                   description: "change",
                   href: "change",
                 },
@@ -169,30 +152,6 @@ describe("definitions/definitionGenerators.ts", () => {
     })
   })
   describe("detach from default instance", () => {
-    beforeEach(() => {
-      renderer = new Renderer()
-      category = new Category({
-        name: "category",
-        description: "description",
-      })
-      service = new Service({
-        brand: {
-          color: "#fff",
-          onColor: "black",
-          name: "service",
-          description: "description",
-        },
-        links: new Map([
-          [
-            "link",
-            {
-              description: "description",
-              href: "href",
-            },
-          ],
-        ]),
-      })
-    })
     it("allow duplicates if at least one is detached", () => {
       renderer.add(category.add(service.detach()).add(service))
       const expectedResult = [
@@ -209,7 +168,7 @@ describe("definitions/definitionGenerators.ts", () => {
               },
               links: [
                 {
-                  name: "link",
+                  title: "link",
                   description: "description",
                   href: "href",
                 },
@@ -224,7 +183,7 @@ describe("definitions/definitionGenerators.ts", () => {
               },
               links: [
                 {
-                  name: "link",
+                  title: "link",
                   description: "description",
                   href: "href",
                 },
@@ -240,9 +199,11 @@ describe("definitions/definitionGenerators.ts", () => {
       renderer.add(
         category
           .add(
-            service
-              .detach()
-              .link("added", { href: "href", description: "description" })
+            service.detach().link("add", "added", {
+              title: "added",
+              href: "href",
+              description: "description",
+            })
           )
           .add(service)
       )
@@ -260,12 +221,12 @@ describe("definitions/definitionGenerators.ts", () => {
               },
               links: [
                 {
-                  name: "link",
+                  title: "link",
                   description: "description",
                   href: "href",
                 },
                 {
-                  name: "added",
+                  title: "added",
                   description: "description",
                   href: "href",
                 },
@@ -280,7 +241,7 @@ describe("definitions/definitionGenerators.ts", () => {
               },
               links: [
                 {
-                  name: "link",
+                  title: "link",
                   description: "description",
                   href: "href",
                 },

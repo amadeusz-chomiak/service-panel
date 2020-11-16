@@ -13,7 +13,11 @@ export const useDefinitions = () => {
       .add(
         service.firebase
           .detach()
-          .link("analytics", { description: "analytics", href: "test" })
+          .link("add", "analytics", {
+            title: "analytics",
+            description: "analytics",
+            href: "test",
+          })
       )
   )
   renderer.add(category.server.add(service.firebase))

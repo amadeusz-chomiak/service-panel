@@ -10,7 +10,7 @@
       target="_blank"
       rel="noreferrer"
       ><span class="first-letter:uppercase" :style="brandOnClorStyle">{{
-        link.name
+        link.title
       }}</span
       ><base-icon icon="link" class="ml-2 h-3" :style="brandOnClorStyle"
     /></a>
@@ -42,7 +42,7 @@ export default defineComponent({
   setup(props) {
     const { contentStyle: brandOnClorStyle } = useColor(props.brand.onColor, 1)
     const { backgroundStyle: brandBackgroundStyle } = useColor(
-      props.brand.color
+      props.brand.color,
     )
 
     return {
