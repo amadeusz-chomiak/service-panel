@@ -28,25 +28,53 @@ const hexToRGB = (color: string) => {
   return `${r}%,${g}%,${b}%`
 }
 
-export const useColor = (color: Color) => {
+export const useColor = (
+  colorDefinition: Color,
+  opacityDefinition?: number
+) => {
   const tailwindColors = Tailwind.theme.colors
+  const color = computed(() => {
+    if (colorDefinition === "black") return tailwindColors.black
+    if (colorDefinition === "white") return tailwindColors.white
+    if (colorDefinition[0] !== "#")
+      throw new Error(
+        'color name has to be in HEX format starting from "#" symbol'
+      )
+    return colorDefinition
+  })
+
+  //* throw on wrong data format
+  color.value
+  if (opacityDefinition) {
+    if (opacityDefinition > 1)
+      throw new Error("opacity has to be smaller than or equal 1")
+    if (opacityDefinition < 0)
+      throw new Error("opacity has to be larger than or equal 0")
+  }
+
   return {
-    color: computed(() => {
-      if (color === "black") return tailwindColors.black
-      if (color === "white") return tailwindColors.white
-      if (color[0] !== "#")
-        throw new Error(
-          'color name has to be in HEX format starting from "#" symbol'
-        )
-      return color
-    }),
+    color,
     backgroundStyle: computed(() => {
-      const rgb = hexToRGB(color)
-      return `background-color: rgb(${rgb});background-color: rgba(${rgb}, var(--bg-opacity));`
+      const rgb = hexToRGB(color.value)
+      const opacity = opacityDefinition
+        ? { "--bg-opacity": opacityDefinition }
+        : {}
+
+      return {
+        backgroundColor: [`rgb(${rgb})`, `rgba(${rgb}, var(--bg-opacity))`],
+        ...opacity,
+      }
     }),
     contentStyle: computed(() => {
-      const rgb = hexToRGB(color)
-      return `color: rgb(${rgb});color: rgba(${rgb}, var(--text-opacity));`
+      const rgb = hexToRGB(color.value)
+      const opacity = opacityDefinition
+        ? { "--text-opacity": opacityDefinition }
+        : {}
+
+      return {
+        color: [`rgb(${rgb})`, `rgba(${rgb}, var(--text-opacity))`],
+        ...opacity,
+      }
     }),
   }
 }

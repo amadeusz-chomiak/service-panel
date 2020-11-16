@@ -9,8 +9,8 @@ const base = new Base(Component, {
     },
     brand: {
       color: "#fff",
-      onColor: "#fff"
-    }
+      onColor: "#fff",
+    },
   },
 })
 
@@ -18,27 +18,32 @@ describe("components/ServiceCardLink.vue", () => {
   it("render 'a' tag with name and href", async () => {
     const wrapper = base.render()
     const link = wrapper.get('[target="_blank"]')
-    expect(link.text()).toContain('name')
-    expect(link.attributes().href).toBe('href')
+    expect(link.text()).toContain("name")
+    expect(link.attributes().href).toBe("href")
   })
 
-  it('render "a" tag with brand colors', () => {
+  it('render "a" tag with brand colors', async () => {
     const wrapper = base.render()
     const element = wrapper.get('[target="_blank"]').element as HTMLLinkElement
-    expect(element.style.color).toBe('rgb(255, 255, 255)')
-    expect(element.style.background).toBe('rgb(255, 255, 255)')
+    expect(element.style.backgroundColor).toBe("rgb(255, 255, 255)")
   })
 
-  it('render link icon', () => {
+  it("has brand background style on the container", async () => {
     const wrapper = base.render()
-    const baseIcon = wrapper.get('base-icon')
-    expect(baseIcon.attributes().icon).toBe('link')
-    expect((baseIcon.element as HTMLElement).style.color).toBe('rgb(255, 255, 255)')
+    expect((wrapper.element as HTMLElement).style.backgroundColor).toBe(
+      "rgb(255, 255, 255)"
+    )
   })
 
-  it('render link description', () => {
+  it("render link icon", () => {
+    const wrapper = base.render()
+    const baseIcon = wrapper.get("base-icon")
+    expect(baseIcon.attributes().icon).toBe("link")
+  })
+
+  it("render link description", () => {
     const wrapper = base.render()
     const description = wrapper.get('[data-testid="description"]')
-    expect(description.text()).toBe('description')
+    expect(description.text()).toBe("description")
   })
 })

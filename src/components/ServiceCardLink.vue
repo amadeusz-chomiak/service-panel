@@ -6,11 +6,13 @@
     <a
       :href="link.href"
       :style="brandBackgroundStyle"
-      class="button text-black dark:text-gray-100 text-lg w-40 bg-opacity-60 flex-shrink-0 px-5 py-2 flex items-baseline justify-between"
+      class="button text-lg w-40 bg-opacity-100 dark:bg-opacity-60 flex-shrink-0 px-5 py-2 flex items-baseline justify-between"
       target="_blank"
       rel="noreferrer"
-      ><span class="first-letter:uppercase">{{ link.name }}</span
-      ><base-icon icon="link" class="ml-2 h-3 text-black dark:text-gray-100"
+      ><span class="first-letter:uppercase" :style="brandOnClorStyle">{{
+        link.name
+      }}</span
+      ><base-icon icon="link" class="ml-2 h-3" :style="brandOnClorStyle"
     /></a>
     <p
       class="mx-5 mt-2 mb-4 sm:my-2 sm:mx-3 text-black dark:text-gray-200"
@@ -22,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { ref, reactive, defineComponent, computed } from "vue"
+import { defineComponent } from "vue"
 import { Service } from "@/composable/useDefinitions"
 import { useColor } from "@/composable/useColor"
 
@@ -38,17 +40,12 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { color: brandOnColor, contentStyle: brandOnClorStyle } = useColor(
-      props.brand.onColor,
+    const { contentStyle: brandOnClorStyle } = useColor(props.brand.onColor, 1)
+    const { backgroundStyle: brandBackgroundStyle } = useColor(
+      props.brand.color
     )
-    const {
-      color: brandColor,
-      backgroundStyle: brandBackgroundStyle,
-    } = useColor(props.brand.color)
 
     return {
-      brandOnColor,
-      brandColor,
       brandBackgroundStyle,
       brandOnClorStyle,
     }
