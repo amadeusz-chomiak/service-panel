@@ -3,22 +3,22 @@ import { Price } from "../definitionGeneratorPrice"
 
 const price = new Price({
   cost: {
-    free: "",
-    paid: "",
-    flexible: "",
+    free: "darmowa",
+    paid: "płatna",
+    flexible: "darmowa w limicie, potem płatna",
   },
   renew: {
-    never: "",
-    onDemand: "",
-    daily: "",
-    weekly: "",
-    monthly: "",
-    quarterly: "",
-    yearly: "",
+    never: "jednorazowo",
+    onDemand: "na zlecenie",
+    daily: "co dziennie",
+    weekly: "co tydzień",
+    monthly: "co miesiąc",
+    quarterly: "co kwartał",
+    yearly: "co rok",
   },
-  compose({ renew, cost }, originalPrice) {
+  compose({ renew, cost }) {
     if (renew) {
-      return `${renew} ${cost}`
+      return `Usługa ${cost} ${renew}`
     }
     return cost
   },
@@ -28,47 +28,57 @@ export const firebase = service
   .Firebase({
     brand: {
       description:
-        "",
+        "stworzony przez Google, wielozadaniowy serwer, zapewnia hosting, bazę danych, analitykę i wiele więcej",
     },
     price: {
       localize: price,
     },
   })
   .link("initialize", "dashboard", {
-    title: "",
-    description: "",
+    title: "panel kontrolny",
+    description: "dowiesz się o wszystkich aspektach usługi (wymaga logowania)",
   })
   .link("initialize", "pricing", {
-    title: "",
-    description: "",
+    title: "cennik",
+    description: "dowiesz się o aktualnych cenach",
   })
 
 export const plausible = service
   .Plausible({
     brand: {
-      description:
-        "",
+      description: "prosta i przyjazna RODO, analityka",
     },
     price: {
       localize: price,
     },
   })
   .link("initialize", "pricing", {
-    title: "",
-    description: "",
+    title: "cennik",
+    description: "dowiesz się o aktualnych cenach",
   })
 
 export const sanity = service
   .Sanity({
     brand: {
-      description:
-        "",
+      description: "system CMS dzięki któremu z łatwością zmienisz treść strony",
     },
     price: {
       localize: price,
     },
   })
   .link("initialize", "pricing", {
-    title: "",
-    description: "",
+    title: "cennik",
+    description: "dowiesz się o aktualnych cenach",
   })
+
+  export const developer = service
+  .Developer({
+    brand: {
+      name: "Amadeusz Chomiak",
+      description: "Stwórzmy Twoją część internetu! Jeśli potrzebujesz pomocy, napisz do mnie",
+    },
+    price: {
+      localize: price,
+    },
+  })
+  

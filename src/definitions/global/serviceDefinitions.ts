@@ -45,3 +45,16 @@ export const Sanity = createService({
     renew: "monthly",
   },
 })
+
+export const Developer = createService({
+  brand: {
+    name: "developer",
+    color: "#3e61a5",
+    onColor: "white",
+  },
+  links: {},
+  price: {
+    cost: "paid",
+    renew: "onDemand",
+  },
+})

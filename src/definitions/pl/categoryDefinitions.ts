@@ -1,26 +1,26 @@
 import { Category } from '../definitionGenerator'
 
 export const analytic = new Category({
-  name: '',
+  name: 'analityka',
   description: ''
 })
 
 export const domain = new Category({
-  name: '',
+  name: 'domena',
   description: ''
 })
 
 export const server = new Category({
-  name: '',
+  name: 'serwer',
   description: ''
 })
 
 export const development = new Category({
-  name: '',
+  name: 'rozwój projektu',
   description: ''
 })
 
 export const contentEditor = new Category({
-  name: '',
+  name: 'edycja treści',
   description: ''
 })
