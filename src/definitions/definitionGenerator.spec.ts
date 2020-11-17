@@ -3,12 +3,12 @@ import {
   Category,
   Service,
   createService,
-} from "./definitionGenerators"
+} from "./definitionGenerator"
 let renderer: Renderer
 let category: Category
 let service: Service<{}>
 
-describe("definitions/definitionGenerators.ts", () => {
+describe("definitions/definitionGenerator.ts", () => {
   beforeEach(() => {
     renderer = new Renderer()
     category = new Category({
@@ -252,5 +252,8 @@ describe("definitions/definitionGenerators.ts", () => {
       ]
       expect(renderer.export()).toStrictEqual(expectedResult)
     })
+  })
+  describe("price module", () => {
+    it("renderer returns ")
   })
 })

@@ -1,5 +1,5 @@
 
-import { Category } from '../definitionGenerators'
+import { Category } from '../definitionGenerator'
 
 export const analytic = new Category({
   name: 'analytic',

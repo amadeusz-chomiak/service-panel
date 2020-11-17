@@ -25,6 +25,7 @@ interface BrandLocalize extends Partial<Brand> {
 }
 
 type LinksMap = Map<string | number | symbol, ServiceOptionLinkLocalize>
+
 export class Service<
   Links extends { [key: string]: string },
   LinksKey extends keyof Links = keyof Links
@@ -152,45 +153,3 @@ export const createService = <Links extends { [key: string]: string }>(global: {
   brand: Brand
   links: Links
 }) => (localize: { brand: BrandLocalize }) => new Service(global, localize)
-
-interface CategoryOptions {
-  name: string
-  description: string
-}
-
-export class Category {
-  private readonly services = new Map<
-    Symbol,
-    ReturnType<Service<{}>["export"]>
-  >()
-  public readonly id = Symbol()
-  constructor(private readonly options: CategoryOptions) {}
-
-  add(instance: Service<{}>) {
-    this.services.set(instance.id, instance.export())
-    return this
-  }
-
-  export() {
-    return {
-      ...this.options,
-      services: Array.from(this.services.values()),
-    }
-  }
-}
-
-export class Renderer {
-  private readonly categories = new Map<
-    Symbol,
-    ReturnType<Category["export"]>
-  >()
-
-  add(instance: Category) {
-    this.categories.set(instance.id, instance.export())
-    return this
-  }
-
-  export() {
-    return Array.from(this.categories.values())
-  }
-}

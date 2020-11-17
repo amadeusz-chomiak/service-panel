@@ -1,5 +1,5 @@
 import { computed } from "vue"
-import { Renderer } from "@/definitions/definitionGenerators"
+import { Renderer } from "@/definitions/definitionGenerator"
 import * as category from "@/definitions/en/categoryDefinitions"
 import * as service from "@/definitions/en/serviceDefinitions"
 

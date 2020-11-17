@@ -1,30 +1,30 @@
 import { Base } from "../../tests/utils/core"
 import Component from "./ServiceCard.vue"
-import { Service } from "@/definitions/definitionGenerators"
-const baseService = new Service({
+import { createService } from "@/definitions/definitionGenerator"
+const baseService = createService({
   brand: {
     name: "name",
-    description: "description",
     color: "#000",
     onColor: "white",
   },
-  links: new Map([
-    [
-      "link",
-      {
-        description: "link-description",
-        href: "link-href",
-      },
-    ],
-    [
-      "link-second",
-      {
-        description: "link-second-description",
-        href: "link-second-href",
-      },
-    ],
-  ]),
-}).export()
+  links: {
+    link: "link-href",
+    "link-second": "link-second-href",
+  },
+})({
+  brand: {
+    description: "description",
+  },
+})
+  .link("initialize", "link", {
+    description: "link-description",
+    title: "link",
+  })
+  .link("initialize", "link-second", {
+    description: "link-second-description",
+    title: "link-second",
+  })
+  .export() 
 
 const base = new Base(Component, {
   props: {

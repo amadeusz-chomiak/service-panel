@@ -1,4 +1,4 @@
-import { createService } from "../definitionGenerators"
+import { createService } from "../definitionGenerator"
 
 export const Firebase = createService({
   brand: {
