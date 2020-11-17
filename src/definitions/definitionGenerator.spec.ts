@@ -3,9 +3,11 @@ import {
   Category,
   Service,
   createService,
+  Price,
 } from "./definitionGenerator"
 let renderer: Renderer
 let category: Category
+let price: Price
 let service: Service<{}>
 
 describe("definitions/definitionGenerator.ts", () => {
@@ -15,6 +17,26 @@ describe("definitions/definitionGenerator.ts", () => {
       name: "category",
       description: "description",
     })
+
+    price = new Price({
+      cost: {
+        free: "free",
+        paid: "paid",
+        flexible: "flexible"
+      },
+      renew: {
+        never: "never",
+        daily: "daily",
+        weekly: "weekly",
+        monthly: "monthly",
+        quarterly: "quarterly",
+        yearly: "yearly",
+      },
+      compose({ renew, cost }) {
+        return renew + " " + cost
+      },
+    })
+
     service = createService({
       brand: {
         color: "#fff",
@@ -24,9 +46,16 @@ describe("definitions/definitionGenerator.ts", () => {
       links: {
         link: "href",
       },
+      price: {
+        cost: "paid",
+        renew: "monthly",
+      },
     })({
       brand: {
         description: "description",
+      },
+      price: {
+        localize: price,
       },
     }).link("initialize", "link", {
       title: "link",
@@ -54,6 +83,7 @@ describe("definitions/definitionGenerator.ts", () => {
                 href: "href",
               },
             ],
+            price: "monthly paid",
           },
         ],
       },
@@ -109,6 +139,7 @@ describe("definitions/definitionGenerator.ts", () => {
                   href: "href",
                 },
               ],
+              price: "monthly paid",
             },
           ],
         },
@@ -144,6 +175,7 @@ describe("definitions/definitionGenerator.ts", () => {
                   href: "change",
                 },
               ],
+              price: "monthly paid",
             },
           ],
         },
@@ -173,6 +205,7 @@ describe("definitions/definitionGenerator.ts", () => {
                   href: "href",
                 },
               ],
+              price: "monthly paid",
             },
             {
               brand: {
@@ -188,6 +221,7 @@ describe("definitions/definitionGenerator.ts", () => {
                   href: "href",
                 },
               ],
+              price: "monthly paid",
             },
           ],
         },
@@ -231,6 +265,7 @@ describe("definitions/definitionGenerator.ts", () => {
                   href: "href",
                 },
               ],
+              price: "monthly paid",
             },
             {
               brand: {
@@ -246,6 +281,7 @@ describe("definitions/definitionGenerator.ts", () => {
                   href: "href",
                 },
               ],
+              price: "monthly paid",
             },
           ],
         },
@@ -254,6 +290,7 @@ describe("definitions/definitionGenerator.ts", () => {
     })
   })
   describe("price module", () => {
-    it("renderer returns ")
+    it.todo("can change cost and renew after initialization")
+    it.todo("can change compose function after initialization")
   })
 })

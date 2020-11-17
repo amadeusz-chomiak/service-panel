@@ -10,6 +10,10 @@ export const Firebase = createService({
     dashboard: "https://console.firebase.google.com/",
     pricing: "https://firebase.google.com/pricing",
   },
+  price: {
+    cost: "flexible",
+    renew: "monthly",
+  },
 })
 
 export const Plausible = createService({
@@ -21,6 +25,10 @@ export const Plausible = createService({
   links: {
     pricing: "https://plausible.io/#pricing",
   },
+  price: {
+    cost: "paid",
+    renew: "yearly",
+  },
 })
 
 export const Sanity = createService({
@@ -31,5 +39,9 @@ export const Sanity = createService({
   },
   links: {
     pricing: "https://www.sanity.io/pricing/compare",
+  },
+  price: {
+    cost: "flexible",
+    renew: "monthly",
   },
 })

@@ -1,10 +1,38 @@
 import * as service from "../global/serviceDefinitions"
+import { Price } from "../definitionGeneratorPrice"
+
+const price = new Price({
+  cost: {
+    free: "free",
+    paid: "paid",
+    flexible: "paid with free tier",
+  },
+  renew: {
+    never: "one time",
+    daily: "daily",
+    weekly: "weekly",
+    monthly: "monthly",
+    quarterly: "quarterly",
+    yearly: "yearly",
+  },
+  compose({ renew, cost }, originalPrice) {
+    if (renew) {
+      if (originalPrice.cost === "flexible")
+        return `${renew} paid service with a free tier`
+      return `${renew} ${cost} service`
+    }
+    return cost
+  },
+})
 
 export const firebase = service
   .Firebase({
     brand: {
       description:
         "Server provider that combines site hosting, database, authentication, analytics and more",
+    },
+    price: {
+      localize: price,
     },
   })
   .link("initialize", "dashboard", {
@@ -22,6 +50,9 @@ export const plausible = service
       description:
         "Simple and privacy-friendly alternative to Google Analytics",
     },
+    price: {
+      localize: price,
+    },
   })
   .link("initialize", "pricing", {
     title: "pricing",
@@ -33,6 +64,9 @@ export const sanity = service
     brand: {
       description:
         "Sanity is the ultimate content platform that helps teams dream big and deliver quickly",
+    },
+    price: {
+      localize: price,
     },
   })
   .link("initialize", "pricing", {

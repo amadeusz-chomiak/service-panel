@@ -1,4 +1,9 @@
 import { cloneDeep } from "lodash"
+import { Price, PriceOptions } from "./definitionGeneratorPrice"
+
+interface PriceOptionsLocalize extends Partial<PriceOptions> {
+  localize: Price
+}
 
 interface ServiceOptionLink {
   href: string
@@ -32,6 +37,7 @@ export class Service<
 > {
   private readonly brand: Required<BrandLocalize>
   private links: LinksMap
+  private price: Required<PriceOptionsLocalize>
 
   public readonly id = Symbol()
 
@@ -39,8 +45,13 @@ export class Service<
     private readonly global: {
       brand: Brand
       links: Links
+      price: PriceOptions
     },
-    localize: { brand: BrandLocalize; links?: LinksMap }
+    localize: {
+      brand: BrandLocalize
+      links?: LinksMap
+      price: PriceOptionsLocalize
+    }
   ) {
     this.brand = {
       ...global.brand,
@@ -48,6 +59,11 @@ export class Service<
     }
 
     this.links = localize.links ?? new Map()
+
+    this.price = {
+      ...global.price,
+      ...localize.price,
+    }
   }
 
   /**
@@ -137,14 +153,16 @@ export class Service<
     return new Service(cloneDeep(this.global), {
       brand: { ...this.brand },
       links: new Map(this.links),
+      price: { ...this.price },
     })
   }
 
   export() {
     const brand = this.brand
     const links = Array.from(this.links.values())
+    const price = this.price.localize.compose(this.price)
 
-    return { brand, links }
+    return { brand, links, price }
   }
 }
 
@@ -152,4 +170,6 @@ export class Service<
 export const createService = <Links extends { [key: string]: string }>(global: {
   brand: Brand
   links: Links
-}) => (localize: { brand: BrandLocalize }) => new Service(global, localize)
+  price: PriceOptions
+}) => (localize: { brand: BrandLocalize; price: { localize: Price } }) =>
+  new Service(global, localize)

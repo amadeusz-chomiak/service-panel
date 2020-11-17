@@ -3,7 +3,7 @@ import Component from "./ServiceCardLink.vue"
 const base = new Base(Component, {
   props: {
     link: {
-      name: "name",
+      title: "title",
       href: "href",
       description: "description",
     },
@@ -15,10 +15,10 @@ const base = new Base(Component, {
 })
 
 describe("components/ServiceCardLink.vue", () => {
-  it("render 'a' tag with name and href", async () => {
+  it("render 'a' tag with title and href", async () => {
     const wrapper = base.render()
     const link = wrapper.get('[target="_blank"]')
-    expect(link.text()).toContain("name")
+    expect(link.text()).toContain("title")
     expect(link.attributes().href).toBe("href")
   })
 
