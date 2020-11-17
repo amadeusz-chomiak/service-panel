@@ -5,10 +5,11 @@ const price = new Price({
   cost: {
     free: "free",
     paid: "paid",
-    flexible: "paid with free tier",
+    flexible: "", // handled in compose function
   },
   renew: {
     never: "one time",
+    onDemand: "on demand",
     daily: "daily",
     weekly: "weekly",
     monthly: "monthly",

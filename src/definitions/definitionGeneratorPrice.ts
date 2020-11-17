@@ -1,5 +1,13 @@
+import { conformsTo } from 'lodash'
+
 interface CostTranslation {
+  /**
+   * @description Always paid, without a free tier, may have a free trial
+   */
   paid: string
+  /**
+   * @description Always free ex. open source
+   */
   free: string
   /**
    * @description Flexible pricing with free tier
@@ -8,7 +16,14 @@ interface CostTranslation {
 }
 
 interface RenewTranslation {
+  /**
+   * @description One time payment
+   */
   never: string
+  /**
+   * @description Payment without automatic renewal
+   */
+  onDemand: string
   daily: string
   weekly: string
   monthly: string
