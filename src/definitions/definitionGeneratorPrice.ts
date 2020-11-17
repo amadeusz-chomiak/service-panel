@@ -10,7 +10,7 @@ interface CostTranslation {
    */
   free: string
   /**
-   * @description Flexible pricing with free tier
+   * @description Flexible pricing with a free tier
    */
   flexible: string
 }
