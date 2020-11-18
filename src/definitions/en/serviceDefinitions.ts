@@ -36,11 +36,11 @@ export const firebase = service
       localize: price,
     },
   })
-  .link("initialize", "dashboard", {
+  .links("initialize", "dashboard", {
     title: "dashboard",
     description: "You'll find there all parts firebase",
   })
-  .link("initialize", "pricing", {
+  .links("initialize", "pricing", {
     title: "pricing",
     description: "You'll find detailed pricing",
   })
@@ -55,7 +55,7 @@ export const plausible = service
       localize: price,
     },
   })
-  .link("initialize", "pricing", {
+  .links("initialize", "pricing", {
     title: "pricing",
     description: "You'll find detailed pricing",
   })
@@ -70,7 +70,7 @@ export const sanity = service
       localize: price,
     }, 
   })
-  .link("initialize", "pricing", {
+  .links("initialize", "pricing", {
     title: "pricing",
     description: "You'll find detailed pricing",
   })

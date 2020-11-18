@@ -1,4 +1,4 @@
-import { Service } from './definitionGeneratorService'
+import { Service } from "./definitionGeneratorService"
 
 interface CategoryOptions {
   name: string
@@ -11,16 +11,21 @@ export class Category {
     ReturnType<Service<{}>["export"]>
   >()
   public readonly id = Symbol()
-  constructor(private readonly options: CategoryOptions) {}
+  constructor(private contentOptions: CategoryOptions) {}
 
   add(instance: Service<{}>) {
     this.services.set(instance.id, instance.export())
     return this
   }
 
+  content(change: Partial<CategoryOptions>) {
+    this.contentOptions = { ...this.contentOptions, ...change }
+    return this
+  }
+
   export() {
     return {
-      ...this.options,
+      ...this.contentOptions,
       services: Array.from(this.services.values()),
     }
   }

@@ -66,7 +66,7 @@ describe("definitions/definitionGenerator.ts", () => {
       price: {
         localize: price,
       },
-    }).link("initialize", "link", {
+    }).links("initialize", "link", {
       title: "link",
       description: "description",
     })
@@ -128,7 +128,7 @@ describe("definitions/definitionGenerator.ts", () => {
     it("service allow links extension", async () => {
       renderer.add(
         category.add(
-          service.link("add", "added", {
+          service.links("add", "added", {
             title: "added",
             description: "description",
             href: "href",
@@ -181,7 +181,7 @@ describe("definitions/definitionGenerator.ts", () => {
     it("service allow existing links change", async () => {
       renderer.add(
         category.add(
-          service.link("change", "link", {
+          service.links("change", "link", {
             description: "change",
             href: "change",
           })
@@ -286,7 +286,7 @@ describe("definitions/definitionGenerator.ts", () => {
       renderer.add(
         category
           .add(
-            service.detach().link("add", "added", {
+            service.detach().links("add", "added", {
               title: "added",
               href: "href",
               description: "description",
@@ -353,8 +353,152 @@ describe("definitions/definitionGenerator.ts", () => {
       expect(renderer.export()).toStrictEqual(expectedResult)
     })
   })
+
   describe("price module", () => {
     it.todo("can change cost and renew after initialization")
     it.todo("can change compose function after initialization")
+  })
+
+  describe("allow change of texts on instance", () => {
+    describe("category generator", () => {
+      it("allow change of content", () => {
+        const expectedResult = {
+          interface: {
+            header: {
+              title: "title",
+              link: {
+                title: "title",
+                href: "href",
+              },
+            },
+          },
+          categories: [
+            {
+              name: "change",
+              description: "change",
+              services: [
+                {
+                  brand: {
+                    color: "#fff",
+                    onColor: "black",
+                    name: "service",
+                    description: "description",
+                  },
+                  links: [
+                    {
+                      title: "link",
+                      description: "description",
+                      href: "href",
+                    },
+                  ],
+                  price: "monthly paid",
+                },
+              ],
+            },
+          ],
+        }
+        renderer.add(
+          category
+            .content({ name: "change", description: "change" })
+            .add(service)
+        )
+
+        expect(renderer.export()).toStrictEqual(expectedResult)
+      })
+    })
+
+    describe("service generator", () => {
+      it("allow change of brand", () => {
+        const expectedResult = {
+          interface: {
+            header: {
+              title: "title",
+              link: {
+                title: "title",
+                href: "href",
+              },
+            },
+          },
+          categories: [
+            {
+              name: "category",
+              description: "description",
+              services: [
+                {
+                  brand: {
+                    color: "change",
+                    onColor: "change",
+                    name: "change",
+                    description: "change",
+                  },
+                  links: [
+                    {
+                      title: "link",
+                      description: "description",
+                      href: "href",
+                    },
+                  ],
+                  price: "monthly paid",
+                },
+              ],
+            },
+          ],
+        }
+
+        renderer.add(
+          category.add(
+            service.brand({
+              name: "change",
+              color: "change",
+              description: "change",
+              onColor: "change",
+            })
+          )
+        )
+
+        expect(renderer.export()).toStrictEqual(expectedResult)
+      })
+      it("allow change of price", () => {
+        const expectedResult = {
+          interface: {
+            header: {
+              title: "title",
+              link: {
+                title: "title",
+                href: "href",
+              },
+            },
+          },
+          categories: [
+            {
+              name: "category",
+              description: "description",
+              services: [
+                {
+                  brand: {
+                    color: "#fff",
+                    onColor: "black",
+                    name: "service",
+                    description: "description",
+                  },
+                  links: [
+                    {
+                      title: "link",
+                      description: "description",
+                      href: "href",
+                    },
+                  ],
+                  price: "daily paid",
+                },
+              ],
+            },
+          ],
+        }
+
+        renderer.add(category.add(service.price({ renew: "daily" })))
+
+        expect(renderer.export()).toStrictEqual(expectedResult)
+      })
+    })
   })
 })

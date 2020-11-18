@@ -34,11 +34,11 @@ export const firebase = service
       localize: price,
     },
   })
-  .link("initialize", "dashboard", {
+  .links("initialize", "dashboard", {
     title: "panel kontrolny",
     description: "dowiesz się o wszystkich aspektach usługi (wymaga logowania)",
   })
-  .link("initialize", "pricing", {
+  .links("initialize", "pricing", {
     title: "cennik",
     description: "dowiesz się o aktualnych cenach",
   })
@@ -52,7 +52,7 @@ export const plausible = service
       localize: price,
     },
   })
-  .link("initialize", "pricing", {
+  .links("initialize", "pricing", {
     title: "cennik",
     description: "dowiesz się o aktualnych cenach",
   })
@@ -66,7 +66,7 @@ export const sanity = service
       localize: price,
     },
   })
-  .link("initialize", "pricing", {
+  .links("initialize", "pricing", {
     title: "cennik",
     description: "dowiesz się o aktualnych cenach",
   })

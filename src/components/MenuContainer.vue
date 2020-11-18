@@ -24,12 +24,12 @@ import {
 } from "vue"
 import { Render } from "@/composable/useDefinitions"
 const MenuContainerMobile = defineAsyncComponent(() =>
-  import("./MenuContainerMobile.vue"),
+  import("./MenuContainerMobile.vue")
 )
 const MenuContainerDesktop = defineAsyncComponent(() =>
-  import("./MenuContainerDesktop.vue"),
+  import("./MenuContainerDesktop.vue")
 )
-//TODO maybe add global page loader based on state of this async component
+//TODO add global page loader based on state of this async component
 
 export default defineComponent({
   components: {

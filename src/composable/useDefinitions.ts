@@ -17,7 +17,7 @@ export const useDefinitions = () => {
   renderer.add(category.contentEditor.add(service.sanity))
   renderer.add(
     category.analytic.add(service.plausible).add(
-      service.firebase.detach().link("add", "analytics", {
+      service.firebase.detach().links("add", "analytics", {
         title: "analytics",
         description: "analytics",
         href: "test",
@@ -27,11 +27,13 @@ export const useDefinitions = () => {
   renderer.add(category.server.add(service.firebase))
   renderer.add(
     category.development.add(
-      service.developer.link("add", "email", {
-        title: "send",
-        description: "send email to me at help@amadeo.dev",
-        href: "mailto:help@amadeo.dev",
-      })
+      service.developer
+        .links("add", "email", {
+          title: "send",
+          description: "send email to me at help@amadeo.dev",
+          href: "mailto:help@amadeo.dev",
+        })
+        .brand({ name: "Amadeusz Chomiak" })
     )
   )
 

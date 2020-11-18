@@ -10,6 +10,7 @@ const price = new Price({
   },
   renew: {
     never: "never",
+    onDemand: "onDemand",
     daily: "daily",
     weekly: "weekly",
     monthly: "monthly",
@@ -44,11 +45,11 @@ const baseService = createService({
     localize: price,
   },
 })
-  .link("initialize", "link", {
+  .links("initialize", "link", {
     description: "link-description",
     title: "link",
   })
-  .link("initialize", "link-second", {
+  .links("initialize", "link-second", {
     description: "link-second-description",
     title: "link-second",
   })

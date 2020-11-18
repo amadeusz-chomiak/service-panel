@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === "production") {
       console.log("New content is downloading.")
     },
     updated() {
+      // TODO add skip waiting pop-up
       console.log("New content is available; please refresh.")
     },
     offline() {

@@ -35,9 +35,9 @@ export class Service<
   Links extends { [key: string]: string },
   LinksKey extends keyof Links = keyof Links
 > {
-  private readonly brand: Required<BrandLocalize>
-  private links: LinksMap
-  private price: Required<PriceOptionsLocalize>
+  private brandOptions: Required<BrandLocalize>
+  private linksOptions: LinksMap
+  private priceOptions: Required<PriceOptionsLocalize>
 
   public readonly id = Symbol()
 
@@ -53,14 +53,14 @@ export class Service<
       price: PriceOptionsLocalize
     }
   ) {
-    this.brand = {
+    this.brandOptions = {
       ...global.brand,
       ...localize.brand,
     }
 
-    this.links = localize.links ?? new Map()
+    this.linksOptions = localize.links ?? new Map()
 
-    this.price = {
+    this.priceOptions = {
       ...global.price,
       ...localize.price,
     }
@@ -69,7 +69,7 @@ export class Service<
   /**
    * @description Initialize one of links setup in global serviceDefinition
    */
-  link(
+  links(
     run: "initialize",
     key: LinksKey,
     options: ServiceOptionLinkLocalizeWithOptionalHref
@@ -77,19 +77,19 @@ export class Service<
   /**
    * @description Add new link. Will throw if the key already exists
    */
-  link(run: "add", key: string, options: ServiceOptionLinkLocalize): this
+  links(run: "add", key: string, options: ServiceOptionLinkLocalize): this
   /**
    * @description Remove existing link. Will throw if the key doesn't exist
    */
-  link(run: "remove", key: LinksKey): this
+  links(run: "remove", key: LinksKey): this
   /**
    * @description Remove existing link. Will throw if the key doesn't exist
    */
-  link(run: "remove", key: string): this
+  links(run: "remove", key: string): this
   /**
    * @description Change existing link. Will throw if the key doesn't exist
    */
-  link(
+  links(
     run: "change",
     key: LinksKey,
     options: Partial<ServiceOptionLinkLocalize>
@@ -97,7 +97,7 @@ export class Service<
   /**
    * @description Change existing link. Will throw if the key doesn't exist
    */
-  link(
+  links(
     run: "change",
     key: string,
     options: Partial<ServiceOptionLinkLocalize>
@@ -105,12 +105,12 @@ export class Service<
   /**
    * @description You can add new link, initialize default link, remove or change existing link
    */
-  public link(
+  links(
     run: "initialize" | "add" | "remove" | "change",
     key: string | LinksKey,
     options?: Partial<ServiceOptionLinkLocalize>
   ): this {
-    const links = this.links
+    const links = this.linksOptions
 
     switch (run) {
       case "initialize":
@@ -145,22 +145,33 @@ export class Service<
     }
     return this
   }
+
+  brand(change: Partial<BrandLocalize>) {
+    this.brandOptions = { ...this.brandOptions, ...change }
+    return this
+  }
+
+  price(change: Partial<PriceOptionsLocalize>) {
+    this.priceOptions = { ...this.priceOptions, ...change }
+    return this
+  }
+
   /**
    * @description Detach from default instance. Let You define independent version of a service
    * @example service.detach().link('unique', {href: 'YOUR_HREF', description: 'YOUR_DESCRIPTION'})
    */
   detach() {
     return new Service(cloneDeep(this.global), {
-      brand: { ...this.brand },
-      links: new Map(this.links),
-      price: { ...this.price },
+      brand: { ...this.brandOptions },
+      links: new Map(this.linksOptions),
+      price: { ...this.priceOptions },
     })
   }
 
   export() {
-    const brand = this.brand
-    const links = Array.from(this.links.values())
-    const price = this.price.localize.compose(this.price)
+    const brand = this.brandOptions
+    const links = Array.from(this.linksOptions.values())
+    const price = this.priceOptions.localize.compose(this.priceOptions)
 
     return { brand, links, price }
   }
