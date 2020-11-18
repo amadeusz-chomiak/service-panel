@@ -14,6 +14,13 @@ describe("dark mode", () => {
       Array.from(document.documentElement.classList.values())
     )
     expect(classes).toContain("dark")
+
+    const themeColor = await page.$eval(
+      "head > meta[name='theme-color']",
+      //@ts-expect-error
+      element => element.content
+    )
+    expect(themeColor).toBe("#011332")
   })
 
   it("press setColorScheme toggle button", async () => {
@@ -23,6 +30,13 @@ describe("dark mode", () => {
       Array.from(document.documentElement.classList.values())
     )
     expect(classes).not.toContain("dark")
+
+    const themeColor = await page.$eval(
+      "head > meta[name='theme-color']",
+      //@ts-expect-error
+      element => element.content
+    )
+    expect(themeColor).toBe("#b8cdea")
   })
 
   it("keeps light mode preference, after reload", async () => {
@@ -33,5 +47,12 @@ describe("dark mode", () => {
       Array.from(document.documentElement.classList.values())
     )
     expect(classes).not.toContain("dark")
+
+    const themeColor = await page.$eval(
+      "head > meta[name='theme-color']",
+      //@ts-expect-error
+      element => element.content
+    )
+    expect(themeColor).toBe("#b8cdea")
   })
 })

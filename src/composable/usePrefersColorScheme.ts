@@ -40,10 +40,13 @@ const initializeFromPrefersColorScheme = () => {
 
 watch(isLight, isLight => {
   const root = document.documentElement
+  const metaThemeColor = document.querySelector("head > meta[name='theme-color']")
   if (isLight) {
     root.classList.remove("dark")
+    metaThemeColor?.setAttribute("content", "#b8cdea")
   } else {
     root.classList.add("dark")
+    metaThemeColor?.setAttribute("content", "#011332")
   }
   saveState()
 })
