@@ -28,7 +28,7 @@ export const firebase = service
   .Firebase({
     brand: {
       description:
-        "stworzony przez Google, wielozadaniowy serwer, zapewnia hosting, bazę danych, analitykę i wiele więcej",
+        "Stworzony przez Google, wielozadaniowy serwer, zapewnia hosting, bazę danych, analitykę i wiele więcej",
     },
     price: {
       localize: price,
@@ -46,7 +46,7 @@ export const firebase = service
 export const plausible = service
   .Plausible({
     brand: {
-      description: "prosta i przyjazna RODO, analityka",
+      description: "Prosta i przyjazna RODO, analityka",
     },
     price: {
       localize: price,
@@ -60,7 +60,7 @@ export const plausible = service
 export const sanity = service
   .Sanity({
     brand: {
-      description: "system CMS dzięki któremu z łatwością zmienisz treść strony",
+      description: "System CMS dzięki któremu z łatwością zmienisz treść strony",
     },
     price: {
       localize: price,
@@ -68,7 +68,7 @@ export const sanity = service
   })
   .links("initialize", "pricing", {
     title: "cennik",
-    description: "dowiesz się o aktualnych cenach",
+    description: "Dowiesz się o aktualnych cenach",
   })
 
   export const developer = service

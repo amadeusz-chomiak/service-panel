@@ -78,7 +78,7 @@ export const sanity = service
 export const developer = service.Developer({
   brand: {
     description:
-      "custom development",
+      "I'll help You upgrade this website",
   },
   price: {
     localize: price,
