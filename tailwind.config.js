@@ -11,8 +11,7 @@ module.exports = {
     applyComplexClasses: true,
   },
   purge: {
-    // content: ['./src/**/*.html'],
-
+    content: ["src/**/*.vue", "public/index.html"],
     // These options are passed through directly to PurgeCSS
     options: {
       whitelist: ["dark"],
