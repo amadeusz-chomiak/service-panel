@@ -12,7 +12,15 @@ let service: Service<{}>
 
 describe("definitions/definitionGenerator.ts", () => {
   beforeEach(() => {
-    renderer = new Renderer()
+    renderer = new Renderer({
+      header: {
+        title: "title",
+        link: {
+          title: "title",
+          href: "href",
+        },
+      },
+    })
     category = new Category({
       name: "category",
       description: "description",
@@ -22,10 +30,11 @@ describe("definitions/definitionGenerator.ts", () => {
       cost: {
         free: "free",
         paid: "paid",
-        flexible: "flexible"
+        flexible: "flexible",
       },
       renew: {
         never: "never",
+        onDemand: "onDemand",
         daily: "daily",
         weekly: "weekly",
         monthly: "monthly",
@@ -64,30 +73,41 @@ describe("definitions/definitionGenerator.ts", () => {
   })
 
   describe("basic", () => {
-    const expectedResult = [
-      {
-        name: "category",
-        description: "description",
-        services: [
-          {
-            brand: {
-              color: "#fff",
-              onColor: "black",
-              name: "service",
-              description: "description",
-            },
-            links: [
-              {
-                title: "link",
-                description: "description",
-                href: "href",
-              },
-            ],
-            price: "monthly paid",
+    const expectedResult = {
+      interface: {
+        header: {
+          title: "title",
+          link: {
+            title: "title",
+            href: "href",
           },
-        ],
+        },
       },
-    ]
+      categories: [
+        {
+          name: "category",
+          description: "description",
+          services: [
+            {
+              brand: {
+                color: "#fff",
+                onColor: "black",
+                name: "service",
+                description: "description",
+              },
+              links: [
+                {
+                  title: "link",
+                  description: "description",
+                  href: "href",
+                },
+              ],
+              price: "monthly paid",
+            },
+          ],
+        },
+      ],
+    }
 
     it("renderer returns category with service", async () => {
       renderer.add(category.add(service))
@@ -115,35 +135,46 @@ describe("definitions/definitionGenerator.ts", () => {
           })
         )
       )
-      const expectedResult = [
-        {
-          name: "category",
-          description: "description",
-          services: [
-            {
-              brand: {
-                color: "#fff",
-                onColor: "black",
-                name: "service",
-                description: "description",
-              },
-              links: [
-                {
-                  title: "link",
-                  description: "description",
-                  href: "href",
-                },
-                {
-                  title: "added",
-                  description: "description",
-                  href: "href",
-                },
-              ],
-              price: "monthly paid",
+      const expectedResult = {
+        interface: {
+          header: {
+            title: "title",
+            link: {
+              title: "title",
+              href: "href",
             },
-          ],
+          },
         },
-      ]
+        categories: [
+          {
+            name: "category",
+            description: "description",
+            services: [
+              {
+                brand: {
+                  color: "#fff",
+                  onColor: "black",
+                  name: "service",
+                  description: "description",
+                },
+                links: [
+                  {
+                    title: "link",
+                    description: "description",
+                    href: "href",
+                  },
+                  {
+                    title: "added",
+                    description: "description",
+                    href: "href",
+                  },
+                ],
+                price: "monthly paid",
+              },
+            ],
+          },
+        ],
+      }
       expect(renderer.export()).toStrictEqual(expectedResult)
     })
 
@@ -156,76 +187,98 @@ describe("definitions/definitionGenerator.ts", () => {
           })
         )
       )
-      const expectedResult = [
-        {
-          name: "category",
-          description: "description",
-          services: [
-            {
-              brand: {
-                color: "#fff",
-                onColor: "black",
-                name: "service",
-                description: "description",
-              },
-              links: [
-                {
-                  title: "link",
-                  description: "change",
-                  href: "change",
-                },
-              ],
-              price: "monthly paid",
+      const expectedResult = {
+        interface: {
+          header: {
+            title: "title",
+            link: {
+              title: "title",
+              href: "href",
             },
-          ],
+          },
         },
-      ]
+        categories: [
+          {
+            name: "category",
+            description: "description",
+            services: [
+              {
+                brand: {
+                  color: "#fff",
+                  onColor: "black",
+                  name: "service",
+                  description: "description",
+                },
+                links: [
+                  {
+                    title: "link",
+                    description: "change",
+                    href: "change",
+                  },
+                ],
+                price: "monthly paid",
+              },
+            ],
+          },
+        ],
+      }
       expect(renderer.export()).toStrictEqual(expectedResult)
     })
   })
   describe("detach from default instance", () => {
     it("allow duplicates if at least one is detached", () => {
       renderer.add(category.add(service.detach()).add(service))
-      const expectedResult = [
-        {
-          name: "category",
-          description: "description",
-          services: [
-            {
-              brand: {
-                color: "#fff",
-                onColor: "black",
-                name: "service",
-                description: "description",
-              },
-              links: [
-                {
-                  title: "link",
-                  description: "description",
-                  href: "href",
-                },
-              ],
-              price: "monthly paid",
+      const expectedResult = {
+        interface: {
+          header: {
+            title: "title",
+            link: {
+              title: "title",
+              href: "href",
             },
-            {
-              brand: {
-                color: "#fff",
-                onColor: "black",
-                name: "service",
-                description: "description",
-              },
-              links: [
-                {
-                  title: "link",
-                  description: "description",
-                  href: "href",
-                },
-              ],
-              price: "monthly paid",
-            },
-          ],
+          },
         },
-      ]
+        categories: [
+          {
+            name: "category",
+            description: "description",
+            services: [
+              {
+                brand: {
+                  color: "#fff",
+                  onColor: "black",
+                  name: "service",
+                  description: "description",
+                },
+                links: [
+                  {
+                    title: "link",
+                    description: "description",
+                    href: "href",
+                  },
+                ],
+                price: "monthly paid",
+              },
+              {
+                brand: {
+                  color: "#fff",
+                  onColor: "black",
+                  name: "service",
+                  description: "description",
+                },
+                links: [
+                  {
+                    title: "link",
+                    description: "description",
+                    href: "href",
+                  },
+                ],
+                price: "monthly paid",
+              },
+            ],
+          },
+        ],
+      }
       expect(renderer.export()).toStrictEqual(expectedResult)
     })
 
@@ -241,51 +294,62 @@ describe("definitions/definitionGenerator.ts", () => {
           )
           .add(service)
       )
-      const expectedResult = [
-        {
-          name: "category",
-          description: "description",
-          services: [
-            {
-              brand: {
-                color: "#fff",
-                onColor: "black",
-                name: "service",
-                description: "description",
-              },
-              links: [
-                {
-                  title: "link",
-                  description: "description",
-                  href: "href",
-                },
-                {
-                  title: "added",
-                  description: "description",
-                  href: "href",
-                },
-              ],
-              price: "monthly paid",
+      const expectedResult = {
+        interface: {
+          header: {
+            title: "title",
+            link: {
+              title: "title",
+              href: "href",
             },
-            {
-              brand: {
-                color: "#fff",
-                onColor: "black",
-                name: "service",
-                description: "description",
-              },
-              links: [
-                {
-                  title: "link",
-                  description: "description",
-                  href: "href",
-                },
-              ],
-              price: "monthly paid",
-            },
-          ],
+          },
         },
-      ]
+        categories: [
+          {
+            name: "category",
+            description: "description",
+            services: [
+              {
+                brand: {
+                  color: "#fff",
+                  onColor: "black",
+                  name: "service",
+                  description: "description",
+                },
+                links: [
+                  {
+                    title: "link",
+                    description: "description",
+                    href: "href",
+                  },
+                  {
+                    title: "added",
+                    description: "description",
+                    href: "href",
+                  },
+                ],
+                price: "monthly paid",
+              },
+              {
+                brand: {
+                  color: "#fff",
+                  onColor: "black",
+                  name: "service",
+                  description: "description",
+                },
+                links: [
+                  {
+                    title: "link",
+                    description: "description",
+                    href: "href",
+                  },
+                ],
+                price: "monthly paid",
+              },
+            ],
+          },
+        ],
+      }
       expect(renderer.export()).toStrictEqual(expectedResult)
     })
   })

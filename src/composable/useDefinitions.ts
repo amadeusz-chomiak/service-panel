@@ -1,38 +1,45 @@
-import { computed, onBeforeMount } from "vue"
+import { computed, onBeforeMount, ref } from "vue"
 import { Renderer } from "@/definitions/definitionGenerator"
-import * as category from "@/definitions/pl/categoryDefinitions"
-import * as service from "@/definitions/pl/serviceDefinitions"
+import * as category from "@/definitions/en/categoryDefinitions"
+import * as service from "@/definitions/en/serviceDefinitions"
 
 export const useDefinitions = () => {
-  const renderer = new Renderer()
-  onBeforeMount(() => {
-    renderer.add(category.contentEditor.add(service.sanity))
-    renderer.add(
-      category.analytic.add(service.plausible).add(
-        service.firebase.detach().link("add", "analytics", {
-          title: "analytics",
-          description: "analytics",
-          href: "test",
-        })
-      )
-    )
-    renderer.add(category.server.add(service.firebase))
-    renderer.add(
-      category.development.add(
-        service.developer.link("add", "email", {
-          title: "napisz",
-          description: "wyślij do mnie e-mail na pomoc@amadeusz.dev",
-          href: "mailto:pomoc@amadeusz.dev",
-        })
-      )
-    )
+  const renderer = new Renderer({
+    header: {
+      title: "services",
+      link: {
+        title: "amadeo.dev",
+        href: "https://amadeo.dev",
+      },
+    },
   })
 
+  renderer.add(category.contentEditor.add(service.sanity))
+  renderer.add(
+    category.analytic.add(service.plausible).add(
+      service.firebase.detach().link("add", "analytics", {
+        title: "analytics",
+        description: "analytics",
+        href: "test",
+      })
+    )
+  )
+  renderer.add(category.server.add(service.firebase))
+  renderer.add(
+    category.development.add(
+      service.developer.link("add", "email", {
+        title: "send",
+        description: "send email to me at help@amadeo.dev",
+        href: "mailto:help@amadeo.dev",
+      })
+    )
+  )
+
   return {
-    render: computed(() => renderer.export()),
+    render: computed(() => renderer.export()), //? is computed if You need to get it as JSON from api
   }
 }
 
-export type Render = ReturnType<typeof useDefinitions>["render"]["value"]
-export type Category = Render[number]
+export type Render = ReturnType<Renderer["export"]>
+export type Category = Render["categories"][number]
 export type Service = Category["services"][number]

@@ -12,13 +12,13 @@
 
 <script lang="ts">
 import { ref, reactive, defineComponent } from "vue"
-import { Render } from "@/composable/useDefinitions"
+import { Category } from "@/composable/useDefinitions"
 
 export default defineComponent({
   props: {
     render: {
       required: true,
-      type: Array as () => Render,
+      type: Array as () => Category[],
     },
   },
   setup() {

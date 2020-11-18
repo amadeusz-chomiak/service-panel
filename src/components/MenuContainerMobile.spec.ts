@@ -2,9 +2,20 @@ import { Base } from "../../tests/utils/core"
 import Component from "./MenuContainerMobile.vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import waitFor from "wait-for-expect"
-
+import { Renderer } from "@/definitions/definitionGenerator"
+const renderer = new Renderer({
+  header: {
+    title: "title",
+    link: {
+      title: "title",
+      href: "href",
+    },
+  },
+})
 const base = new Base(Component, {
-  // props: {},
+  props: {
+    render: renderer.export(),
+  },
 })
 
 describe("components/MenuContainerMobile.vue", () => {
@@ -22,7 +33,9 @@ describe("components/MenuContainerMobile.vue", () => {
     const wrapper = base.render()
     await wrapper.find("[data-testid='toggle']").trigger("click")
     await waitFor(() =>
-      expect(wrapper.find("menu-container-content-stub").element).not.toBeVisible()
+      expect(
+        wrapper.find("menu-container-content-stub").element
+      ).not.toBeVisible()
     )
   })
 })

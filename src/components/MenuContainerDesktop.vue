@@ -4,15 +4,17 @@
       <h1
         class="font-semibold text-5xl text-black dark:text-gray-200 first-letter:uppercase"
       >
-        services
+        {{ header.title }}
       </h1>
       <a
         class="text-2xl text-primary-700 dark:text-primary-200 underline font-small-caps"
-        href="https://amadeo.dev"
-        >amadeo.dev</a
+        :href="header.link.href"
+        target="_blank"
+        rel="noreferrer"
+        >{{ header.link.title }}</a
       >
     </div>
-    <MenuContainerContent :render="render" />
+    <MenuContainerContent :render="render.categories" />
   </div>
   <button
     class="button button-primary p-3 self-start"
@@ -24,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { ref, reactive, defineComponent } from "vue"
+import { ref, reactive, defineComponent, computed } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import { Render } from "@/composable/useDefinitions"
 import { usePrefersColorScheme } from "@/composable/usePrefersColorScheme"
@@ -36,12 +38,15 @@ export default defineComponent({
   props: {
     render: {
       required: true,
-      type: Array as () => Render,
+      type: Object as () => Render,
     },
   },
-  setup() {
+  setup(props) {
     const { isLight, setColorScheme } = usePrefersColorScheme()
-    return { isLight, setColorScheme }
+
+    const header = computed(() => props.render.interface.header)
+
+    return { isLight, setColorScheme, header }
   },
 })
 </script>

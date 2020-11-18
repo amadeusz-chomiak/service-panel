@@ -68,9 +68,19 @@ export const sanity = service
     },
     price: {
       localize: price,
-    },
+    }, 
   })
   .link("initialize", "pricing", {
     title: "pricing",
     description: "You'll find detailed pricing",
   })
+
+export const developer = service.Developer({
+  brand: {
+    description:
+      "custom development",
+  },
+  price: {
+    localize: price,
+  },
+})

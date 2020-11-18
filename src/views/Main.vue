@@ -2,7 +2,7 @@
   <div class="flex justify-between">
     <MenuContainer :render="render" />
     <main class="max-h-screen flex-1 pr-2">
-      <CategoryContainer :render="render" />
+      <CategoryContainer :render="render.categories" />
     </main>
   </div>
 </template>

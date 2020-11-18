@@ -15,7 +15,10 @@
       v-show="mobileShowContent"
       class="transform transition-all duration-200 ease-in flex flex-col p-2 sm:p-4 fixed inset-x-0 bottom-0 shadow-center-lg bg-gray-200 dark:bg-gray-800 rounded-t-xl"
     >
-      <MenuContainerContent class="mb-14 mt-4 ml-4" :render="render" />
+      <MenuContainerContent
+        class="mb-14 mt-4 ml-4"
+        :render="render.categories"
+      />
     </div>
   </transition>
   <div class="flex-1 flex justify-between z-10">
@@ -31,8 +34,10 @@
     </button>
     <a
       class="text-2xl text-primary-700 dark:text-primary-200 underline font-small-caps"
-      href="https://amadeo.dev"
-      >amadeo.dev</a
+      :href="header.link.href"
+      target="_blank"
+      rel="noreferrer"
+      >{{ header.link.title }}</a
     >
     <button
       class="button button-primary p-2"
@@ -45,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from "vue"
+import { ref, defineComponent, computed } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import { Render } from "@/composable/useDefinitions"
 import { usePrefersColorScheme } from "@/composable/usePrefersColorScheme"
@@ -58,10 +63,10 @@ export default defineComponent({
   props: {
     render: {
       required: true,
-      type: Array as () => Render,
+      type: Object as () => Render,
     },
   },
-  setup() {
+  setup(props) {
     const mobileShowContent = ref(true)
     onBeforeRouteUpdate(() => {
       mobileShowContent.value = false
@@ -69,7 +74,9 @@ export default defineComponent({
 
     const { isLight, setColorScheme } = usePrefersColorScheme()
 
-    return { mobileShowContent, isLight, setColorScheme }
+    const header = computed(() => props.render.interface.header)
+
+    return { mobileShowContent, isLight, setColorScheme, header }
   },
 })
 </script>

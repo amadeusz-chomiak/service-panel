@@ -1,9 +1,21 @@
 import { Base } from "../../tests/utils/core"
 import Component from "./MenuContainerDesktop.vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
+import { Renderer } from '@/definitions/definitionGenerator'
 
+const renderer = new Renderer({
+  header: {
+    title: "title",
+    link: {
+      title: "title",
+      href: "href",
+    },
+  },
+})
 const base = new Base(Component, {
-  // props: {},
+  props: {
+    render: renderer.export(),
+  },
 })
 
 describe("components/MenuContainerDesktop.vue", () => {
