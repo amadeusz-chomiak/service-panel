@@ -56,6 +56,7 @@ module.exports = {
       boxShadow: {
         "center-lg":
           "0 0 17px -3px rgba(0, 0, 0, 0.1), 0 0 8px -2px rgba(0, 0, 0, 0.05)",
+        "light-inner": "inset 0 -2px 6px 0 rgba(255, 255, 255, 0.05)",
       },
       opacity: {
         60: "0.6",
@@ -64,7 +65,7 @@ module.exports = {
   },
   variants: {
     scale: ({ after }) => after(["active"]),
-    boxShadow: ({ after }) => after(["active"]),
+    boxShadow: ({ after }) => after(["active", "dark"]),
     backgroundColor: ({ before }) => before(["dark"]),
     backgroundOpacity: ({ before }) => before(["dark"]),
     textColor: ({ before }) => before(["dark"]),

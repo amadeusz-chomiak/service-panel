@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col sm:flex-row flex-wrap sm:items-center bg-opacity-25 rounded-3xl shadow-inner"
+    class="flex flex-col sm:flex-row flex-wrap sm:items-center bg-opacity-25 rounded-3xl shadow-inner dark:shadow-light-inner"
     :style="brandBackgroundStyle"
   >
     <a
