@@ -1,12 +1,12 @@
 <template>
   <div
-    class="flex flex-col sm:flex-row flex-wrap sm:items-center bg-opacity-25 rounded-3xl"
+    class="flex flex-col sm:flex-row flex-wrap sm:items-center bg-opacity-25 rounded-3xl shadow-inner"
     :style="brandBackgroundStyle"
   >
     <a
       :href="link.href"
       :style="brandBackgroundStyle"
-      class="button text-lg w-40 bg-opacity-100 dark:bg-opacity-60 flex-shrink-0 px-5 py-2 flex items-baseline justify-between"
+      class="button text-lg bg-opacity-100 dark:bg-opacity-60 flex-shrink-0 px-5 py-2 flex items-baseline justify-between"
       target="_blank"
       rel="noreferrer"
       ><span class="first-letter:uppercase" :style="brandOnClorStyle">{{
