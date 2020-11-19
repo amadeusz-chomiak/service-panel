@@ -13,13 +13,14 @@ module.exports = {
   pwa: {
     name: "services panel",
     manifestPath: "site.webmanifest",
-    themeColor: "#3e61a5",
+    themeColor: "#e6e6e6",
     iconPaths: {
       appleTouchIcon: "img/icons/apple-touch-icon.png",
       msTileImage: "img/icons/mstile-144x144.png",
     },
     manifestOptions: {
       short_name: "services",
+      background_color: "#e6e6e6",
     },
   },
 }

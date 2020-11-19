@@ -43,10 +43,10 @@ watch(isLight, isLight => {
   const metaThemeColor = document.querySelector("head > meta[name='theme-color']")
   if (isLight) {
     root.classList.remove("dark")
-    metaThemeColor?.setAttribute("content", "#b8cdea")
+    metaThemeColor?.setAttribute("content", "#e6e6e6")
   } else {
     root.classList.add("dark")
-    metaThemeColor?.setAttribute("content", "#011332")
+    metaThemeColor?.setAttribute("content", "#1a1a1a")
   }
   saveState()
 })

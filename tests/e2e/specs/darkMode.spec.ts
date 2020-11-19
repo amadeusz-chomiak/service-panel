@@ -20,7 +20,7 @@ describe("dark mode", () => {
       //@ts-expect-error
       element => element.content
     )
-    expect(themeColor).toBe("#011332")
+    expect(themeColor).toBe("#1a1a1a")
   })
 
   it("press setColorScheme toggle button", async () => {
@@ -36,7 +36,7 @@ describe("dark mode", () => {
       //@ts-expect-error
       element => element.content
     )
-    expect(themeColor).toBe("#b8cdea")
+    expect(themeColor).toBe("#e6e6e6")
   })
 
   it("keeps light mode preference, after reload", async () => {
@@ -53,6 +53,6 @@ describe("dark mode", () => {
       //@ts-expect-error
       element => element.content
     )
-    expect(themeColor).toBe("#b8cdea")
+    expect(themeColor).toBe("#e6e6e6")
   })
 })
