@@ -34,6 +34,13 @@
     class="fill-current fill-inherit"
     alt="open menu icon"
   />
+  <img
+    v-else-if="icon === 'download'"
+    svg-inline
+    src="@/assets/icons/download.svg"
+    class="fill-current fill-inherit"
+    alt="download icon"
+  />
 </template>
 
 <script lang="ts">
@@ -42,7 +49,7 @@ import { ref, reactive, defineComponent } from "vue"
 export default defineComponent({
   props: {
     icon: {
-      type: String as () => "link" | "close" | "moon" | "sun" | "menu",
+      type: String as () => "link" | "close" | "moon" | "sun" | "menu" | "download",
       required: true,
     },
   },
