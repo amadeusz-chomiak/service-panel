@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @import './button.css';
+@import './after.css';
 
 @import './fonts.css';
 @import './svg.css';
