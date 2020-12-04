@@ -11,7 +11,7 @@ module.exports = {
       })
   },
   pwa: {
-    name: "services panel",
+    name: process.env.VUE_APP_NAME || "services panel",
     manifestPath: "site.webmanifest",
     themeColor: "#e6e6e6",
     iconPaths: {
@@ -19,7 +19,7 @@ module.exports = {
       msTileImage: "img/icons/mstile-144x144.png",
     },
     manifestOptions: {
-      short_name: "services",
+      short_name: process.env.VUE_APP_SHORT_NAME || "services",
       background_color: "#e6e6e6",
     },
   },

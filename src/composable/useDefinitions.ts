@@ -6,7 +6,8 @@ import * as service from "@/definitions/en/serviceDefinitions"
 export const useDefinitions = () => {
   const renderer = new Renderer({
     header: {
-      title: "services",
+      //? change title from .env file in the root of the project
+      title: process.env.VUE_APP_SHORT_NAME || 'services',
       link: {
         title: "amadeo.dev",
         href: "https://amadeo.dev",
