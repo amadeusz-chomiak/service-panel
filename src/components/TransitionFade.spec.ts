@@ -5,7 +5,6 @@ const base = new Base(Component, {
 })
 
 describe("components/TransitionFade.vue", () => {
-  it("", async () => {
-    const wrapper = base.render()
-  })
+  it("render default slot", async () => base.testHasSlot())
+  
 })

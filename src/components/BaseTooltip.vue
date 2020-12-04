@@ -1,16 +1,18 @@
 <template>
   <div class="relative">
-    <div
-      v-if="show"
-      class="absolute cursor-pointer after-arrow after-arrow-primary-700 dark:after-arrow-primary-600 bottom-full shadow-sm mb-3 rounded-full px-4 py-2 bg-primary-700 dark:bg-primary-600"
-      :class="tooltipClasses"
-      data-testid="tooltip"
-      @click="closeTooltip"
-    >
-      <p class="text-white whitespace-no-wrap">
-        {{ text }}
-      </p>
-    </div>
+    <transition-fade>
+      <div
+        v-if="show"
+        class="absolute cursor-pointer after-arrow after-arrow-primary-700 dark:after-arrow-primary-600 bottom-full shadow-sm mb-3 rounded-full px-4 py-2 bg-primary-700 dark:bg-primary-600"
+        :class="tooltipClasses"
+        data-testid="tooltip"
+        @click="closeTooltip"
+      >
+        <p class="text-white whitespace-no-wrap">
+          {{ text }}
+        </p>
+      </div>
+    </transition-fade>
     <slot />
   </div>
 </template>
