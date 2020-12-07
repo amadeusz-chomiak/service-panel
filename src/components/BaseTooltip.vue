@@ -8,7 +8,7 @@
         data-testid="tooltip"
         @click="closeTooltip"
       >
-        <p class="text-white whitespace-no-wrap">
+        <p class="text-white first-letter:uppercase whitespace-no-wrap">
           {{ text }}
         </p>
       </div>
@@ -42,7 +42,7 @@ export default defineComponent({
     const tooltipClasses = computed(() =>
       props.right
         ? ["right-0", "after-arrow-right"]
-        : ["left-0", "after-arrow-left"]
+        : ["left-0", "after-arrow-left"],
     )
 
     const closeTooltip = () => emit("close")
@@ -56,7 +56,7 @@ export default defineComponent({
       },
       {
         immediate: true,
-      }
+      },
     )
 
     return { tooltipClasses, closeTooltip }

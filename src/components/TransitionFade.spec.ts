@@ -6,5 +6,4 @@ const base = new Base(Component, {
 
 describe("components/TransitionFade.vue", () => {
   it("render default slot", async () => base.testHasSlot())
-  
 })

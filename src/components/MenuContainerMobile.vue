@@ -30,7 +30,7 @@
       >{{ header.link.title }}</a
     >
     <div class="flex justify-end space-x-2">
-      <transition-fade>
+      <transition-fade duration="duration-600">
         <button-new-version v-if="serviceWorkerWaiting" tooltip-right />
       </transition-fade>
       <button-toggle-color-scheme />
@@ -53,7 +53,7 @@ import { ref, defineComponent, computed, defineAsyncComponent } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
-  import("./ButtonNewVersion.vue"),
+  import("./ButtonNewVersion.vue")
 )
 import { Render } from "@/composable/useDefinitions"
 import { onBeforeRouteUpdate } from "vue-router"

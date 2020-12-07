@@ -12,7 +12,7 @@ const renderer = new Renderer({
       href: "https://amadeo.dev",
     },
     versionControl: {
-      tooltip: 'switch to new version'
+      tooltip: 'switch to a new version'
     }
   },
 })

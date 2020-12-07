@@ -18,7 +18,7 @@
   </div>
   <div class="flex space-x-2">
     <button-toggle-color-scheme />
-    <transition-fade>
+    <transition-fade duration="duration-600">
       <button-new-version v-if="serviceWorkerWaiting" />
     </transition-fade>
   </div>
@@ -35,7 +35,7 @@ import {
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
-  import("./ButtonNewVersion.vue"),
+  import("./ButtonNewVersion.vue")
 )
 import { Render } from "@/composable/useDefinitions"
 import { useVersionControl } from "@/composable/useVersionControl"
