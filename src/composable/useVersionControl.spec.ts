@@ -1,17 +1,29 @@
-import { useVersionControl } from "./useVersionControl"
-
 describe("composable/useVersionControl.ts", () => {
-  it("serviceWorkerWaiting is true after setting skip waiting", () => {
+  beforeEach(() => {
+    jest.resetModules()
+  })
+
+  it("serviceWorkerWaiting is true after setting skip waiting", async () => {
+    const { useVersionControl } = await import("./useVersionControl")
     const { setSkipWaiting, serviceWorkerWaiting } = useVersionControl()
-    setSkipWaiting(async () => { })
+    setSkipWaiting(async () => {})
     expect(serviceWorkerWaiting.value).toBe(true)
   })
 
-  it("call skipWaiting set by setSkipWaiting", () => {
+  it("call skipWaiting set by setSkipWaiting", async () => {
+    const { useVersionControl } = await import("./useVersionControl")
     const { setSkipWaiting, skipWaiting } = useVersionControl()
     const fn = jest.fn()
     setSkipWaiting(fn)
-    skipWaiting.value?.()
+    skipWaiting()
     expect(fn).toBeCalledTimes(1)
+  })
+
+  it("set skipping to true after calling skipWaiting", async () => {
+    const { useVersionControl } = await import("./useVersionControl")
+    const { skipWaiting, skipping } = useVersionControl()
+    expect(skipping.value).toBe(false)
+    skipWaiting()
+    expect(skipping.value).toBe(true)
   })
 })

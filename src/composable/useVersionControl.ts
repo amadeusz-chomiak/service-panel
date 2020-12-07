@@ -1,17 +1,23 @@
 import { computed, ref, readonly } from "vue"
 
 type SkipWaiting = () => Promise<void>
-const skipWaiting = ref<SkipWaiting>()
+const skipServiceWorkerWaiting = ref<SkipWaiting>()
+const skipping = ref(false)
  
 export const useVersionControl = () => {
   const setSkipWaiting = (to?: SkipWaiting) => {
-    skipWaiting.value = to
+    skipServiceWorkerWaiting.value = to
   }
-  const serviceWorkerWaiting = computed(()=> !!skipWaiting.value)
+  const serviceWorkerWaiting = computed(()=> !!skipServiceWorkerWaiting.value)
+  const skipWaiting = () => {
+    skipping.value = true
+    return skipServiceWorkerWaiting.value?.()
+  }
 
   return {
     setSkipWaiting,
     skipWaiting,
     serviceWorkerWaiting: serviceWorkerWaiting,
+    skipping: readonly(skipping)
   }
 }
