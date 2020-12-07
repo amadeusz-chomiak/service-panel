@@ -5,7 +5,9 @@ const base = new Base(Component, {
 })
 
 describe("components/ButtonToggleColorScheme.vue", () => {
-  it("", async () => {
+  it("has button", async () => {
     const wrapper = base.render()
+    const button = wrapper.get('button')
+    expect(button.isVisible()).toBe(true)
   })
 })

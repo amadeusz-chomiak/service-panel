@@ -22,16 +22,6 @@
     </div>
   </transition>
   <div class="flex-1 flex justify-between z-10 items-center">
-    <button
-      class="button button-primary p-3 sm:p-4 mr-1 sm:ml-3"
-      data-testid="toggle"
-      @click="mobileShowContent = !mobileShowContent"
-    >
-      <base-icon
-        class="h-5 w-5 text-white"
-        :icon="mobileShowContent ? 'close' : 'menu'"
-      />
-    </button>
     <a
       class="text-2xl sm:text-3xl text-primary-700 dark:text-primary-200 underline font-small-caps"
       :href="header.link.href"
@@ -39,26 +29,41 @@
       rel="noreferrer"
       >{{ header.link.title }}</a
     >
-    <button
-      class="button button-primary p-3 sm:p-4 mr-1 sm:mr-3"
-      data-testid="toggle-color-scheme"
-      @click="setColorScheme(!isLight)"
-    >
-      <base-icon class="h-5 text-white" :icon="isLight ? 'sun' : 'moon'" />
-    </button>
+    <div class="flex justify-end space-x-2">
+      <transition-fade>
+        <button-new-version v-if="serviceWorkerWaiting" tooltip-right />
+      </transition-fade>
+      <button-toggle-color-scheme />
+      <button
+        class="button button-primary p-3 sm:p-4 mr-1 sm:ml-3"
+        data-testid="toggle"
+        @click="mobileShowContent = !mobileShowContent"
+      >
+        <base-icon
+          class="h-5 w-5 text-white"
+          :icon="mobileShowContent ? 'close' : 'menu'"
+        />
+      </button>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, computed } from "vue"
+import { ref, defineComponent, computed, defineAsyncComponent } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
+import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
+const ButtonNewVersion = defineAsyncComponent(() =>
+  import("./ButtonNewVersion.vue"),
+)
 import { Render } from "@/composable/useDefinitions"
-import { usePrefersColorScheme } from "@/composable/usePrefersColorScheme"
 import { onBeforeRouteUpdate } from "vue-router"
+import { useVersionControl } from "@/composable/useVersionControl"
 
 export default defineComponent({
   components: {
     MenuContainerContent,
+    ButtonToggleColorScheme,
+    ButtonNewVersion,
   },
   props: {
     render: {
@@ -72,11 +77,11 @@ export default defineComponent({
       mobileShowContent.value = false
     })
 
-    const { isLight, setColorScheme } = usePrefersColorScheme()
-
     const header = computed(() => props.render.interface.header)
 
-    return { mobileShowContent, isLight, setColorScheme, header }
+    const { serviceWorkerWaiting } = useVersionControl()
+
+    return { mobileShowContent, header, serviceWorkerWaiting }
   },
 })
 </script>
