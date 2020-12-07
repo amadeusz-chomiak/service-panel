@@ -41,6 +41,13 @@
     class="fill-current fill-inherit"
     alt="download icon"
   />
+  <img
+    v-else-if="icon === 'downloading'"
+    svg-inline
+    src="@/assets/icons/downloading.svg"
+    class="fill-current fill-inherit"
+    alt="downloading icon"
+  />
 </template>
 
 <script lang="ts">
@@ -49,7 +56,14 @@ import { ref, reactive, defineComponent } from "vue"
 export default defineComponent({
   props: {
     icon: {
-      type: String as () => "link" | "close" | "moon" | "sun" | "menu" | "download",
+      type: String as () =>
+        | "link"
+        | "close"
+        | "moon"
+        | "sun"
+        | "menu"
+        | "download"
+        | "downloading",
       required: true,
     },
   },
