@@ -64,11 +64,13 @@ module.exports = {
     },
   },
   variants: {
-    scale: ({ after }) => after(["active"]),
-    boxShadow: ({ after }) => after(["active", "dark"]),
+    scale: ({ after }) => after(["active", "disabled"]),
+    boxShadow: ({ after }) => after(["active", "dark", "disabled"]),
     backgroundColor: ({ before }) => before(["dark"]),
     backgroundOpacity: ({ before }) => before(["dark"]),
     textColor: ({ before }) => before(["dark"]),
+    opacity: ({ after }) => after(["disabled"]),
+    cursor: ({ after }) => after(["disabled"]),
   },
   plugins: [require("tailwindcss-dark-mode")()],
 }
