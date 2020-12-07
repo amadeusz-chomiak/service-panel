@@ -6,5 +6,6 @@
 @import './fonts.css';
 @import './svg.css';
 @import './scroll.css';
+@import './animations.css';
 
 @tailwind utilities;
