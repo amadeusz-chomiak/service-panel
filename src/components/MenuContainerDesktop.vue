@@ -16,24 +16,37 @@
     </div>
     <MenuContainerContent :render="render.categories" />
   </div>
-  <button
-    class="button button-primary p-3 self-start"
-    data-testid="toggle-color-scheme"
-    @click="setColorScheme(!isLight)"
-  >
-    <base-icon class="h-6 text-white" :icon="isLight ? 'sun' : 'moon'" />
-  </button>
+  <div class="flex space-x-2">
+    <button-toggle-color-scheme />
+    <transition-fade duration="duration-600">
+      <button-new-version v-if="serviceWorkerWaiting" />
+    </transition-fade>
+  </div>
 </template>
 
 <script lang="ts">
-import { ref, reactive, defineComponent, computed } from "vue"
+import {
+  ref,
+  reactive,
+  defineComponent,
+  defineAsyncComponent,
+  computed,
+} from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
+import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
+const ButtonNewVersion = defineAsyncComponent(() =>
+  import("./ButtonNewVersion.vue")
+)
 import { Render } from "@/composable/useDefinitions"
-import { usePrefersColorScheme } from "@/composable/usePrefersColorScheme"
+import { useVersionControl } from "@/composable/useVersionControl"
+import TransitionFade from "./TransitionFade.vue"
 
 export default defineComponent({
   components: {
     MenuContainerContent,
+    ButtonToggleColorScheme,
+    ButtonNewVersion,
+    TransitionFade,
   },
   props: {
     render: {
@@ -42,11 +55,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { isLight, setColorScheme } = usePrefersColorScheme()
-
     const header = computed(() => props.render.interface.header)
-
-    return { isLight, setColorScheme, header }
+    const { serviceWorkerWaiting } = useVersionControl()
+    return { header, serviceWorkerWaiting }
   },
 })
 </script>

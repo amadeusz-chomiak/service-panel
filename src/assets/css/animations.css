@@ -1,0 +1,28 @@
+.animate-elevator {
+  animation: elevator 600ms linear 0s infinite;
+}
+
+@keyframes elevator {
+  0% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(200%);
+    opacity: 1;
+  }
+  46% {
+    opacity: 0;
+    transform: translateY(200%);
+  }
+  54% {
+    opacity: 0;
+    transform: translateY(-200%);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-200%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

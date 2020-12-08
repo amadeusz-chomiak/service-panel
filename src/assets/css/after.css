@@ -1,0 +1,23 @@
+.after-arrow::after {
+  content: "";
+  @apply absolute top-full border-8 mx-5;
+}
+
+.after-arrow-left::after {
+  @apply left-0;
+}
+
+.after-arrow-right::after {
+  @apply right-0;
+}
+@variants dark {
+  .after-arrow-primary-700::after {
+    border-color: theme("colors.primary.700") transparent transparent
+      transparent;
+  }
+
+  .after-arrow-primary-600::after {
+    border-color: theme("colors.primary.600") transparent transparent
+      transparent;
+  }
+}

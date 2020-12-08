@@ -5,6 +5,9 @@ interface RendererInterfaceOptions {
     link: {
       title: string
       href: string
+    },
+    versionControl: {
+      tooltip: string
     }
   }
 }

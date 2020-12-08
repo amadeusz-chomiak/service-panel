@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= VUE_APP_LANGUAGE %>">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,15 +7,11 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#e6e6e6" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title><%= VUE_APP_SHORT_NAME %></title>
   </head>
   <body class="bg-gray-200 dark:bg-gray-900">
-    <noscript>
-      <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
-        properly without JavaScript enabled. Please enable it to
-        continue.</strong
-      >
+    <noscript class="text-black dark:text-white text-2xl sm:text-3xl font-semibold p-4 sm:p-8">
+      <%= VUE_APP_NO_SCRIPT %>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->

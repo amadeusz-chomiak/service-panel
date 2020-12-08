@@ -1,35 +1,37 @@
-/* eslint-disable no-console */
-
-import { register } from "register-service-worker"
-
 if (process.env.NODE_ENV === "production") {
-  register(`${process.env.BASE_URL}service-worker.js`, {
-    ready() {
-      console.log(
-        "App is being served from cache by a service worker.\n" +
-          "For more details, visit https://goo.gl/AFskqB"
-      )
-    },
-    registered() {
-      console.log("Service worker has been registered.")
-    },
-    cached() {
-      console.log("Content has been cached for offline use.")
-    },
-    updatefound() {
-      console.log("New content is downloading.")
-    },
-    updated() {
-      // TODO add skip waiting pop-up
-      console.log("New content is available; please refresh.")
-    },
-    offline() {
-      console.log(
-        "No internet connection found. App is running in offline mode."
-      )
-    },
-    error(error) {
-      console.error("Error during service worker registration:", error)
-    },
-  })
+  try {
+    ;(async () => {
+      if ("serviceWorker" in navigator) {
+        const { Workbox, messageSW } = await import("workbox-window")
+        const { useVersionControl } = await import(
+          "./composable/useVersionControl"
+        )
+        const { setSkipWaiting } = useVersionControl()
+        const wb = new Workbox(`${process.env.BASE_URL}service-worker.js`)
+
+        wb.addEventListener("waiting", event => {
+          setSkipWaiting(async () => {
+            const waitingServiceWorker = event.sw
+            if (waitingServiceWorker) {
+              await messageSW(waitingServiceWorker, {
+                action: "skipWaiting",
+                type: "SKIP_WAITING",
+              })
+              setSkipWaiting()
+            }
+          })
+        })
+
+        wb.addEventListener("controlling", event => {
+          if (event.isUpdate) {
+            location.reload()
+          }
+        })
+
+        wb.register()
+      }
+    })()
+  } catch (error) {
+    console.error(error)
+  }
 }
