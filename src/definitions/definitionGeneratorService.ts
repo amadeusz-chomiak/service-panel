@@ -1,4 +1,4 @@
-import { cloneDeep } from "lodash"
+import { merge } from "lodash"
 import { Price, PriceOptions } from "./definitionGeneratorPrice"
 
 interface PriceOptionsLocalize extends Partial<PriceOptions> {
@@ -9,15 +9,10 @@ interface ServiceOptionLink {
   href: string
 }
 
-interface ServiceOptionLinkLocalize extends ServiceOptionLink {
+interface ServiceOptionLinkLocalize extends Partial<ServiceOptionLink> {
   description: string
   title: string
 }
-
-type ServiceOptionLinkLocalizeWithOptionalHref = PartialOptionally<
-  ServiceOptionLinkLocalize,
-  "href"
->
 
 interface Brand {
   color: string
@@ -29,158 +24,117 @@ interface BrandLocalize extends Partial<Brand> {
   description: string
 }
 
-type LinksMap = Map<string | number | symbol, ServiceOptionLinkLocalize>
+type LinksHandler<Links> = (helpers: {
+  initialize: (
+    key: Links,
+    changes?: Partial<ServiceOptionLinkLocalize>
+  ) => Required<ServiceOptionLinkLocalize>
+  initializeAll: () => Required<ServiceOptionLinkLocalize>[]
+}) => Required<ServiceOptionLinkLocalize>[]
 
 export class Service<
-  Links extends { [key: string]: string },
-  LinksKey extends keyof Links = keyof Links
+  LinksDefinitionKey extends string,
+  LinksDefinition extends {
+    [key in LinksDefinitionKey]: Required<ServiceOptionLinkLocalize>
+  } = {
+    [key in LinksDefinitionKey]: Required<ServiceOptionLinkLocalize>
+  }
 > {
-  private brandOptions: Required<BrandLocalize>
-  private linksOptions: LinksMap
-  private priceOptions: Required<PriceOptionsLocalize>
+  private brandDefinition: Required<BrandLocalize>
+  private linksDefinition: LinksDefinition
+  private priceDefinition: Required<PriceOptionsLocalize>
+  private linksValue: ServiceOptionLinkLocalize[] = []
 
   public readonly id = Symbol()
 
   constructor(
-    private readonly global: {
-      brand: Brand
-      links: Links
-      price: PriceOptions
-    },
-    localize: {
-      brand: BrandLocalize
-      links?: LinksMap
-      price: PriceOptionsLocalize
+    private readonly options: {
+      brand: Required<BrandLocalize>
+      price: Required<PriceOptionsLocalize>
+      links: LinksDefinition
     }
   ) {
-    this.brandOptions = {
-      ...global.brand,
-      ...localize.brand,
-    }
-
-    this.linksOptions = localize.links ?? new Map()
-
-    this.priceOptions = {
-      ...global.price,
-      ...localize.price,
-    }
+    this.brandDefinition = options.brand
+    this.linksDefinition = options.links
+    this.priceDefinition = options.price
   }
 
-  /**
-   * @description Initialize one of links setup in global serviceDefinition
-   */
-  links(
-    run: "initialize",
-    key: LinksKey,
-    options: ServiceOptionLinkLocalizeWithOptionalHref
-  ): this
-  /**
-   * @description Add new link. Will throw if the key already exists
-   */
-  links(run: "add", key: string, options: ServiceOptionLinkLocalize): this
-  /**
-   * @description Remove existing link. Will throw if the key doesn't exist
-   */
-  links(run: "remove", key: LinksKey): this
-  /**
-   * @description Remove existing link. Will throw if the key doesn't exist
-   */
-  links(run: "remove", key: string): this
-  /**
-   * @description Change existing link. Will throw if the key doesn't exist
-   */
-  links(
-    run: "change",
-    key: LinksKey,
-    options: Partial<ServiceOptionLinkLocalize>
-  ): this
-  /**
-   * @description Change existing link. Will throw if the key doesn't exist
-   */
-  links(
-    run: "change",
-    key: string,
-    options: Partial<ServiceOptionLinkLocalize>
-  ): this
-  /**
-   * @description You can add new link, initialize default link, remove or change existing link
-   */
-  links(
-    run: "initialize" | "add" | "remove" | "change",
-    key: string | LinksKey,
-    options?: Partial<ServiceOptionLinkLocalize>
-  ): this {
-    const links = this.linksOptions
+  links(handler: LinksHandler<LinksDefinitionKey>) {
+    const initialize = (
+      key: LinksDefinitionKey,
+      changes?: Partial<ServiceOptionLinkLocalize>
+    ) => {
+      const link = this.linksDefinition[key]
+      if (!link) {
+        const availableKeys = Object.keys(this.linksDefinition).join(", ")
+        throw new Error(
+          `Name of ${key} doesn't exist in default links map. You can chose from [${availableKeys}]`
+        )
+      }
 
-    switch (run) {
-      case "initialize":
-        const href = this.global.links[key]
-        links.set(key, {
-          href,
-          ...(options as ServiceOptionLinkLocalizeWithOptionalHref),
-        })
-        break
-
-      case "add":
-        if (links.has(key))
-          throw new Error(
-            `Name of ${key} already exists on this service. Try running 'change' command instead`
-          )
-        links.set(key, options as ServiceOptionLinkLocalize)
-
-        break
-      case "remove":
-        if (!links.has(key))
-          throw new Error(`Name of ${key} doesn't exist in links map`)
-        links.delete(key)
-        break
-      case "change":
-        const oldLink = links.get(key)
-        if (oldLink) links.set(key, { ...oldLink, ...options })
-        else
-          throw new Error(
-            `Name of ${key} doesn't exist in links map. Try running 'add' command instead`
-          )
-        break
+      if (changes) {
+        if (changes.title) link.title = changes.title
+        if (changes.description) link.description = changes.description
+        if (changes.href) link.href = changes.href
+      }
+      return link
     }
+
+    const initializeAll = () => {
+      return Object.values(this.linksDefinition) as Required<
+        ServiceOptionLinkLocalize
+      >[]
+    }
+
+    this.linksValue = handler({ initialize, initializeAll })
     return this
   }
 
   brand(change: Partial<BrandLocalize>) {
-    this.brandOptions = { ...this.brandOptions, ...change }
+    this.brandDefinition = { ...this.brandDefinition, ...change }
     return this
   }
 
   price(change: Partial<PriceOptionsLocalize>) {
-    this.priceOptions = { ...this.priceOptions, ...change }
+    this.priceDefinition = { ...this.priceDefinition, ...change }
     return this
   }
 
-  /**
-   * @description Detach from default instance. Let You define independent version of a service
-   * @example service.detach().link('unique', {href: 'YOUR_HREF', description: 'YOUR_DESCRIPTION'})
-   */
-  detach() {
-    return new Service(cloneDeep(this.global), {
-      brand: { ...this.brandOptions },
-      links: new Map(this.linksOptions),
-      price: { ...this.priceOptions },
-    })
-  }
-
   export() {
-    const brand = this.brandOptions
-    const links = Array.from(this.linksOptions.values())
-    const price = this.priceOptions.localize.compose(this.priceOptions)
+    const brand = this.brandDefinition
+    const links = this.linksValue
+    const price = this.priceDefinition.localize.compose(this.priceDefinition)
 
     return { brand, links, price }
   }
 }
 
-//TODO add way to edit options from code
-export const createService = <Links extends { [key: string]: string }>(global: {
+export const createService = <
+  LinksDefinitionKey extends string,
+  LinksDefinition extends {
+    [key in LinksDefinitionKey]: ServiceOptionLink
+  } = {
+    [key in LinksDefinitionKey]: ServiceOptionLink
+  },
+  LocalizedLinksDefinition extends {
+    [key in LinksDefinitionKey]: ServiceOptionLinkLocalize
+  } = {
+    [key in LinksDefinitionKey]: ServiceOptionLinkLocalize
+  }
+>(global: {
   brand: Brand
-  links: Links
+  links: LinksDefinition
   price: PriceOptions
-}) => (localize: { brand: BrandLocalize; price: { localize: Price } }) =>
-  new Service(global, localize)
+}) => (localize: {
+  brand: BrandLocalize
+  price: PriceOptionsLocalize
+  links: LocalizedLinksDefinition
+}) => (
+  linksHandler: LinksHandler<LinksDefinitionKey> | "initialize-from-definition"
+) => {
+  const handleLinks: LinksHandler<LinksDefinitionKey> =
+    typeof linksHandler === "string"
+      ? ({ initializeAll }) => initializeAll()
+      : linksHandler
+  return new Service<LinksDefinitionKey>(merge(localize, global)).links(handleLinks)
+}

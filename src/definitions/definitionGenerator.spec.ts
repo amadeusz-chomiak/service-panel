@@ -9,7 +9,7 @@ import { cloneDeep } from "lodash"
 let renderer: Renderer
 let category: Category
 let price: Price
-let service: Service<{}>
+let service: Service<"link">
 
 const expectedResultTemplate = {
   interface: {
@@ -18,6 +18,9 @@ const expectedResultTemplate = {
       link: {
         title: "title",
         href: "href",
+      },
+      versionControl: {
+        tooltip: "tooltip",
       },
     },
   },
@@ -64,6 +67,9 @@ describe("definitions/definitionGenerator.ts", () => {
           title: "title",
           href: "href",
         },
+        versionControl: {
+          tooltip: "tooltip",
+        },
       },
     })
 
@@ -95,14 +101,16 @@ describe("definitions/definitionGenerator.ts", () => {
     })
 
     //? redefine service template
-    service = createService({
+    service = createService<"link">({
       brand: {
         color: "#fff",
         onColor: "black",
         name: "service",
       },
       links: {
-        link: "href",
+        link: {
+          href: "href",
+        },
       },
       price: {
         cost: "paid",
@@ -117,14 +125,18 @@ describe("definitions/definitionGenerator.ts", () => {
         price: {
           localize: price,
         },
+        links: {
+          link: {
+            title: "link",
+            description: "description",
+          },
+        },
       }
-    ) //? initialize link of service
-      .links("initialize", "link", {
-        title: "link",
-        description: "description",
-      })
+    )(
+      //? initialize link of service
+      ({ initializeAll }) => initializeAll()
+    )
   })
-
   describe("basic", () => {
     it("renderer returns category with service", async () => {
       renderer.add(category.add(service))
@@ -145,11 +157,14 @@ describe("definitions/definitionGenerator.ts", () => {
     it("service allow links extension", async () => {
       renderer.add(
         category.add(
-          service.links("add", "added", {
-            title: "added",
-            description: "description",
-            href: "href",
-          })
+          service.links(({ initialize }) => [
+            initialize("link"),
+            {
+              title: "added",
+              description: "description",
+              href: "href",
+            },
+          ])
         )
       )
       expect(renderer.export()).toStrictEqual(
@@ -158,75 +173,6 @@ describe("definitions/definitionGenerator.ts", () => {
             title: "added",
             description: "description",
             href: "href",
-          })
-          return expected
-        })
-      )
-    })
-
-    it("service allow existing links change", async () => {
-      renderer.add(
-        category.add(
-          service.links("change", "link", {
-            description: "change",
-            href: "change",
-          })
-        )
-      )
-
-      expect(renderer.export()).toStrictEqual(
-        expectedResultGenerator(expected => {
-          expected.categories[0].services[0].links[0] = {
-            title: "link",
-            description: "change",
-            href: "change",
-          }
-          return expected
-        })
-      )
-    })
-  })
-  describe("detach from default instance", () => {
-    it("allow duplicates if at least one is detached", () => {
-      renderer.add(category.add(service.detach()).add(service))
-
-      expect(renderer.export()).toStrictEqual(
-        expectedResultGenerator(expected => {
-          const serviceClone = expected.categories[0].services[0]
-          expected.categories[0].services.push(serviceClone)
-          return expected
-        })
-      )
-    })
-
-    it("allow different values of detached service", () => {
-      renderer.add(
-        category.add(service).add(
-          service.detach().links("add", "added", {
-            title: "added",
-            href: "href",
-            description: "description",
-          })
-        )
-      )
-
-      expect(renderer.export()).toStrictEqual(
-        expectedResultGenerator(expected => {
-          const serviceClone = expected.categories[0].services[0]
-          const brandClone = serviceClone.brand
-          const linksClone = serviceClone.links
-          const priceClone = serviceClone.price
-          expected.categories[0].services.push({
-            brand: brandClone,
-            links: [
-              ...linksClone,
-              {
-                title: "added",
-                description: "description",
-                href: "href",
-              },
-            ],
-            price: priceClone,
           })
           return expected
         })

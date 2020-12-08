@@ -1,14 +1,14 @@
 import { createService } from "../definitionGenerator"
 
-export const Firebase = createService({
+export const Firebase = createService<'dashboard' | 'pricing'>({
   brand: {
     name: "firebase",
     color: "#FFA000",
     onColor: "black",
   },
   links: {
-    dashboard: "https://console.firebase.google.com/",
-    pricing: "https://firebase.google.com/pricing",
+    dashboard: { href: "https://console.firebase.google.com/" },
+    pricing: { href: "https://firebase.google.com/pricing" },
   },
   price: {
     cost: "flexible",
@@ -16,14 +16,14 @@ export const Firebase = createService({
   },
 })
 
-export const Plausible = createService({
+export const Plausible = createService<'pricing'>({
   brand: {
     name: "plausible",
     color: "#5850ec",
     onColor: "white",
   },
   links: {
-    pricing: "https://plausible.io/#pricing",
+    pricing: { href: "https://plausible.io/#pricing" },
   },
   price: {
     cost: "paid",
@@ -31,14 +31,14 @@ export const Plausible = createService({
   },
 })
 
-export const Sanity = createService({
+export const Sanity = createService<'pricing'>({
   brand: {
     name: "sanity",
     color: "#f03e2f",
     onColor: "white",
   },
   links: {
-    pricing: "https://www.sanity.io/pricing/compare",
+    pricing: { href: "https://www.sanity.io/pricing/compare" },
   },
   price: {
     cost: "flexible",
