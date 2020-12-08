@@ -26,61 +26,63 @@ const price = new Price({
   },
 })
 
-export const firebase = service
-  .Firebase({
-    brand: {
-      description:
-        "Server provider that combines site hosting, database, authentication, analytics and more",
-    },
-    price: {
-      localize: price,
-    },
-  })
-  .links("initialize", "dashboard", {
-    title: "dashboard",
-    description: "You'll find there all parts firebase",
-  })
-  .links("initialize", "pricing", {
-    title: "pricing",
-    description: "You'll find detailed pricing",
-  })
-
-export const plausible = service
-  .Plausible({
-    brand: {
-      description:
-        "Simple and privacy-friendly alternative to Google Analytics",
-    },
-    price: {
-      localize: price,
-    },
-  })
-  .links("initialize", "pricing", {
-    title: "pricing",
-    description: "You'll find detailed pricing",
-  })
-
-export const sanity = service
-  .Sanity({
-    brand: {
-      description:
-        "Sanity is the ultimate content platform that helps teams dream big and deliver quickly",
-    },
-    price: {
-      localize: price,
-    }, 
-  })
-  .links("initialize", "pricing", {
-    title: "pricing",
-    description: "You'll find detailed pricing",
-  })
-
-export const developer = service.Developer({
+export const firebase = service.Firebase({
   brand: {
     description:
-      "I'll help You upgrade this website",
+      "Server provider that combines site hosting, database, authentication, analytics and more",
   },
   price: {
     localize: price,
   },
+  links: {
+    dashboard: {
+      title: "dashboard",
+      description: "You'll find there all parts firebase",
+    },
+    pricing: {
+      title: "pricing",
+      description: "You'll find detailed pricing",
+    },
+  },
+})
+
+export const plausible = service.Plausible({
+  brand: {
+    description: "Simple and privacy-friendly alternative to Google Analytics",
+  },
+  price: {
+    localize: price,
+  },
+  links: {
+    pricing: {
+      title: "pricing",
+      description: "You'll find detailed pricing",
+    },
+  },
+})
+
+export const sanity = service.Sanity({
+  brand: {
+    description:
+      "Sanity is the ultimate content platform that helps teams dream big and deliver quickly",
+  },
+  price: {
+    localize: price,
+  },
+  links: {
+    pricing: {
+      title: "pricing",
+      description: "You'll find detailed pricing",
+    },
+  },
+})
+
+export const developer = service.Developer({
+  brand: {
+    description: "I'll help You upgrade this website",
+  },
+  price: {
+    localize: price,
+  },
+  links: {},
 })

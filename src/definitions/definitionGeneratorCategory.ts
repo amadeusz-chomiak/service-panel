@@ -8,12 +8,12 @@ interface CategoryOptions {
 export class Category {
   private readonly services = new Map<
     Symbol,
-    ReturnType<Service<{}>["export"]>
+    ReturnType<Service<any>["export"]>
   >()
   public readonly id = Symbol()
   constructor(private contentOptions: CategoryOptions) {}
 
-  add(instance: Service<{}>) {
+  add(instance: Service<any>) {
     this.services.set(instance.id, instance.export())
     return this
   }
