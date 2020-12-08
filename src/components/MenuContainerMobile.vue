@@ -16,7 +16,7 @@
       class="transform transition-all duration-200 ease-in flex flex-col p-2 sm:p-4 fixed inset-x-0 bottom-0 shadow-center-lg bg-gray-200 dark:bg-gray-800 rounded-t-xl"
     >
       <MenuContainerContent
-        class="mb-14 sm:mb-20 mt-4 ml-5 sm:ml-8 sm:pl-1"
+        class="mb-14 sm:mb-20 mt-4 mr-5 sm:mr-7 text-right"
         :render="render.categories"
       />
     </div>
@@ -53,7 +53,7 @@ import { ref, defineComponent, computed, defineAsyncComponent } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
-  import("./ButtonNewVersion.vue")
+  import("./ButtonNewVersion.vue"),
 )
 import { Render } from "@/composable/useDefinitions"
 import { onBeforeRouteUpdate } from "vue-router"
