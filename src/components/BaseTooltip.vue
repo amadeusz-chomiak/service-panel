@@ -8,7 +8,7 @@
         data-testid="tooltip"
         @click="closeTooltip"
       >
-        <p class="text-white first-letter:uppercase whitespace-no-wrap">
+        <p class="text-white first-letter:uppercase whitespace-nowrap">
           {{ text }}
         </p>
       </div>

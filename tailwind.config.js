@@ -1,24 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-    defaultLineHeights: true,
-    standardFontWeights: true,
-  },
-  experimental: {
-    additionalBreakpoint: true,
-    applyComplexClasses: true,
-  },
   purge: {
     content: ["src/**/*.vue", "public/index.html"],
     // These options are passed through directly to PurgeCSS
-    options: {
-      whitelist: ["dark"],
-    },
+    options: {},
   },
+  darkMode: "class",
   theme: {
-    darkSelector: ".dark",
     colors: {
       primary: {
         200: "#b8cdea", //18%
@@ -64,13 +52,11 @@ module.exports = {
     },
   },
   variants: {
-    scale: ({ after }) => after(["active", "disabled"]),
-    boxShadow: ({ after }) => after(["active", "dark", "disabled"]),
-    backgroundColor: ({ before }) => before(["dark"]),
-    backgroundOpacity: ({ before }) => before(["dark"]),
-    textColor: ({ before }) => before(["dark"]),
-    opacity: ({ after }) => after(["disabled"]),
-    cursor: ({ after }) => after(["disabled"]),
+    extend: {
+      scale: ["active", "disabled"],
+      boxShadow: ["active", "disabled"],
+      opacity: ["disabled"],
+      cursor: ["disabled"],
+    },
   },
-  plugins: [require("tailwindcss-dark-mode")()],
 }

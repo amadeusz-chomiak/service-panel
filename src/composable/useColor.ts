@@ -57,22 +57,22 @@ export const useColor = (
     backgroundStyle: computed(() => {
       const rgb = hexToRGB(color.value)
       const opacity = opacityDefinition
-        ? { "--bg-opacity": opacityDefinition }
+        ? { "--tw-bg-opacity": opacityDefinition }
         : {}
 
       return {
-        backgroundColor: [`rgb(${rgb})`, `rgba(${rgb}, var(--bg-opacity))`],
+        backgroundColor: [`rgb(${rgb})`, `rgba(${rgb}, var(--tw-bg-opacity))`],
         ...opacity,
       }
     }),
     contentStyle: computed(() => {
       const rgb = hexToRGB(color.value)
       const opacity = opacityDefinition
-        ? { "--text-opacity": opacityDefinition }
+        ? { "--tw-text-opacity": opacityDefinition }
         : {}
 
       return {
-        color: [`rgb(${rgb})`, `rgba(${rgb}, var(--text-opacity))`],
+        color: [`rgb(${rgb})`, `rgba(${rgb}, var(--tw-text-opacity))`],
         ...opacity,
       }
     }),
