@@ -1,15 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-    defaultLineHeights: true,
-    standardFontWeights: true,
-  },
-  experimental: {
-    additionalBreakpoint: true,
-    applyComplexClasses: true,
-  },
   purge: {
     content: ["src/**/*.vue", "public/index.html"],
     // These options are passed through directly to PurgeCSS
