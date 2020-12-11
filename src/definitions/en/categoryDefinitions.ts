@@ -31,3 +31,8 @@ export const contentEditor = new Category({
   name: 'content editor',
   description: 'for changing this site content'
 })
+
+export const searchEngine = new Category({
+  name: 'search engines',
+  description: 'how to find Your site'
+})

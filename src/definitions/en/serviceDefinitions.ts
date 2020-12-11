@@ -1,30 +1,5 @@
 import * as service from "../global/serviceDefinitions"
-import { Price } from "../definitionGeneratorPrice"
-
-const price = new Price({
-  cost: {
-    free: "free",
-    paid: "paid",
-    flexible: "", // handled in compose function
-  },
-  renew: {
-    never: "one time",
-    onDemand: "on demand",
-    daily: "daily",
-    weekly: "weekly",
-    monthly: "monthly",
-    quarterly: "quarterly",
-    yearly: "yearly",
-  },
-  compose({ renew, cost }, originalPrice) {
-    if (renew) {
-      if (originalPrice.cost === "flexible")
-        return `${renew} paid service with a free tier`
-      return `${renew} ${cost} service`
-    }
-    return cost
-  },
-})
+import { price } from './priceDefinition'
 
 export const firebase = service.Firebase({
   brand: {
@@ -37,7 +12,7 @@ export const firebase = service.Firebase({
   links: {
     dashboard: {
       title: "dashboard",
-      description: "You'll find there all parts firebase",
+      description: "You'll find there all parts of firebase",
     },
     pricing: {
       title: "pricing",
@@ -85,4 +60,63 @@ export const developer = service.Developer({
     localize: price,
   },
   links: {},
+})
+
+export const googleDomains = service.GoogleDomains({
+  brand: {
+    description: "Simple domain provider, with no string attached"
+  },
+  price: {
+    localize: price
+  },
+  links: {
+    payments: {
+      title: "payments",
+      description: "Check Your spendings",
+    },
+    dashboard: {
+      title: 'dashboard',
+      description: "You'll find there details of Your domains"
+    }
+  }
+})
+
+export const googleSearchConsole = service.GoogleSearchConsole({
+  brand: {
+    description: "Allow this site to be found in Google"
+  },
+  price: {
+    localize: price
+  },
+  links: {
+    dashboard: {
+      title: 'dashboard',
+      description: "Check how the site is doing on Google search engine"
+    }
+  }
+})
+
+export const microsoftBingWebmasterTool = service.MicrosoftBingWebmasterTool({
+  brand: {
+    description: "Allow this site to be found in Bing"
+  },
+  price: {
+    localize: price
+  },
+  links: {
+    dashboard: {
+      title: 'dashboard',
+      description: "Check how the site is doing on Bing search engine"
+    }
+  }
+})
+
+export const github = service.Github({
+  brand: {
+    description: "Place for all of the code of the site"
+  },
+  price: {
+    localize: price
+  },
+  links: {}
 })

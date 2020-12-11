@@ -82,3 +82,66 @@ export const sanity = service
     }
   })
 
+export const googleDomains = service.GoogleDomains({
+  brand: {
+    description: ""
+  },
+  price: {
+    localize: price
+  },
+  links: {
+    payments: {
+      title: '',
+      description: ''
+    },
+    dashboard: {
+      title: '',
+      description: ''
+    }
+  }
+})
+
+export const googleSearchConsole = service.GoogleSearchConsole({
+  brand: {
+    description: ""
+  },
+  price: {
+    localize: price
+  },
+  links: {
+    dashboard: {
+      title: '',
+      description: ''
+    }
+  }
+})
+
+export const microsoftBingWebmasterTool = service.MicrosoftBingWebmasterTool({
+  brand: {
+    description: ""
+  },
+  price: {
+    localize: price
+  },
+  links: {
+    dashboard: {
+      title: '',
+      description: ''
+    }
+  }
+})
+
+export const github = service.Github({
+  brand: {
+    description: ""
+  },
+  price: {
+    localize: price
+  },
+  links: {
+    dashboard: {
+      title: '',
+      description: ''
+    }
+  }
+})

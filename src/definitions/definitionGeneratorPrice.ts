@@ -1,5 +1,3 @@
-import { conformsTo } from 'lodash'
-
 interface CostTranslation {
   /**
    * @description Always paid, without a free tier, may have a free trial
@@ -31,10 +29,27 @@ interface RenewTranslation {
   yearly: string
 }
 
-export interface PriceOptions {
+interface PriceOptionsBasic {
   cost: keyof CostTranslation
   renew: keyof RenewTranslation
 }
+
+export type PriceOptions =
+  | PriceOptionsBasic
+  | {
+      cost: "free"
+    }
+
+export interface PriceOptionsLocalizeBasic extends Partial<PriceOptionsBasic> {
+  localize: Price
+}
+
+export type PriceOptionsLocalize =
+  | Required<PriceOptionsLocalizeBasic>
+  | {
+      cost: "free"
+      localize: Price
+    }
 
 interface PriceOptionsTranslate {
   cost: string
@@ -46,15 +61,15 @@ export class Price {
     cost: (key: keyof CostTranslation) => string
     renew: (key: keyof RenewTranslation) => string
   }
-
+  
   public readonly compose: (price: PriceOptions) => string
-
+  
   constructor(translation: {
     cost: CostTranslation
     renew: RenewTranslation
     compose: (
       price: PriceOptionsTranslate,
-      originalPrice: PriceOptions
+      originalPrice: PartialOptionally<PriceOptionsBasic, 'renew'>
     ) => string
   }) {
     this.translate = {
@@ -62,8 +77,19 @@ export class Price {
       renew: key => translation.renew[key],
     }
 
-    this.compose = price =>
-      translation.compose(
+    this.compose = price => {
+      if (price.cost === "free")
+        return translation.compose(
+          {
+            cost: this.translate.cost(price.cost),
+            renew: '',
+          },
+          {
+            cost: price.cost,
+          }
+        )
+
+      return translation.compose(
         {
           cost: this.translate.cost(price.cost),
           renew: this.translate.renew(price.renew),
@@ -73,5 +99,6 @@ export class Price {
           renew: price.renew,
         }
       )
+    }
   }
 }

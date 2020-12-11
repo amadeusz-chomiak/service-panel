@@ -27,3 +27,8 @@ export const contentEditor = new Category({
   name: '',
   description: ''
 })
+
+export const searchEngine = new Category({
+  name: '',
+  description: ''
+})

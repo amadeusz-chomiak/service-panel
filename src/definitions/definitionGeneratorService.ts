@@ -1,9 +1,5 @@
 import { merge } from "lodash"
-import { Price, PriceOptions } from "./definitionGeneratorPrice"
-
-interface PriceOptionsLocalize extends Partial<PriceOptions> {
-  localize: Price
-}
+import { PriceOptions, PriceOptionsLocalizeBasic, PriceOptionsLocalize  } from "./definitionGeneratorPrice"
 
 interface ServiceOptionLink {
   href: string
@@ -42,7 +38,7 @@ export class Service<
 > {
   private brandDefinition: Required<BrandLocalize>
   private linksDefinition: LinksDefinition
-  private priceDefinition: Required<PriceOptionsLocalize>
+  private priceDefinition: PriceOptionsLocalize
   private linksValue: ServiceOptionLinkLocalize[] = []
 
   public readonly id = Symbol()
@@ -96,7 +92,7 @@ export class Service<
   }
 
   price(change: Partial<PriceOptionsLocalize>) {
-    this.priceDefinition = { ...this.priceDefinition, ...change }
+    this.priceDefinition = { ...this.priceDefinition, ...change } as PriceOptionsLocalize
     return this
   }
 
@@ -127,10 +123,10 @@ export const createService = <
   price: PriceOptions
 }) => (localize: {
   brand: BrandLocalize
-  price: PriceOptionsLocalize
+  price: PriceOptionsLocalizeBasic
   links: LocalizedLinksDefinition
 }) => (
-  linksHandler: LinksHandler<LinksDefinitionKey> | "initialize-from-definition"
+  linksHandler: LinksHandler<LinksDefinitionKey> | "default-links"
 ) => {
   const handleLinks: LinksHandler<LinksDefinitionKey> =
     typeof linksHandler === "string"
