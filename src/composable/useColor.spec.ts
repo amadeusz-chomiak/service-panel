@@ -31,7 +31,7 @@ describe("composable/useColor.ts", () => {
         expect(backgroundStyle.value).toStrictEqual({
           backgroundColor: [
             "rgb(0%,0%,0%)",
-            "rgba(0%,0%,0%, var(--bg-opacity))",
+            "rgba(0%,0%,0%, var(--tw-bg-opacity))",
           ],
         })
       })
@@ -39,7 +39,7 @@ describe("composable/useColor.ts", () => {
       it("convert hex to rgba content color style", () => {
         const { contentStyle } = useColor("#000")
         expect(contentStyle.value).toStrictEqual({
-          color: ["rgb(0%,0%,0%)", "rgba(0%,0%,0%, var(--text-opacity))"],
+          color: ["rgb(0%,0%,0%)", "rgba(0%,0%,0%, var(--tw-text-opacity))"],
         })
       })
 
@@ -48,29 +48,29 @@ describe("composable/useColor.ts", () => {
         expect(contentStyle.value).toStrictEqual({
           color: [
             "rgb(96.9%,96.9%,96.9%)",
-            "rgba(96.9%,96.9%,96.9%, var(--text-opacity))",
+            "rgba(96.9%,96.9%,96.9%, var(--tw-text-opacity))",
           ],
         })
       })
     })
 
     describe("opacity", () => {
-      it("add --bg-opacity css var if it's explicitly set to a number", () => {
+      it("add --tw-bg-opacity css var if it's explicitly set to a number", () => {
         const { backgroundStyle } = useColor("#000", 1)
         expect(backgroundStyle.value).toStrictEqual({
-          "--bg-opacity": 1,
+          "--tw-bg-opacity": 1,
           backgroundColor: [
             "rgb(0%,0%,0%)",
-            "rgba(0%,0%,0%, var(--bg-opacity))",
+            "rgba(0%,0%,0%, var(--tw-bg-opacity))",
           ],
         })
       })
 
-      it("add --text-opacity css var if it's explicitly set to a number", () => {
+      it("add --tw-text-opacity css var if it's explicitly set to a number", () => {
         const { contentStyle } = useColor("#000", 1)
         expect(contentStyle.value).toStrictEqual({
-          "--text-opacity": 1,
-          color: ["rgb(0%,0%,0%)", "rgba(0%,0%,0%, var(--text-opacity))"],
+          "--tw-text-opacity": 1,
+          color: ["rgb(0%,0%,0%)", "rgba(0%,0%,0%, var(--tw-text-opacity))"],
         })
       })
 
