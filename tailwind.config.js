@@ -52,12 +52,11 @@ module.exports = {
     },
   },
   variants: {
-    scale: ({ after }) => after(["active", "disabled"]),
-    boxShadow: ({ after }) => after(["active", "dark", "disabled"]),
-    backgroundColor: ({ before }) => before(["dark"]),
-    backgroundOpacity: ({ before }) => before(["dark"]),
-    textColor: ({ before }) => before(["dark"]),
-    opacity: ({ after }) => after(["disabled"]),
-    cursor: ({ after }) => after(["disabled"]),
+    extend: {
+      scale: ["active", "disabled"],
+      boxShadow: ["active", "disabled"],
+      opacity: ["disabled"],
+      cursor: ["disabled"],
+    },
   },
 }
