@@ -10,6 +10,9 @@ const renderer = new Renderer({
       title: "title",
       href: "href",
     },
+    versionControl: {
+      tooltip: 'tooltip'
+    }
   },
 })
 const base = new Base(Component, {
