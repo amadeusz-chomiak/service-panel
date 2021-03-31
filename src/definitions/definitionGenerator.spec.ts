@@ -21,6 +21,13 @@ const expectedResultTemplate = {
       },
       versionControl: {
         tooltip: "tooltip",
+        buttonLabel: 'label'
+      },
+      colorScheme: {
+        buttonLabel: {
+          changeToLightMode: 'changeToLightMode',
+          changeToDarkMode: 'changeToDarkMode'
+        }
       },
     },
   },
@@ -69,6 +76,13 @@ describe("definitions/definitionGenerator.ts", () => {
         },
         versionControl: {
           tooltip: "tooltip",
+          buttonLabel: 'label'
+        },
+        colorScheme: {
+          buttonLabel: {
+            changeToLightMode: 'changeToLightMode',
+            changeToDarkMode: 'changeToDarkMode'
+          }
         },
       },
     })

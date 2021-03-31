@@ -31,9 +31,13 @@
     >
     <div class="flex justify-end space-x-2">
       <transition-fade duration="duration-600">
-        <button-new-version v-if="serviceWorkerWaiting" tooltip-right />
+        <button-new-version
+          v-if="serviceWorkerWaiting"
+          tooltip-right
+          :render="render"
+        />
       </transition-fade>
-      <button-toggle-color-scheme />
+      <button-toggle-color-scheme :render="render" />
       <button
         class="button button-primary p-3 sm:p-4 mr-1 sm:ml-3"
         data-testid="toggle"
@@ -53,7 +57,7 @@ import { ref, defineComponent, computed, defineAsyncComponent } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
-  import("./ButtonNewVersion.vue"),
+  import("./ButtonNewVersion.vue")
 )
 import { Render } from "@/composable/useDefinitions"
 import { onBeforeRouteUpdate } from "vue-router"

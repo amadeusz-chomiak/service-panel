@@ -1,13 +1,20 @@
-import { Category } from './definitionGeneratorCategory'
+import { Category } from "./definitionGeneratorCategory"
 interface RendererInterfaceOptions {
   header: {
     title: string
     link: {
       title: string
       href: string
-    },
+    }
     versionControl: {
       tooltip: string
+      buttonLabel: string
+    }
+    colorScheme: {
+      buttonLabel: {
+        changeToLightMode: string
+        changeToDarkMode: string
+      }
     }
   }
 }
@@ -16,8 +23,8 @@ export class Renderer {
     Symbol,
     ReturnType<Category["export"]>
   >()
-  constructor(private readonly interfaceOptions: RendererInterfaceOptions) { }
-  
+  constructor(private readonly interfaceOptions: RendererInterfaceOptions) {}
+
   add(instance: Category) {
     this.categories.set(instance.id, instance.export())
     return this
@@ -26,7 +33,7 @@ export class Renderer {
   export() {
     return {
       interface: this.interfaceOptions,
-      categories: Array.from(this.categories.values())
+      categories: Array.from(this.categories.values()),
     }
   }
 }
