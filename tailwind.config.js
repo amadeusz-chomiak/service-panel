@@ -46,8 +46,17 @@ module.exports = {
           "0 0 17px -3px rgba(0, 0, 0, 0.1), 0 0 8px -2px rgba(0, 0, 0, 0.05)",
         "light-inner": "inset 0 -2px 6px 0 rgba(255, 255, 255, 0.05)",
       },
+      borderWidth: {
+        px: "1px",
+      },
       opacity: {
         60: "0.6",
+      },
+      ringColor: {
+        current: "currentColor",
+      },
+      ringOffsetColor: {
+        current: "currentColor",
       },
     },
   },
@@ -57,6 +66,8 @@ module.exports = {
       boxShadow: ["active", "disabled"],
       opacity: ["disabled"],
       cursor: ["disabled"],
+      ringWidth: ["focus-visible"],
+      outline: ["focus"],
     },
   },
 }

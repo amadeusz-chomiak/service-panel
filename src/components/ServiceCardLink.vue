@@ -5,14 +5,14 @@
   >
     <a
       :href="link.href"
-      :style="brandBackgroundStyle"
-      class="button text-lg bg-opacity-100 dark:bg-opacity-60 flex-shrink-0 px-5 py-2 flex items-baseline justify-between"
+      class="button ring-current dark:ring-current text-opacity-100 text-lg bg-opacity-100 dark:bg-opacity-60 flex-shrink-0 px-5 py-2 flex items-baseline justify-between"
       target="_blank"
       rel="noreferrer"
-      ><span class="first-letter:uppercase" :style="brandOnClorStyle">{{
+      :style="{ ...brandBackgroundStyle, ...brandColorStyle }"
+      ><span class="first-letter:uppercase" :style="brandOnColorStyle">{{
         link.title
       }}</span
-      ><base-icon icon="link" class="ml-2 h-3" :style="brandOnClorStyle"
+      ><base-icon icon="link" class="ml-2 h-3" :style="brandOnColorStyle"
     /></a>
     <p
       class="mx-5 mt-2 mb-4 sm:my-2 sm:mx-3 text-black dark:text-gray-200"
@@ -40,14 +40,16 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { contentStyle: brandOnClorStyle } = useColor(props.brand.onColor, 1)
-    const { backgroundStyle: brandBackgroundStyle } = useColor(
-      props.brand.color,
-    )
+    const { contentStyle: brandOnColorStyle } = useColor(props.brand.onColor, 1)
+    const {
+      backgroundStyle: brandBackgroundStyle,
+      contentStyle: brandColorStyle,
+    } = useColor(props.brand.color)
 
     return {
       brandBackgroundStyle,
-      brandOnClorStyle,
+      brandOnColorStyle,
+      brandColorStyle,
     }
   },
 })
