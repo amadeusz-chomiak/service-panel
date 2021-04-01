@@ -1,7 +1,7 @@
 import { Base } from "../../tests/utils/core"
 import Component from "./MenuContainerDesktop.vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
-import { Renderer } from '@/definitions/definitionGenerator'
+import { Renderer } from "@/definitions/definitionGenerator"
 
 const renderer = new Renderer({
   header: {
@@ -11,8 +11,11 @@ const renderer = new Renderer({
       href: "href",
     },
     versionControl: {
-      tooltip: 'tooltip'
-    }
+      tooltip: "tooltip",
+    },
+    colorScheme: {
+      buttonLabel: { changeToDarkMode: "dark", changeToLightMode: "light" },
+    },
   },
 })
 const base = new Base(Component, {

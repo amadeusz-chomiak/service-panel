@@ -8,7 +8,6 @@ interface RendererInterfaceOptions {
     }
     versionControl: {
       tooltip: string
-      buttonLabel: string
     }
     colorScheme: {
       buttonLabel: {

@@ -21,7 +21,6 @@ const expectedResultTemplate = {
       },
       versionControl: {
         tooltip: "tooltip",
-        buttonLabel: 'label'
       },
       colorScheme: {
         buttonLabel: {
@@ -76,7 +75,6 @@ describe("definitions/definitionGenerator.ts", () => {
         },
         versionControl: {
           tooltip: "tooltip",
-          buttonLabel: 'label'
         },
         colorScheme: {
           buttonLabel: {

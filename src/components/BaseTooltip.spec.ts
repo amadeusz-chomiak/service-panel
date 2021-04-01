@@ -1,5 +1,6 @@
 import { Base } from "../../tests/utils/core"
 import Component from "./BaseTooltip.vue"
+
 const base = new Base(Component, {
   props: {
     text: "test-text",
@@ -45,6 +46,7 @@ describe("components/BaseTooltip.vue", () => {
           show: true,
           text: "test-text",
           right: true,
+
         },
       })
 

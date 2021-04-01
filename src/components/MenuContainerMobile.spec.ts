@@ -12,7 +12,10 @@ const renderer = new Renderer({
     },
     versionControl: {
       tooltip: 'tooltip'
-    }
+    },
+    colorScheme: {
+      buttonLabel: { changeToDarkMode: "dark", changeToLightMode: "light" },
+    },
   },
 })
 const base = new Base(Component, {

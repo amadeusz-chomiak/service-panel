@@ -1,35 +1,38 @@
-import { shallowMount, VueWrapper } from "@vue/test-utils"
-import { ComponentPublicInstance, h } from "vue"
+import { shallowMount } from "@vue/test-utils"
+import { MountingOptions as MountingOptionsDefinition } from "@vue/test-utils/dist/types"
+import { h, Component } from "vue"
 type LiteralUnion<T extends U, U = string> = T | (U & never)
 
-type Select = (
-  wrapper: Wrapper
-) => Wrapper | never
+type Select = (wrapper: Wrapper) => Wrapper | never
 const randomNumber = () => Math.round(Math.random() * 1000)
 const testText = () => `__test-nr-${randomNumber()}__`
 const testTag = () => {
   const text = testText()
   return {
-    component: h('div', text),
-    text
+    component: h("div", text),
+    text,
   }
 }
 
-type MountingOptions = Parameters<typeof shallowMount>[1]
-type Wrapper = ReturnType<typeof shallowMount> 
+type MountingComponent = Parameters<typeof shallowMount>[0]
+type Wrapper = ReturnType<typeof shallowMount>
 const selectRoot: Select = wrapper => wrapper
 
-export class Base {
+export class Base<
+  C extends Component<Props>,
+  MountingOptions extends MountingOptionsDefinition<Props>,
+  MountingOptionsOrProps extends MountingOptions | {props: Partial<Props>},
+  Props
+> {
   constructor(
-    //@ts-expect-error
-    protected readonly Component: VueClass,
-    protected options: MountingOptions = {}
+    protected readonly Component: C,
+    protected options?: MountingOptions
   ) {}
 
-  render(additionalOptions: MountingOptions = {}): Wrapper {
-    const wrapper = shallowMount(this.Component, {
+  render(additionalOptions?: MountingOptionsOrProps): Wrapper {
+    const wrapper = shallowMount(this.Component as MountingComponent, {
       ...this.options,
-      ...additionalOptions,
+      ...additionalOptions as MountingOptions,
     }) as Wrapper
 
     return wrapper
@@ -37,9 +40,9 @@ export class Base {
 
   /**
    * Will always throw rendered HTML
-   * @param additionalOptions 
+   * @param additionalOptions
    */
-  debug(additionalOptions: MountingOptions = {}) {
+  debug(additionalOptions: MountingOptionsOrProps) {
     expect(this.render(additionalOptions).html()).toBe(undefined)
   }
   // ? tests
@@ -47,12 +50,15 @@ export class Base {
    * Test if slot exists and is visible
    */
   testHasSlot(slotName = "default") {
-    const {component, text} = testTag()
-    const wrapper = this.render({
-      slots: {
-        [slotName]: component,
-      },
-    })
+    const { component, text } = testTag()
+    const wrapper = this.render(
+      //@ts-expect-error
+      {
+        slots: {
+          [slotName]: component,
+        },
+      }
+    )
 
     expect(wrapper.html()).toContain(text)
   }
@@ -75,9 +81,10 @@ export class Base {
   /**
    * Test if your query return visible element, let You easily override props
    */
-  testPropInline(select: Select = selectRoot, propsOverload?: object) {
+  testPropInline(select: Select = selectRoot, propsOverload?: Partial<Props>) {
     const wrapper = propsOverload
-      ? this.render({ props: propsOverload })
+      ? //@ts-expect-error
+        this.render({ props: propsOverload })
       : this.render()
     const PropTarget = select(wrapper)
     expect(PropTarget.exists()).toBe(true)
@@ -86,7 +93,10 @@ export class Base {
   /**
    * Test if your query return visible element
    */
-  testHtmlVisibility(select: Select = selectRoot, optionsOverload: MountingOptions = {}) {
+  testHtmlVisibility(
+    select: Select = selectRoot,
+    optionsOverload?: MountingOptionsOrProps
+  ) {
     const wrapper = this.render(optionsOverload)
     expect(select(wrapper).exists()).toBe(true)
   }
@@ -97,9 +107,11 @@ export class Base {
   testHtmlTag(
     select: Select = selectRoot,
     tag: LiteralUnion<"button" | "p" | "span" | "div">,
-    optionsOverload: MountingOptions = {}
+    optionsOverload?: MountingOptionsOrProps
   ) {
     const wrapper = this.render(optionsOverload)
-    expect(select(wrapper).element.tagName.toLowerCase()).toBe(tag.toLowerCase())
+    expect(select(wrapper).element.tagName.toLowerCase()).toBe(
+      tag.toLowerCase()
+    )
   }
 }
