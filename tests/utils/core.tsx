@@ -1,7 +1,6 @@
 import { shallowMount } from "@vue/test-utils"
 import { MountingOptions as MountingOptionsDefinition } from "@vue/test-utils/dist/types"
-import { h, Component } from "vue"
-type LiteralUnion<T extends U, U = string> = T | (U & never)
+import { h, Component, defineComponent } from "vue"
 
 type Select = (wrapper: Wrapper) => Wrapper | never
 const randomNumber = () => Math.round(Math.random() * 1000)
@@ -21,7 +20,7 @@ const selectRoot: Select = wrapper => wrapper
 export class Base<
   C extends Component<Props>,
   MountingOptions extends MountingOptionsDefinition<Props>,
-  MountingOptionsOrProps extends MountingOptions | {props: Partial<Props>},
+  MountingOptionsOrProps extends MountingOptions | { props: Partial<Props> },
   Props
 > {
   constructor(
@@ -32,7 +31,7 @@ export class Base<
   render(additionalOptions?: MountingOptionsOrProps): Wrapper {
     const wrapper = shallowMount(this.Component as MountingComponent, {
       ...this.options,
-      ...additionalOptions as MountingOptions,
+      ...(additionalOptions as MountingOptions),
     }) as Wrapper
 
     return wrapper
@@ -42,7 +41,7 @@ export class Base<
    * Will always throw rendered HTML
    * @param additionalOptions
    */
-  debug(additionalOptions: MountingOptionsOrProps) {
+  debug(additionalOptions?: MountingOptionsOrProps) {
     expect(this.render(additionalOptions).html()).toBe(undefined)
   }
   // ? tests
@@ -61,6 +60,36 @@ export class Base<
     )
 
     expect(wrapper.html()).toContain(text)
+  }
+
+  /**
+   * Test if scoped slot receive object with property of specific value
+   * @param slotName
+   * @param expectedKey
+   * @param expectedValue You can provide only a part of expected value
+   */
+  testHasScopedSlot(
+    slotName: LiteralUnion<"default"> = "default",
+    expectedKey: string,
+    expectedValue?: unknown
+  ) {
+    const wrapper = this.render(
+      //@ts-expect-error
+      {
+        slots: {
+          [slotName]: {
+            render(props: any) {
+              return <scoped-slot-test>{props[expectedKey]}</scoped-slot-test>
+            },
+          },
+        },
+      }
+    )
+   
+    const ScopedSlotComponent = wrapper.find("scoped-slot-test")
+    expect(ScopedSlotComponent.text()).toBeTruthy()
+    if (expectedValue)
+      expect(ScopedSlotComponent.text()).toContain(expectedValue)
   }
 
   /**
