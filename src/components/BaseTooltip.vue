@@ -2,7 +2,7 @@
   <div class="relative">
     <transition-fade>
       <div
-        v-if="show"
+        v-show="show"
         class="absolute cursor-pointer after-arrow after-arrow-primary-700 dark:after-arrow-primary-600 bottom-full shadow-sm mb-3 rounded-full px-4 py-2 bg-primary-700 dark:bg-primary-600"
         :class="tooltipClasses"
         data-testid="tooltip"
@@ -46,7 +46,7 @@ export default defineComponent({
     const tooltipClasses = computed(() =>
       props.right
         ? ["right-0", "after-arrow-right"]
-        : ["left-0", "after-arrow-left"]
+        : ["left-0", "after-arrow-left"],
     )
 
     const closeTooltip = () => emit("close")
@@ -60,7 +60,7 @@ export default defineComponent({
       },
       {
         immediate: true,
-      }
+      },
     )
 
     const { id } = useId()

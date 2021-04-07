@@ -39,7 +39,7 @@ describe("components/BaseTooltip.vue", () => {
           show: false,
         },
       })
-      expect(wrapper.html()).not.toContain("test-text")
+      expect(wrapper.find("label").isVisible()).toBe(false)
     })
   })
 
