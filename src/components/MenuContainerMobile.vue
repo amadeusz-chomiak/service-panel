@@ -23,7 +23,7 @@
   </transition>
   <div class="flex-1 flex justify-between z-10 items-center">
     <a
-      class="text-2xl sm:text-3xl text-primary-700 dark:text-primary-200 underline font-small-caps"
+      class="link text-2xl sm:text-3xl text-primary-700 dark:text-primary-200 underline font-small-caps"
       :href="header.link.href"
       target="_blank"
       rel="noreferrer"
@@ -57,7 +57,7 @@ import { ref, defineComponent, computed, defineAsyncComponent } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
-  import("./ButtonNewVersion.vue")
+  import("./ButtonNewVersion.vue"),
 )
 import { Render } from "@/composable/useDefinitions"
 import { onBeforeRouteUpdate } from "vue-router"

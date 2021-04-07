@@ -7,7 +7,7 @@
         {{ header.title }}
       </h1>
       <a
-        class="text-2xl text-primary-700 dark:text-primary-200 underline font-small-caps"
+        class="link text-2xl text-primary-700 dark:text-primary-200 underline font-small-caps"
         :href="header.link.href"
         target="_blank"
         rel="noreferrer"
@@ -35,7 +35,7 @@ import {
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
-  import("./ButtonNewVersion.vue"),
+  import("./ButtonNewVersion.vue")
 )
 import { Render } from "@/composable/useDefinitions"
 import { useVersionControl } from "@/composable/useVersionControl"

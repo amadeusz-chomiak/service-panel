@@ -66,8 +66,10 @@ module.exports = {
       boxShadow: ["active", "disabled"],
       opacity: ["disabled"],
       cursor: ["disabled"],
-      ringWidth: ["focus-visible"],
+      ringWidth: ["focus-visible", "hover"],
+      ringOpacity: ["focus-visible", "hover"],
       outline: ["focus"],
+      borderColor: ["focus-visible"],
     },
   },
 }
