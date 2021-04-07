@@ -42,7 +42,7 @@ export default defineComponent({
   setup(props) {
     const { contentStyle: brandOnClorStyle } = useColor(props.brand.onColor, 1)
     const { backgroundStyle: brandBackgroundStyle } = useColor(
-      props.brand.color,
+      props.brand.color
     )
 
     return {

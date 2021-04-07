@@ -7,7 +7,7 @@
         {{ header.title }}
       </h1>
       <a
-        class="text-2xl text-primary-700 dark:text-primary-200 underline font-small-caps"
+        class="link text-2xl text-primary-700 dark:text-primary-200 underline font-small-caps"
         :href="header.link.href"
         target="_blank"
         rel="noreferrer"
@@ -17,9 +17,9 @@
     <MenuContainerContent :render="render.categories" />
   </div>
   <div class="flex space-x-2">
-    <button-toggle-color-scheme />
+    <button-toggle-color-scheme :render="render" />
     <transition-fade duration="duration-600">
-      <button-new-version v-if="serviceWorkerWaiting" />
+      <button-new-version v-if="serviceWorkerWaiting" :render="render" />
     </transition-fade>
   </div>
 </template>

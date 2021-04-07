@@ -65,6 +65,12 @@ const renderer = new Renderer({
     versionControl: {
       tooltip: "switch to a new version",
     },
+    colorScheme: {
+      buttonLabel: {
+        changeToDarkMode: "change to the dark theme",
+        changeToLightMode: "change to the light theme",
+      },
+    },
   },
 })
 

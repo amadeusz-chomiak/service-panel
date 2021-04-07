@@ -1,10 +1,11 @@
 import { Base } from "../../tests/utils/core"
 import Component from "./ButtonNewVersion.vue"
+import BaseTooltip from "./BaseTooltip.vue"
 import { useVersionControl } from "@/composable/useVersionControl"
 import { useDefinitions } from "@/composable/useDefinitions"
-const base = new Base(Component, {
-  // props: {},
-})
+const idMock = "test-id"
+
+const base = new Base(Component)
 
 describe("components/ButtonNewVersion.vue", () => {
   it("set base-tooltip right prop to false by default", async () => {
@@ -49,5 +50,11 @@ describe("components/ButtonNewVersion.vue", () => {
     const tooltipText = render.value.interface.header.versionControl.tooltip
     const tooltip = wrapper.get("base-tooltip")
     expect(tooltip.attributes("text")).toBe(tooltipText)
+  })
+
+  it("button has aria-labelledby set from scoped slot id parameter", () => {
+    const wrapper = base.render()
+    const button = wrapper.get("button")
+    expect(button.attributes("aria-labelledby")).toBe(idMock)
   })
 })

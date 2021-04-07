@@ -23,7 +23,7 @@
   </transition>
   <div class="flex-1 flex justify-between z-10 items-center">
     <a
-      class="text-2xl sm:text-3xl text-primary-700 dark:text-primary-200 underline font-small-caps"
+      class="link text-2xl sm:text-3xl text-primary-700 dark:text-primary-200 underline font-small-caps"
       :href="header.link.href"
       target="_blank"
       rel="noreferrer"
@@ -31,9 +31,13 @@
     >
     <div class="flex justify-end space-x-2">
       <transition-fade duration="duration-600">
-        <button-new-version v-if="serviceWorkerWaiting" tooltip-right />
+        <button-new-version
+          v-if="serviceWorkerWaiting"
+          tooltip-right
+          :render="render"
+        />
       </transition-fade>
-      <button-toggle-color-scheme />
+      <button-toggle-color-scheme :render="render" />
       <button
         class="button button-primary p-3 sm:p-4 mr-1 sm:ml-3"
         data-testid="toggle"

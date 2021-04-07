@@ -2,23 +2,24 @@
   <div class="relative">
     <transition-fade>
       <div
-        v-if="show"
+        v-show="show"
         class="absolute cursor-pointer after-arrow after-arrow-primary-700 dark:after-arrow-primary-600 bottom-full shadow-sm mb-3 rounded-full px-4 py-2 bg-primary-700 dark:bg-primary-600"
         :class="tooltipClasses"
         data-testid="tooltip"
         @click="closeTooltip"
       >
-        <p class="text-white first-letter:uppercase whitespace-nowrap">
+        <p :id="id" class="text-white first-letter:uppercase whitespace-nowrap">
           {{ text }}
         </p>
       </div>
     </transition-fade>
-    <slot />
+    <slot :id="id" />
   </div>
 </template>
 
 <script lang="ts">
 import { ref, reactive, defineComponent, computed, watch } from "vue"
+import { useId } from "@/composable/useId"
 
 export default defineComponent({
   props: {
@@ -42,7 +43,7 @@ export default defineComponent({
     const tooltipClasses = computed(() =>
       props.right
         ? ["right-0", "after-arrow-right"]
-        : ["left-0", "after-arrow-left"],
+        : ["left-0", "after-arrow-left"]
     )
 
     const closeTooltip = () => emit("close")
@@ -56,10 +57,12 @@ export default defineComponent({
       },
       {
         immediate: true,
-      },
+      }
     )
 
-    return { tooltipClasses, closeTooltip }
+    const { id } = useId()
+
+    return { tooltipClasses, closeTooltip, id }
   },
 })
 </script>

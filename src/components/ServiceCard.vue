@@ -4,7 +4,7 @@
       class="w-10 h-10 mr-4 rounded-full flex-shrink-0 dark:bg-opacity-75 shadow-inner dark:shadow-light-inner"
       :style="brandBackgroundStyle"
     ></div>
-    <div class="flex-1">
+    <section class="flex-1">
       <div class="grid lg:grid-cols-3 gap-1">
         <h3
           class="text-3xl lg:col-span-2 first-letter:uppercase text-black dark:text-gray-200"
@@ -34,7 +34,7 @@
           :brand="service.brand"
         />
       </div>
-    </div>
+    </section>
   </base-card>
 </template>
 
@@ -56,7 +56,7 @@ export default defineComponent({
   },
   setup(props) {
     const { backgroundStyle: brandBackgroundStyle } = useColor(
-      props.service.brand.color,
+      props.service.brand.color
     )
     return { brandBackgroundStyle }
   },
