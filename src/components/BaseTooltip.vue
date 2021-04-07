@@ -8,17 +8,21 @@
         data-testid="tooltip"
         @click="closeTooltip"
       >
-        <p class="text-white first-letter:uppercase whitespace-nowrap">
+        <label
+          :for="id"
+          class="text-white first-letter:uppercase whitespace-nowrap"
+        >
           {{ text }}
-        </p>
+        </label>
       </div>
     </transition-fade>
-    <slot />
+    <slot :id="id" />
   </div>
 </template>
 
 <script lang="ts">
 import { ref, reactive, defineComponent, computed, watch } from "vue"
+import { useId } from "@/composable/useId"
 
 export default defineComponent({
   props: {
@@ -42,7 +46,7 @@ export default defineComponent({
     const tooltipClasses = computed(() =>
       props.right
         ? ["right-0", "after-arrow-right"]
-        : ["left-0", "after-arrow-left"],
+        : ["left-0", "after-arrow-left"]
     )
 
     const closeTooltip = () => emit("close")
@@ -56,10 +60,12 @@ export default defineComponent({
       },
       {
         immediate: true,
-      },
+      }
     )
 
-    return { tooltipClasses, closeTooltip }
+    const { id } = useId()
+
+    return { tooltipClasses, closeTooltip, id }
   },
 })
 </script>

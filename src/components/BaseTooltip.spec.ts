@@ -1,6 +1,6 @@
 import { Base } from "../../tests/utils/core"
 import Component from "./BaseTooltip.vue"
-
+import {idPrefix} from '@/composable/useId'
 const base = new Base(Component, {
   props: {
     text: "test-text",
@@ -13,7 +13,18 @@ const queryTooltip = "[data-testid='tooltip']"
 jest.useFakeTimers()
 
 describe("components/BaseTooltip.vue", () => {
-  it("render base slot", () => base.testHasSlot())
+  describe("label", () => {
+    it("has 'for' attribute with value of the Id passed to scoped slot", () => {
+      const wrapper = base.render()
+      const Label = wrapper.find('label')
+      expect(Label.attributes('for')).toContain(idPrefix)
+    })
+  })
+
+  describe("slot", () => {
+    it("render base slot", () => base.testHasSlot())
+    it("pass it's Id to slot", () => base.testHasScopedSlot("default", "id", idPrefix))
+  })
 
   describe("visibility", () => {
     it("show tooltip on prop 'show' set to true", () => {
@@ -46,7 +57,6 @@ describe("components/BaseTooltip.vue", () => {
           show: true,
           text: "test-text",
           right: true,
-
         },
       })
 
