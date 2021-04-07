@@ -1,6 +1,7 @@
 let index = 0
+export const idPrefix = 'unique-id-'
 export const useId = () => {
-  const id = `unique-id-${index++}`
+  const id = `${idPrefix}${index++}`
   return {
     id
   }
