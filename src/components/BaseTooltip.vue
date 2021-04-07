@@ -8,12 +8,9 @@
         data-testid="tooltip"
         @click="closeTooltip"
       >
-        <label
-          :for="id"
-          class="text-white first-letter:uppercase whitespace-nowrap"
-        >
+        <p :id="id" class="text-white first-letter:uppercase whitespace-nowrap">
           {{ text }}
-        </label>
+        </p>
       </div>
     </transition-fade>
     <slot :id="id" />
@@ -46,7 +43,7 @@ export default defineComponent({
     const tooltipClasses = computed(() =>
       props.right
         ? ["right-0", "after-arrow-right"]
-        : ["left-0", "after-arrow-left"],
+        : ["left-0", "after-arrow-left"]
     )
 
     const closeTooltip = () => emit("close")
@@ -60,7 +57,7 @@ export default defineComponent({
       },
       {
         immediate: true,
-      },
+      }
     )
 
     const { id } = useId()

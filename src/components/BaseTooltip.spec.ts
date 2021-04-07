@@ -13,11 +13,11 @@ const queryTooltip = "[data-testid='tooltip']"
 jest.useFakeTimers()
 
 describe("components/BaseTooltip.vue", () => {
-  describe("label", () => {
-    it("has 'for' attribute with value of the Id passed to scoped slot", () => {
+  describe("tooltip text", () => {
+    it("has 'id' attribute with value of the Id passed to scoped slot", () => {
       const wrapper = base.render()
-      const Label = wrapper.find('label')
-      expect(Label.attributes('for')).toContain(idPrefix)
+      const Label = wrapper.find('p')
+      expect(Label.attributes('id')).toContain(idPrefix)
     })
   })
 
@@ -39,7 +39,7 @@ describe("components/BaseTooltip.vue", () => {
           show: false,
         },
       })
-      expect(wrapper.find("label").isVisible()).toBe(false)
+      expect(wrapper.find("p").isVisible()).toBe(false)
     })
   })
 

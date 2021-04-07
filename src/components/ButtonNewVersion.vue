@@ -8,7 +8,7 @@
   >
     <template #default="slot">
       <button
-        :id="slot ? slot.id : 'test-id'"
+        :aria-labelledby="slot ? slot.id : 'test-id'"
         :disabled="skipping"
         class="button button-primary p-3 sm:p-4 overflow-hidden"
         @click.once="skipWaiting"
@@ -45,7 +45,7 @@ export default defineComponent({
 
     const { render } = useDefinitions()
     const tooltipText = computed(
-      () => render.value.interface.header.versionControl.tooltip,
+      () => render.value.interface.header.versionControl.tooltip
     )
 
     return {

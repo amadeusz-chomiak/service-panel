@@ -52,9 +52,9 @@ describe("components/ButtonNewVersion.vue", () => {
     expect(tooltip.attributes("text")).toBe(tooltipText)
   })
 
-  it("button has id from scoped slot", () => {
+  it("button has aria-labelledby set from scoped slot id parameter", () => {
     const wrapper = base.render()
     const button = wrapper.get("button")
-    expect(button.attributes("id")).toBe(idMock)
+    expect(button.attributes("aria-labelledby")).toBe(idMock)
   })
 })
