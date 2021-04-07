@@ -6,17 +6,20 @@
     :timeout="5000"
     @close="tooltipShow = false"
   >
-    <button
-      :disabled="skipping"
-      class="button button-primary p-3 sm:p-4 overflow-hidden"
-      @click.once="skipWaiting"
-    >
-      <base-icon
-        class="h-5 text-white"
-        :class="{ 'animate-elevator': skipping }"
-        :icon="skipping ? 'downloading' : 'download'"
-      />
-    </button>
+    <template #default="slot">
+      <button
+        :id="slot ? slot.id : 'test-id'"
+        :disabled="skipping"
+        class="button button-primary p-3 sm:p-4 overflow-hidden"
+        @click.once="skipWaiting"
+      >
+        <base-icon
+          class="h-5 text-white"
+          :class="{ 'animate-elevator': skipping }"
+          :icon="skipping ? 'downloading' : 'download'"
+        />
+      </button>
+    </template>
   </base-tooltip>
 </template>
 
