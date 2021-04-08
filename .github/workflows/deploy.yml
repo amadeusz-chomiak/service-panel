@@ -1,0 +1,34 @@
+# Deploy to github pages on push to master
+# You need to set up github pages in Your Github repository settings
+#! remove it if You use different static hosting provider
+
+name: Generate a build and push to gh-pages branch
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Push
+    steps:
+      - name: git-checkout
+        uses: actions/checkout@v2
+
+      - name: Install all dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build # Run build command
+
+      # You can change it for Your hosting provider deploy action  
+      - name: Push to github pages
+        uses: s0/git-publish-subdir-action@v2.4.0
+        env:
+          REPO: self
+          BRANCH: gh-pages # Branch for the build
+          FOLDER: dist # Build directory
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message
