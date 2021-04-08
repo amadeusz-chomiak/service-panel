@@ -4,7 +4,6 @@ module.exports = {
     content: ["src/**/*.vue", "public/index.html"],
     // These options are passed through directly to PurgeCSS
     options: {
-      keyframes: true,
       safelist: ["dark"],
     },
   },
