@@ -1,12 +1,15 @@
 @tailwind base;
 @tailwind components;
-@import './button.css';
-@import './link.css';
-@import './after.css';
-
-@import './fonts.css';
-@import './svg.css';
-@import './scroll.css';
-@import './animations.css';
+@layer components {
+  @import './button.css';
+  @import './link.css';
+  @import './after.css';
+}
 
 @tailwind utilities;
+@layer utilities {
+  @import './fonts.css';
+  @import './svg.css';
+  @import './scroll.css';
+  @import './animations.css';
+}

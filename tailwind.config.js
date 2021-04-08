@@ -3,7 +3,9 @@ module.exports = {
   purge: {
     content: ["src/**/*.vue", "public/index.html"],
     // These options are passed through directly to PurgeCSS
-    options: {},
+    options: {
+      safelist: ["dark"],
+    },
   },
   darkMode: "class",
   theme: {

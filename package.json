@@ -22,7 +22,7 @@
     "workbox-window": "^6.0.2"
   },
   "devDependencies": {
-    "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@tailwindcss/postcss7-compat": "^2.1.0",
     "@testing-library/jest-dom": "^5.11.5",
     "@types/jest": "^24.0.19",
     "@types/jest-environment-puppeteer": "^4.4.0",
