@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-8">
+    <header class="mb-8">
       <h1
         class="font-semibold text-5xl text-black dark:text-gray-200 first-letter:uppercase"
       >
@@ -13,7 +13,7 @@
         rel="noreferrer"
         >{{ header.link.title }}</a
       >
-    </div>
+    </header>
     <MenuContainerContent :render="render.categories" />
   </div>
   <div class="flex space-x-2">
@@ -35,7 +35,7 @@ import {
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
-  import("./ButtonNewVersion.vue")
+  import("./ButtonNewVersion.vue"),
 )
 import { Render } from "@/composable/useDefinitions"
 import { useVersionControl } from "@/composable/useVersionControl"
