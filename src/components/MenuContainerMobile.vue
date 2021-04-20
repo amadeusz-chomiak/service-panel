@@ -1,27 +1,5 @@
 <template>
-  <transition
-    appear
-    appear-active-class="transform transition-transform duration-200 ease-in"
-    appear-from-class="translate-y-full"
-    appear-to-class="translate-y-0"
-    enter-active-class="transform transition-all duration-200 ease-in"
-    enter-from-class="translate-y-full opacity-0"
-    enter-to-class="translate-y-0 opacity-100"
-    leave-active-class="transform transition-all duration-200 ease-in"
-    leave-from-class="translate-y-0"
-    leave-to-class="translate-y-full"
-  >
-    <div
-      v-show="mobileShowContent"
-      class="transform transition-all duration-200 ease-in flex flex-col p-2 sm:p-4 fixed inset-x-0 bottom-0 shadow-center-lg bg-gray-200 dark:bg-gray-800 rounded-t-xl"
-    >
-      <MenuContainerContent
-        class="mb-14 sm:mb-20 mt-4 mr-5 sm:mr-7 text-right"
-        :render="render.categories"
-      />
-    </div>
-  </transition>
-  <div class="flex-1 flex justify-between z-10 items-center">
+  <div class="flex-1 order-1 flex justify-between z-10 items-center">
     <header>
       <h1 class="sr-only">
         {{ header.title }}
@@ -55,6 +33,28 @@
       </button>
     </div>
   </div>
+  <transition
+    appear
+    appear-active-class="transform transition-transform duration-200 ease-in"
+    appear-from-class="translate-y-full"
+    appear-to-class="translate-y-0"
+    enter-active-class="transform transition-all duration-200 ease-in"
+    enter-from-class="translate-y-full opacity-0"
+    enter-to-class="translate-y-0 opacity-100"
+    leave-active-class="transform transition-all duration-200 ease-in"
+    leave-from-class="translate-y-0"
+    leave-to-class="translate-y-full"
+  >
+    <div
+      v-show="mobileShowContent"
+      class="transform transition-all duration-200 ease-in flex flex-col p-2 sm:p-4 fixed inset-x-0 bottom-0 shadow-center-lg bg-gray-200 dark:bg-gray-800 rounded-t-xl"
+    >
+      <MenuContainerContent
+        class="mb-14 sm:mb-20 mt-4 mr-5 sm:mr-7 text-right"
+        :render="render.categories"
+      />
+    </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -62,7 +62,7 @@ import { ref, defineComponent, computed, defineAsyncComponent } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
-  import("./ButtonNewVersion.vue")
+  import("./ButtonNewVersion.vue"),
 )
 import { Render } from "@/composable/useDefinitions"
 import { onBeforeRouteUpdate } from "vue-router"
