@@ -18,22 +18,17 @@ const setupFocusTarget: DirectiveHook<
   BindingValue
 > = (element, binding) => {
   const { query, enable = true } = binding.value
-  
-  //? check if it wasn't disabled
-  if (!enable) return
-  
   //? check if query is provided
-  if (!query)
+  if (query === undefined)
     throw new Error(
-      `v-focus-target: You need to provide query selector that points to the target. 
-      If Your intend was to disable the v-focus-target set "enable" variable to false`
+      `v-focus-target: You need to provide query selector that points to the target.`
     )
 
   const forth = binding.arg === "back" ? false : true
   const eventHandler = (event: KeyboardEvent) => {
     if (
-      //? check if focus is on this element
-      // document.activeElement === event.currentTarget &&
+      //? check if it wasn't disabled
+      enable &&
       //? check if user use tab to navigate to the next element
       event.key === "Tab" &&
       //? if set to focus target when going forth user intent has to be to go forth (by not holding shift key)
@@ -57,7 +52,7 @@ const setupFocusTarget: DirectiveHook<
     element.removeEventListener("keydown", eventHandler)
   }
 
-  removeEventListener()
+  element[RemoveEventHandler]?.()
   element.addEventListener("keydown", eventHandler)
 
   element[RemoveEventHandler] = removeEventListener
@@ -68,7 +63,7 @@ export const FocusTargetDirective: Directive<
   BindingValue
 > = {
   mounted: setupFocusTarget,
-  updated: setupFocusTarget,
+  beforeUpdate: setupFocusTarget,
   beforeUnmount(element) {
     element[RemoveEventHandler]?.()
   },
