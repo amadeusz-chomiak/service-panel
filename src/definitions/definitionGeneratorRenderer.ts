@@ -16,6 +16,9 @@ interface RendererInterfaceOptions {
       }
     }
   }
+  controls: {
+    title: string
+  }
 }
 export class Renderer {
   private readonly categories = new Map<

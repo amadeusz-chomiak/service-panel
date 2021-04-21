@@ -17,6 +17,9 @@ const props = {
       buttonLabel: { changeToDarkMode: "dark", changeToLightMode: "light" },
     },
   },
+  controls: {
+    title: "controls"
+  }
 }
 const renderer = new Renderer(props)
 const base = new Base(Component, {
@@ -41,6 +44,15 @@ describe("components/MenuContainerMobile.vue", () => {
     )
   })
 
+  describe("controls section", () => {
+    it("render h2 title with value from the controls.title", () => {
+      const wrapper = base.render()
+      const section = wrapper.find('section')
+      const heading = section.find('h2')
+      expect(heading.html()).toContain(props.controls.title)
+    })
+  })
+  
   describe("header", () => {
     it("render one header node", async () => {
       const wrapper = base.render()
@@ -70,7 +82,7 @@ describe("components/MenuContainerMobile.vue", () => {
       })
     })
 
-    it("render h1 title inside of the header", async () => {
+    it("render h1 from the header.title prop", async () => {
       const wrapper = base.render()
       const header = wrapper.find("header")
       const heading = header.find("h1")

@@ -72,6 +72,9 @@ const renderer = new Renderer({
       },
     },
   },
+  controls: {
+    title: "Controls"
+  }
 })
 
 //? adding order does matter. It'll create display order in UI

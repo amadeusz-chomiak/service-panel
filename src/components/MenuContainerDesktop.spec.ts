@@ -17,6 +17,9 @@ const props = {
       buttonLabel: { changeToDarkMode: "dark", changeToLightMode: "light" },
     },
   },
+  controls: {
+    title: "controls"
+  }
 }
 
 const renderer = new Renderer(props)
