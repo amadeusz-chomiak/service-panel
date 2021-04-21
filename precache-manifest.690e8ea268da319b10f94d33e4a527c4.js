@@ -88,7 +88,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/service-panel/fonts/source-sans-pro-v14-latin-ext_latin-regular.woff2"
   },
   {
-    "revision": "dac280fd9140fba39e39f0e05e730178",
+    "revision": "5f8e66d5ca6ce9de4a61798868200203",
     "url": "/service-panel/index.html"
   },
   {
