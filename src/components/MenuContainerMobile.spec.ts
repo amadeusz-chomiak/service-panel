@@ -16,6 +16,9 @@ const props = {
     colorScheme: {
       buttonLabel: { changeToDarkMode: "dark", changeToLightMode: "light" },
     },
+    skipToMain: {
+      title: 'Skip to main content'
+    }
   },
   controls: {
     title: "controls"

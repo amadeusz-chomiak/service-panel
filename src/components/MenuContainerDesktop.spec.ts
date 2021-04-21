@@ -16,6 +16,9 @@ const props = {
     colorScheme: {
       buttonLabel: { changeToDarkMode: "dark", changeToLightMode: "light" },
     },
+    skipToMain: {
+      title: 'Skip to main content'
+    }
   },
   controls: {
     title: "controls"
@@ -34,6 +37,16 @@ describe("components/MenuContainerDesktop.vue", () => {
     const wrapper = base.render()
     expect(wrapper.findAllComponents(MenuContainerContent)).toHaveLength(1)
   })
+
+  describe("controls section", () => {
+    it("render h2 title with value from the controls.title", () => {
+      const wrapper = base.render()
+      const section = wrapper.find('section')
+      const heading = section.find('h2')
+      expect(heading.html()).toContain(props.controls.title)
+    })
+  })
+
   describe("header", () => {
     it("render one header node", async () => {
       const wrapper = base.render()
