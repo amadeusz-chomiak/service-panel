@@ -28,6 +28,9 @@ const expectedResultTemplate = {
           changeToDarkMode: 'changeToDarkMode'
         }
       },
+      skipToMain: {
+        title: 'skipToMainContentTitle'
+      }
     },
     controls: {
       title: 'controls-title'
@@ -85,6 +88,9 @@ describe("definitions/definitionGenerator.ts", () => {
             changeToDarkMode: 'changeToDarkMode'
           }
         },
+        skipToMain: {
+          title: 'skipToMainContentTitle'
+        }
       },
       controls: {
         title: 'controls-title'

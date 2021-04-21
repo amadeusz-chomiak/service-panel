@@ -65,14 +65,20 @@ const renderer = new Renderer({
     versionControl: {
       tooltip: "switch to a new version",
     },
+    //* change color scheme button aria-label for a11y only
     colorScheme: {
       buttonLabel: {
         changeToDarkMode: "change to the dark theme",
         changeToLightMode: "change to the light theme",
       },
     },
+    //* skip to the main content link for keyboard users
+    skipToMain: {
+      title: "skip to the main content"
+    }
   },
   controls: {
+    //* Controls section heading for a11y only
     title: "Controls"
   }
 })
