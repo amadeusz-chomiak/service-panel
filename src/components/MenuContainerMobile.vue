@@ -12,8 +12,11 @@
         >{{ header.link.title }}</a
       >
     </header>
-    <section class="flex justify-end space-x-2">
-      <h2 class="sr-only">{{ controls.title }}</h2>
+    <section
+      class="flex justify-end space-x-2"
+      :aria-labelledby="controlsHeadingId"
+    >
+      <h2 :id="controlsHeadingId" class="sr-only">{{ controls.title }}</h2>
       <transition-fade duration="duration-600">
         <button-new-version
           v-if="serviceWorkerWaiting"
@@ -111,12 +114,15 @@ export default defineComponent({
       lastLink: useId().id,
       toggleButton: useId().id,
     })
+
+    const controlsHeadingId = useId().id
     return {
       mobileShowContent,
       header,
       navigationIds,
       controls,
       serviceWorkerWaiting,
+      controlsHeadingId,
     }
   },
 })

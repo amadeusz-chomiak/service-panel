@@ -16,12 +16,13 @@
     </header>
     <MenuContainerContent :render="render.categories" />
   </div>
-  <div class="flex space-x-2">
+  <section class="flex space-x-2" :aria-labelledby="controlsHeadingId">
+    <h2 :id="controlsHeadingId" class="sr-only">{{ controls.title }}</h2>
     <button-toggle-color-scheme :render="render" />
     <transition-fade duration="duration-600">
       <button-new-version v-if="serviceWorkerWaiting" :render="render" />
     </transition-fade>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
@@ -40,6 +41,7 @@ const ButtonNewVersion = defineAsyncComponent(() =>
 import { Render } from "@/composable/useDefinitions"
 import { useVersionControl } from "@/composable/useVersionControl"
 import TransitionFade from "./TransitionFade.vue"
+import { useId } from "@/composable/useId"
 
 export default defineComponent({
   components: {
@@ -56,8 +58,12 @@ export default defineComponent({
   },
   setup(props) {
     const header = computed(() => props.render.interface.header)
+    const controls = computed(() => props.render.interface.controls)
+
     const { serviceWorkerWaiting } = useVersionControl()
-    return { header, serviceWorkerWaiting }
+    const controlsHeadingId = useId().id
+
+    return { header, controls, serviceWorkerWaiting, controlsHeadingId }
   },
 })
 </script>
