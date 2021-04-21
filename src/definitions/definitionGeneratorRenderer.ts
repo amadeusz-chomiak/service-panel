@@ -15,6 +15,12 @@ interface RendererInterfaceOptions {
         changeToDarkMode: string
       }
     }
+    skipToMain: {
+      title: string
+    }
+  }
+  controls: {
+    title: string
   }
 }
 export class Renderer {

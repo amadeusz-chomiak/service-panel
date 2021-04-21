@@ -72,6 +72,9 @@ module.exports = {
       ringOpacity: ["focus-visible", "hover"],
       outline: ["focus"],
       borderColor: ["focus-visible"],
+      width: ["focus"],
+      position: ["focus"],
+      padding: ["focus"],
     },
   },
 }

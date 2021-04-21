@@ -46,4 +46,14 @@ describe("components/ServiceCardLink.vue", () => {
     const description = wrapper.get('[data-testid="description"]')
     expect(description.text()).toBe("description")
   })
+
+  it("connect link with the description with aria-describedby attribute", () => {
+    const wrapper = base.render()
+    const description = wrapper.get('[data-testid="description"]')
+    const link = wrapper.get('[target="_blank"]')
+    expect(description.attributes("id")).toBeTruthy()
+    expect(link.attributes("aria-describedby")).toBe(
+      description.attributes("id")
+    )
+  })
 })

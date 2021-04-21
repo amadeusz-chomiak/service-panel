@@ -14,7 +14,7 @@ let service: Service<"link">
 const expectedResultTemplate = {
   interface: {
     header: {
-      title: "title",
+      title: "header-title",
       link: {
         title: "title",
         href: "href",
@@ -28,7 +28,13 @@ const expectedResultTemplate = {
           changeToDarkMode: 'changeToDarkMode'
         }
       },
+      skipToMain: {
+        title: 'skipToMainContentTitle'
+      }
     },
+    controls: {
+      title: 'controls-title'
+    }
   },
   categories: [
     {
@@ -68,7 +74,7 @@ describe("definitions/definitionGenerator.ts", () => {
     //? redefine renderer
     renderer = new Renderer({
       header: {
-        title: "title",
+        title: "header-title",
         link: {
           title: "title",
           href: "href",
@@ -82,7 +88,13 @@ describe("definitions/definitionGenerator.ts", () => {
             changeToDarkMode: 'changeToDarkMode'
           }
         },
+        skipToMain: {
+          title: 'skipToMainContentTitle'
+        }
       },
+      controls: {
+        title: 'controls-title'
+      }
     })
 
     //? redefine category template

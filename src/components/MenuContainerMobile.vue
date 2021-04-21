@@ -1,4 +1,46 @@
 <template>
+  <div class="flex-1 order-1 flex justify-between z-10 items-center">
+    <header>
+      <h1 class="sr-only">
+        {{ header.title }}
+      </h1>
+      <a
+        class="link text-2xl sm:text-3xl text-primary-700 dark:text-primary-200 underline font-small-caps"
+        :href="header.link.href"
+        target="_blank"
+        rel="noreferrer"
+        >{{ header.link.title }}</a
+      >
+    </header>
+    <section class="flex justify-end space-x-2">
+      <h2 class="sr-only">{{ controls.title }}</h2>
+      <transition-fade duration="duration-600">
+        <button-new-version
+          v-if="serviceWorkerWaiting"
+          tooltip-right
+          :render="render"
+        />
+      </transition-fade>
+      <button-toggle-color-scheme :render="render" />
+      <div :role="mobileShowContent ? '' : 'navigation'">
+        <button
+          :id="navigationIds.toggleButton"
+          v-focus-target:back="{
+            query: '#' + navigationIds.lastLink,
+            enable: mobileShowContent,
+          }"
+          class="button button-primary p-3 sm:p-4 mr-1 sm:ml-3"
+          data-testid="toggle"
+          @click="mobileShowContent = !mobileShowContent"
+        >
+          <base-icon
+            class="h-5 w-5 text-white"
+            :icon="mobileShowContent ? 'close' : 'menu'"
+          />
+        </button>
+      </div>
+    </section>
+  </div>
   <transition
     appear
     appear-active-class="transform transition-transform duration-200 ease-in"
@@ -18,42 +60,20 @@
       <MenuContainerContent
         class="mb-14 sm:mb-20 mt-4 mr-5 sm:mr-7 text-right"
         :render="render.categories"
+        :focus-targets-id="navigationIds"
       />
     </div>
   </transition>
-  <div class="flex-1 flex justify-between z-10 items-center">
-    <a
-      class="link text-2xl sm:text-3xl text-primary-700 dark:text-primary-200 underline font-small-caps"
-      :href="header.link.href"
-      target="_blank"
-      rel="noreferrer"
-      >{{ header.link.title }}</a
-    >
-    <div class="flex justify-end space-x-2">
-      <transition-fade duration="duration-600">
-        <button-new-version
-          v-if="serviceWorkerWaiting"
-          tooltip-right
-          :render="render"
-        />
-      </transition-fade>
-      <button-toggle-color-scheme :render="render" />
-      <button
-        class="button button-primary p-3 sm:p-4 mr-1 sm:ml-3"
-        data-testid="toggle"
-        @click="mobileShowContent = !mobileShowContent"
-      >
-        <base-icon
-          class="h-5 w-5 text-white"
-          :icon="mobileShowContent ? 'close' : 'menu'"
-        />
-      </button>
-    </div>
-  </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, computed, defineAsyncComponent } from "vue"
+import {
+  ref,
+  defineComponent,
+  computed,
+  defineAsyncComponent,
+  reactive,
+} from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
@@ -62,6 +82,7 @@ const ButtonNewVersion = defineAsyncComponent(() =>
 import { Render } from "@/composable/useDefinitions"
 import { onBeforeRouteUpdate } from "vue-router"
 import { useVersionControl } from "@/composable/useVersionControl"
+import { useId } from "@/composable/useId"
 
 export default defineComponent({
   components: {
@@ -82,10 +103,21 @@ export default defineComponent({
     })
 
     const header = computed(() => props.render.interface.header)
+    const controls = computed(() => props.render.interface.controls)
 
     const { serviceWorkerWaiting } = useVersionControl()
 
-    return { mobileShowContent, header, serviceWorkerWaiting }
+    const navigationIds = reactive({
+      lastLink: useId().id,
+      toggleButton: useId().id,
+    })
+    return {
+      mobileShowContent,
+      header,
+      navigationIds,
+      controls,
+      serviceWorkerWaiting,
+    }
   },
 })
 </script>
