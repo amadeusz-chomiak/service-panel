@@ -19,22 +19,25 @@ const expectedResultTemplate = {
         title: "title",
         href: "href",
       },
+      skipToMain: {
+        title: "skipToMainContentTitle",
+      },
+    },
+    controls: {
+      title: "controls-title",
       versionControl: {
         tooltip: "tooltip",
       },
       colorScheme: {
         buttonLabel: {
-          changeToLightMode: 'changeToLightMode',
-          changeToDarkMode: 'changeToDarkMode'
-        }
+          changeToLightMode: "changeToLightMode",
+          changeToDarkMode: "changeToDarkMode",
+        },
       },
-      skipToMain: {
-        title: 'skipToMainContentTitle'
-      }
+      navigation: {
+        buttonLabel: "navigation menu",
+      },
     },
-    controls: {
-      title: 'controls-title'
-    }
   },
   categories: [
     {
@@ -79,22 +82,26 @@ describe("definitions/definitionGenerator.ts", () => {
           title: "title",
           href: "href",
         },
+
+        skipToMain: {
+          title: "skipToMainContentTitle",
+        },
+      },
+      controls: {
+        title: "controls-title",
         versionControl: {
           tooltip: "tooltip",
         },
         colorScheme: {
           buttonLabel: {
-            changeToLightMode: 'changeToLightMode',
-            changeToDarkMode: 'changeToDarkMode'
-          }
+            changeToLightMode: "changeToLightMode",
+            changeToDarkMode: "changeToDarkMode",
+          },
         },
-        skipToMain: {
-          title: 'skipToMainContentTitle'
-        }
+        navigation: {
+          buttonLabel: "navigation menu",
+        },
       },
-      controls: {
-        title: 'controls-title'
-      }
     })
 
     //? redefine category template

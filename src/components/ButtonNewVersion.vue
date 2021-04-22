@@ -45,7 +45,7 @@ export default defineComponent({
 
     const { render } = useDefinitions()
     const tooltipText = computed(
-      () => render.value.interface.header.versionControl.tooltip
+      () => render.value.interface.controls.versionControl.tooltip,
     )
 
     return {

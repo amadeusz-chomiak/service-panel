@@ -3,26 +3,30 @@ import Component from "./MenuContainerMobile.vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import waitFor from "wait-for-expect"
 import { Renderer } from "@/definitions/definitionGenerator"
-const props = {
+const props: ConstructorParameters<typeof Renderer>[0] = {
   header: {
     title: "title",
     link: {
       title: "title",
       href: "href",
     },
+
+    skipToMain: {
+      title: "Skip to main content",
+    },
+  },
+  controls: {
+    title: "controls",
     versionControl: {
-      tooltip: 'tooltip'
+      tooltip: "tooltip",
     },
     colorScheme: {
       buttonLabel: { changeToDarkMode: "dark", changeToLightMode: "light" },
     },
-    skipToMain: {
-      title: 'Skip to main content'
-    }
+    navigation: {
+      buttonLabel: "navigation menu",
+    },
   },
-  controls: {
-    title: "controls"
-  }
 }
 const renderer = new Renderer(props)
 const base = new Base(Component, {
@@ -32,30 +36,48 @@ const base = new Base(Component, {
 })
 
 describe("components/MenuContainerMobile.vue", () => {
-  it("render one MenuContainerContent node", async () => {
-    const wrapper = base.render()
-    expect(wrapper.html()).toContain("<menu-container-content")
-  })
+  describe("navigation menu", () => {
+    it("render one MenuContainerContent node", async () => {
+      const wrapper = base.render()
+      expect(wrapper.html()).toContain("<menu-container-content")
+    })
 
-  it("hide MenuContainerContent after toggle button click", async () => {
-    const wrapper = base.render()
-    await wrapper.find("[data-testid='toggle']").trigger("click")
-    await waitFor(() =>
-      expect(
-        wrapper.find("menu-container-content-stub").element
-      ).not.toBeVisible()
-    )
+    it("hide MenuContainerContent after the toggle button click", async () => {
+      const wrapper = base.render()
+      await wrapper.find("[data-testid='toggle']").trigger("click")
+      await waitFor(() =>
+        expect(
+          wrapper.find("menu-container-content-stub").element
+        ).not.toBeVisible()
+      )
+    })
+
+    it("set aria-expanded on the toggle button", async () => {
+      const wrapper = base.render()
+      const button = wrapper.find("[data-testid='toggle']")
+      expect(button.attributes("aria-expanded")).toBe("true")
+      await button.trigger("click")
+      expect(button.attributes("aria-expanded")).toBe("false")
+    })
+
+    it("set aria-label of the toggle button", async () => {
+      const wrapper = base.render()
+      const button = wrapper.find("[data-testid='toggle']")
+      expect(button.attributes("aria-label")).toBe(
+        props.controls.navigation.buttonLabel
+      )
+    })
   })
 
   describe("controls section", () => {
     it("render h2 title with value from the controls.title", () => {
       const wrapper = base.render()
-      const section = wrapper.find('section')
-      const heading = section.find('h2')
+      const section = wrapper.find("section")
+      const heading = section.find("h2")
       expect(heading.html()).toContain(props.controls.title)
     })
   })
-  
+
   describe("header", () => {
     it("render one header node", async () => {
       const wrapper = base.render()

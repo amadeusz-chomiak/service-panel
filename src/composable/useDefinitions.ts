@@ -61,6 +61,14 @@ const renderer = new Renderer({
       title: "amadeo.dev",
       href: "https://amadeo.dev",
     },
+    //* skip to the main content link for keyboard users
+    skipToMain: {
+      title: "skip to the main content",
+    },
+  },
+  controls: {
+    //* Controls section heading for a11y only
+    title: "Controls",
     //* new version available button
     versionControl: {
       tooltip: "switch to a new version",
@@ -72,15 +80,9 @@ const renderer = new Renderer({
         changeToLightMode: "change to the light theme",
       },
     },
-    //* skip to the main content link for keyboard users
-    skipToMain: {
-      title: "skip to the main content"
-    }
+    //* change mobile navigation toggle button aria-label for a11y only
+    navigation: { buttonLabel: "navigation menu" },
   },
-  controls: {
-    //* Controls section heading for a11y only
-    title: "Controls"
-  }
 })
 
 //? adding order does matter. It'll create display order in UI

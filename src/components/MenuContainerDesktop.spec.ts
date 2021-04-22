@@ -10,18 +10,22 @@ const props: ConstructorParameters<typeof Renderer>[0] = {
       title: "title",
       href: "href",
     },
+   
+    skipToMain: {
+      title: 'Skip to main content'
+    }
+  },
+  controls: {
+    title: "controls",
     versionControl: {
       tooltip: "tooltip",
     },
     colorScheme: {
       buttonLabel: { changeToDarkMode: "dark", changeToLightMode: "light" },
     },
-    skipToMain: {
-      title: 'Skip to main content'
+    navigation: {
+      buttonLabel: 'navigation menu'
     }
-  },
-  controls: {
-    title: "controls"
   }
 }
 
