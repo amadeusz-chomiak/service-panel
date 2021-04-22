@@ -32,6 +32,7 @@
             query: '#' + navigationIds.lastLink,
             enable: mobileShowContent,
           }"
+          :aria-expanded="mobileShowContent"
           class="button button-primary p-3 sm:p-4 mr-1 sm:ml-3"
           data-testid="toggle"
           @click="mobileShowContent = !mobileShowContent"
@@ -80,7 +81,7 @@ import {
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
 const ButtonNewVersion = defineAsyncComponent(() =>
-  import("./ButtonNewVersion.vue"),
+  import("./ButtonNewVersion.vue")
 )
 import { Render } from "@/composable/useDefinitions"
 import { onBeforeRouteUpdate } from "vue-router"

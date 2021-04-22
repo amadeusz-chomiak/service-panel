@@ -3,7 +3,7 @@ import Component from "./MenuContainerDesktop.vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import { Renderer } from "@/definitions/definitionGenerator"
 
-const props = {
+const props: ConstructorParameters<typeof Renderer>[0] = {
   header: {
     title: "title",
     link: {
