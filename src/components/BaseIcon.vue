@@ -4,49 +4,42 @@
     svg-inline
     src="@/assets/icons/link.svg"
     class="fill-current fill-inherit pointer-events-none"
-    alt="outside link icon"
   />
   <img
     v-else-if="icon === 'close'"
     svg-inline
     src="@/assets/icons/close.svg"
     class="fill-current fill-inherit pointer-events-none"
-    alt="close icon of cross"
   />
   <img
     v-else-if="icon === 'moon'"
     svg-inline
     src="@/assets/icons/moon.svg"
     class="fill-current fill-inherit pointer-events-none"
-    alt="moon icon"
   />
   <img
     v-else-if="icon === 'sun'"
     svg-inline
     src="@/assets/icons/sun.svg"
     class="fill-current fill-inherit pointer-events-none"
-    alt="sun icon"
   />
   <img
     v-else-if="icon === 'menu'"
     svg-inline
     src="@/assets/icons/menu.svg"
     class="fill-current fill-inherit pointer-events-none"
-    alt="open menu icon"
   />
   <img
     v-else-if="icon === 'download'"
     svg-inline
     src="@/assets/icons/download.svg"
     class="fill-current fill-inherit pointer-events-none"
-    alt="download icon"
   />
   <img
     v-else-if="icon === 'downloading'"
     svg-inline
     src="@/assets/icons/downloading.svg"
     class="fill-current fill-inherit pointer-events-none"
-    alt="downloading icon"
   />
 </template>
 

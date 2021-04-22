@@ -9,7 +9,12 @@ module.exports = {
       .use("vue-svg-inline-loader")
       .loader("vue-svg-inline-loader")
       .options({
-        /* ... */
+        addAttributes: {
+          role: "presentation",
+          focusable: false,
+          tabindex: -1,
+          "aria-hidden": true,
+        },
       })
   },
   pwa: {
