@@ -1,9 +1,8 @@
 import { Base } from "../../tests/utils/core"
 import Component from "./ButtonToggleColorScheme.vue"
-import {} from '@vue/test-utils'
 const basicRender = {
   interface: {
-    header: {
+    controls: {
       colorScheme: {
         buttonLabel: {
           changeToDarkMode: 'change to dark',

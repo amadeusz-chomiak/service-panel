@@ -24,12 +24,12 @@ export default defineComponent({
   setup(props) {
     const { isLight, setColorScheme } = usePrefersColorScheme()
     const renderButtonLabels = computed(
-      () => props.render.interface.header.colorScheme.buttonLabel
+      () => props.render.interface.controls.colorScheme.buttonLabel,
     )
     const label = computed(() =>
       isLight.value
         ? renderButtonLabels.value.changeToDarkMode
-        : renderButtonLabels.value.changeToLightMode
+        : renderButtonLabels.value.changeToLightMode,
     )
 
     return { isLight, setColorScheme, label }

@@ -47,7 +47,7 @@ describe("components/ButtonNewVersion.vue", () => {
       },
     })
     const { render } = useDefinitions()
-    const tooltipText = render.value.interface.header.versionControl.tooltip
+    const tooltipText = render.value.interface.controls.versionControl.tooltip
     const tooltip = wrapper.get("base-tooltip")
     expect(tooltip.attributes("text")).toBe(tooltipText)
   })

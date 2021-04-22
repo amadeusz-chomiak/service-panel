@@ -6,8 +6,17 @@ interface RendererInterfaceOptions {
       title: string
       href: string
     }
+    skipToMain: {
+      title: string
+    }
+  }
+  controls: {
+    title: string
     versionControl: {
       tooltip: string
+    }
+    navigation: {
+      buttonLabel: string
     }
     colorScheme: {
       buttonLabel: {
@@ -15,12 +24,6 @@ interface RendererInterfaceOptions {
         changeToDarkMode: string
       }
     }
-    skipToMain: {
-      title: string
-    }
-  }
-  controls: {
-    title: string
   }
 }
 export class Renderer {

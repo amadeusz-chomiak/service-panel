@@ -3,25 +3,29 @@ import Component from "./MenuContainerDesktop.vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import { Renderer } from "@/definitions/definitionGenerator"
 
-const props = {
+const props: ConstructorParameters<typeof Renderer>[0] = {
   header: {
     title: "title",
     link: {
       title: "title",
       href: "href",
     },
+   
+    skipToMain: {
+      title: 'Skip to main content'
+    }
+  },
+  controls: {
+    title: "controls",
     versionControl: {
       tooltip: "tooltip",
     },
     colorScheme: {
       buttonLabel: { changeToDarkMode: "dark", changeToLightMode: "light" },
     },
-    skipToMain: {
-      title: 'Skip to main content'
+    navigation: {
+      buttonLabel: 'navigation menu'
     }
-  },
-  controls: {
-    title: "controls"
   }
 }
 
