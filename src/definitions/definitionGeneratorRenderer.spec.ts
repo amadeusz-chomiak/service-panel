@@ -36,6 +36,13 @@ const mockInterface: RendererInterfaceOptions = {
     //* change mobile navigation toggle button aria-label for a11y only
     navigation: { buttonLabel: "navigation menu" },
   },
+  services: {
+    serviceLink: {
+      composeAriaLabel(brandName, linkTitle) {
+        return `${linkTitle} of ${brandName}`
+      },
+    },
+  },
 }
 
 describe("definitions/definitionGeneratorRenderer.ts", () => {

@@ -10,6 +10,7 @@
       target="_blank"
       rel="noreferrer"
       :aria-describedby="descriptionId"
+      :aria-label="linkAriaLabel"
       ><span class="first-letter:uppercase" :style="brandOnClorStyle">{{
         link.title
       }}</span
@@ -26,8 +27,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
-import { Service } from "@/composable/useDefinitions"
+import { defineComponent, computed } from "vue"
+import { Service, useDefinitions } from "@/composable/useDefinitions"
 import { useColor } from "@/composable/useColor"
 import { useId } from "@/composable/useId"
 
@@ -48,10 +49,19 @@ export default defineComponent({
       props.brand.color,
     )
     const { id: descriptionId } = useId()
+
+    const { render } = useDefinitions()
+    const linkAriaLabel = computed(() =>
+      render.value.interface.services.serviceLink.composeAriaLabel(
+        props.brand.name,
+        props.link.title,
+      ),
+    )
     return {
       brandBackgroundStyle,
       brandOnClorStyle,
       descriptionId,
+      linkAriaLabel,
     }
   },
 })
