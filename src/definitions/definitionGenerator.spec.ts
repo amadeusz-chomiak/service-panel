@@ -38,6 +38,14 @@ const expectedResultTemplate = {
         buttonLabel: "navigation menu",
       },
     },
+    services: {
+      serviceLink: {
+        //@ts-expect-error
+        composeAriaLabel(brandName, linkTitle) {
+          return `${linkTitle} of ${brandName}`
+        },
+      },
+    },
   },
   categories: [
     {
@@ -70,7 +78,7 @@ const expectedResultGenerator = (
 ) => ({
   ...expectedResultTemplate,
   ...change(cloneDeep(expectedResultTemplate)),
-})
+}).toString()
 
 describe("definitions/definitionGenerator.ts", () => {
   beforeEach(() => {
@@ -100,6 +108,13 @@ describe("definitions/definitionGenerator.ts", () => {
         },
         navigation: {
           buttonLabel: "navigation menu",
+        },
+      },
+      services: {
+        serviceLink: {
+          composeAriaLabel(companyName, linkTitle) {
+            return `${linkTitle} of ${companyName}`
+          },
         },
       },
     })
@@ -172,7 +187,7 @@ describe("definitions/definitionGenerator.ts", () => {
     it("renderer returns category with service", async () => {
       renderer.add(category.add(service))
 
-      expect(renderer.export()).toStrictEqual(expectedResultGenerator())
+      expect(renderer.export().toString()).toEqual(expectedResultGenerator())
     })
 
     it("renderer remove duplicates from categories and services", async () => {
@@ -181,7 +196,7 @@ describe("definitions/definitionGenerator.ts", () => {
         .add(category)
         .add(category.add(service))
 
-      expect(renderer.export()).toStrictEqual(expectedResultGenerator())
+      expect(renderer.export().toString()).toEqual(expectedResultGenerator())
     })
   })
   describe("service links", () => {
@@ -198,7 +213,7 @@ describe("definitions/definitionGenerator.ts", () => {
           ])
         )
       )
-      expect(renderer.export()).toStrictEqual(
+      expect(renderer.export().toString()).toEqual(
         expectedResultGenerator(expected => {
           expected.categories[0].services[0].links.push({
             title: "added",
@@ -220,7 +235,7 @@ describe("definitions/definitionGenerator.ts", () => {
             .add(service)
         )
 
-        expect(renderer.export()).toStrictEqual(
+        expect(renderer.export().toString()).toEqual(
           expectedResultGenerator(expected => {
             expected.categories[0].name = "change"
             expected.categories[0].description = "change"
@@ -243,7 +258,7 @@ describe("definitions/definitionGenerator.ts", () => {
           )
         )
 
-        expect(renderer.export()).toStrictEqual(
+        expect(renderer.export().toString()).toEqual(
           expectedResultGenerator(expected => {
             expected.categories[0].services[0].brand = {
               name: "change",
@@ -259,7 +274,7 @@ describe("definitions/definitionGenerator.ts", () => {
       it("allow change of price", () => {
         renderer.add(category.add(service.price({ renew: "daily" })))
 
-        expect(renderer.export()).toStrictEqual(
+        expect(renderer.export().toString()).toEqual(
           expectedResultGenerator(expected => {
             expected.categories[0].services[0].price = "daily paid"
 

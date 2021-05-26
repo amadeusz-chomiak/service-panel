@@ -26,6 +26,11 @@ export interface RendererInterfaceOptions {
       }
     }
   }
+  services: {
+    serviceLink: {
+      composeAriaLabel: (brandName: string, linkTitle: string) => string
+    }
+  }
 }
 export class Renderer {
   private readonly categories = new Map<

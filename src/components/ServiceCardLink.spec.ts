@@ -1,17 +1,22 @@
 import { Base } from "../../tests/utils/core"
 import Component from "./ServiceCardLink.vue"
-const base = new Base(Component, {
-  props: {
-    link: {
-      title: "title",
-      href: "href",
-      description: "description",
-    },
-    brand: {
-      color: "#fff",
-      onColor: "#fff",
-    },
+import { useDefinitions } from '@/composable/useDefinitions'
+const { render } = useDefinitions()
+const composeAriaLabel = render.value.interface.services.serviceLink.composeAriaLabel
+const props = {
+  link: {
+    title: "title",
+    href: "href",
+    description: "description",
   },
+  brand: {
+    color: "#fff",
+    onColor: "#fff",
+    name: "name"
+  },
+}
+const base = new Base(Component, {
+  props
 })
 
 describe("components/ServiceCardLink.vue", () => {
@@ -20,6 +25,12 @@ describe("components/ServiceCardLink.vue", () => {
     const link = wrapper.get('[target="_blank"]')
     expect(link.text()).toContain("title")
     expect(link.attributes().href).toBe("href")
+  })
+
+  it("render 'a' tag with aria-label set to brand name and button title", () => {
+    const wrapper = base.render()
+    const link = wrapper.get('[target="_blank"]')
+    expect(link.attributes()['aria-label']).toBe(composeAriaLabel(props.brand.name, props.link.title))
   })
 
   it('render "a" tag with brand colors', async () => {

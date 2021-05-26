@@ -33,4 +33,11 @@ export const renderer = new Renderer({
     //* change mobile navigation toggle button aria-label for a11y only
     navigation: { buttonLabel: "navigation menu" },
   },
+  services: {
+    serviceLink: {
+      composeAriaLabel(companyName, linkTitle) {
+        return `${linkTitle} of ${companyName}`
+      },
+    },
+  },
 })
