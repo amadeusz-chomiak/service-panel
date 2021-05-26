@@ -6,6 +6,7 @@ import {
 } from "@/definitions/definitionGenerator"
 import * as category from "@/definitions/en/categoryDefinitions"
 import * as service from "@/definitions/en/serviceDefinitions"
+import { renderer } from "@/definitions/en/rendererDefinition"
 // import { price } from "@/definitions/en/priceDefinition"
 
 //* If You need to create custom Service follow this example
@@ -50,38 +51,14 @@ import * as service from "@/definitions/en/serviceDefinitions"
 // })
 
 //* create renderer instance, that will render config object
-const renderer = new Renderer({
+renderer.interface({
   //* options for rendering application header
   header: {
-    //* h1 tag title
-    //? change title from .env file in the root of the project
-    title: process.env.VUE_APP_SHORT_NAME || "services",
     //* link to Your website
     link: {
       title: "amadeo.dev",
       href: "https://amadeo.dev",
     },
-    //* skip to the main content link for keyboard users
-    skipToMain: {
-      title: "skip to the main content",
-    },
-  },
-  controls: {
-    //* Controls section heading for a11y only
-    title: "Controls",
-    //* new version available button
-    versionControl: {
-      tooltip: "switch to a new version",
-    },
-    //* change color scheme button aria-label for a11y only
-    colorScheme: {
-      buttonLabel: {
-        changeToDarkMode: "change to the dark theme",
-        changeToLightMode: "change to the light theme",
-      },
-    },
-    //* change mobile navigation toggle button aria-label for a11y only
-    navigation: { buttonLabel: "navigation menu" },
   },
 })
 
