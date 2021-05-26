@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/service-panel/browserconfig.xml"
   },
   {
-    "revision": "0659eb6c6082a96bd3b6",
+    "revision": "708da0eec7591ba0fab8",
     "url": "/service-panel/css/app.95e33439.css"
   },
   {
@@ -88,16 +88,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/service-panel/fonts/source-sans-pro-v14-latin-ext_latin-regular.woff2"
   },
   {
-    "revision": "792dc679215cb1653376c00ea1f702dd",
+    "revision": "f6775f18ef7893f75334597fbe1b4cd7",
     "url": "/service-panel/index.html"
   },
   {
-    "revision": "0659eb6c6082a96bd3b6",
-    "url": "/service-panel/js/app.a22f0899.js"
+    "revision": "708da0eec7591ba0fab8",
+    "url": "/service-panel/js/app.80240525.js"
   },
   {
-    "revision": "19fe7dcc948e92fcc1fb",
-    "url": "/service-panel/js/chunk-0e79e204.4ec8ba85.js"
+    "revision": "de9c22d5a495ebb67572",
+    "url": "/service-panel/js/chunk-0e79e204.a54c115d.js"
   },
   {
     "revision": "2f56927cbfc6591e0684",
