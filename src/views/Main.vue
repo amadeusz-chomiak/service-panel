@@ -3,6 +3,7 @@
     <a
       href="#main-content"
       class="link focus:py-1 md:focus:py-2 sr-only focus:not-sr-only focus:absolute bg-gray-200 dark:bg-gray-800 text-primary-700 dark:text-primary-200 font-semibold z-50 text-xl md:text-2xl lg:text-3xl text-center focus:w-full first-letter:uppercase"
+      @click="skipToMain"
       >{{ render.interface.header.skipToMain.title }}</a
     >
     <MenuContainer :render="render" />
@@ -26,8 +27,16 @@ export default defineComponent({
   },
   setup() {
     const { render } = useDefinitions()
+
+    //* Fix Firefox not moving focus to main-content on link press
+    const skipToMain = () => {
+      const mainElement = document.getElementById("main-content")
+      mainElement?.focus()
+    }
+
     return {
       render,
+      skipToMain,
     }
   },
 })
