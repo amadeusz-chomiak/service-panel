@@ -12,6 +12,10 @@ const base = new Base(Component, {
 })
 
 describe("components/CategoryContainerItem.vue", () => {
+  it("render section element as root", () => {
+    const wrapper = base.render()
+    expect(wrapper.find('section').exists()).toBeTruthy()
+  })
   it("render category title", () => {
     const wrapper = base.render()
     const header = wrapper.get("h2")
