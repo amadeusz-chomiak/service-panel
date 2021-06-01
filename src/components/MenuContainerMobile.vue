@@ -60,6 +60,7 @@
   >
     <div
       v-show="mobileShowContent"
+      data-testid="mobile-menu-content"
       class="transform transition-all duration-200 ease-in flex flex-col p-2 sm:p-4 fixed inset-x-0 bottom-0 shadow-center-lg bg-gray-200 dark:bg-gray-800 rounded-t-xl"
     >
       <MenuContainerContent
@@ -78,6 +79,8 @@ import {
   computed,
   defineAsyncComponent,
   reactive,
+  onBeforeMount,
+  onBeforeUnmount,
 } from "vue"
 import MenuContainerContent from "./MenuContainerContent.vue"
 import ButtonToggleColorScheme from "./ButtonToggleColorScheme.vue"
@@ -103,10 +106,23 @@ export default defineComponent({
   },
   setup(props) {
     const mobileShowContent = ref(true)
-    onBeforeRouteUpdate(() => {
-      mobileShowContent.value = false
+
+    //* Close menu on route change
+    const closeMenu = () => (mobileShowContent.value = false)
+    onBeforeRouteUpdate(closeMenu)
+
+    //* Close menu on espace key press
+    const closeMenuOnESC = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu()
+    }
+    onBeforeMount(() => {
+      window.addEventListener("keydown", closeMenuOnESC)
+    })
+    onBeforeUnmount(() => {
+      window.removeEventListener("keydown", closeMenuOnESC)
     })
 
+    //* Compute data for the template
     const header = computed(() => props.render.interface.header)
     const controls = computed(() => props.render.interface.controls)
 
