@@ -25,9 +25,4 @@ describe("components/CategoryContainer.vue", () => {
     //? search for two opening tags for category-container-item component
     expect(wrapper.findAll('category-container-item-stub')?.length).toBe(2)
   })
-
-  it("render section element as root", () => {
-    const wrapper = base.render()
-    expect(wrapper.find('section').exists()).toBeTruthy()
-  })
 })
