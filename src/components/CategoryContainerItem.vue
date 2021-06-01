@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-32">
+  <section class="pb-32">
     <h2
       :id="category.name"
       class="text-4xl leading-none text-black dark:text-gray-200 pt-16 md:pt-32 lg:pt-36 xl:pt-38 2xl:pt-40 mb-4 "
